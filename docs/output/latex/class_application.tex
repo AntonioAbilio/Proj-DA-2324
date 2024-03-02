@@ -1,0 +1,169 @@
+\doxysection{Application Class Reference}
+\hypertarget{class_application}{}\label{class_application}\index{Application@{Application}}
+
+
+Class that manages the menu.  
+
+
+
+
+{\ttfamily \#include $<$Application.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_application_a8a0c6f6989c32876137e4a8b6022ee81}{Application}} (std\+::string \mbox{\hyperlink{class_application_ab7b151fe7350dc2a7d17ea76972ecc56}{env}})
+\item 
+void \mbox{\hyperlink{class_application_a27c58712d868d161ec1f407fcab72e24}{run}} (int processed\+Key)
+\item 
+void \mbox{\hyperlink{class_application_ab0547067a5688fa2a17c067dacdf3f6a}{clear\+Screen}} ()
+\begin{DoxyCompactList}\small\item\em clears (or simulates clearing) the screen, depending on the OS used \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_application_ad12666083e189dcf95c8b87bf59d95c2}{delay}} (long sleep\+Time)
+\begin{DoxyCompactList}\small\item\em Small delay for design purposes. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{class_application_a6889e8e33946b8931ccff6f419630331}{process\+Key}} (const std\+::string \&option)
+\begin{DoxyCompactList}\small\item\em Handles the exception thrown by std\+::stoi. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_application_a8dc9c233e74d5b6cb129eeda5b62fd64}{show\+Main\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em Shows the main menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_application_a07eba7cd2a9fcfd846da6ab3e5d2067e}{show\+Go\+Back\+Menu}} (int option, const std\+::string \&function\+Name)
+\item 
+void \mbox{\hyperlink{class_application_a2329c5db2625c987ea554fadc5c51839}{max\+Water}} ()
+\item 
+void \mbox{\hyperlink{class_application_a2ae9fef54782fae04a389cec27a772bf}{listwater\+Needs}} ()
+\item 
+void \mbox{\hyperlink{class_application_aac9d01a21d22d8df6f9bc55ce1749e8f}{balace\+Network\+Load}} ()
+\item 
+void \mbox{\hyperlink{class_application_aa1dc913a7baf452da982591be420fd45}{list\+Cities\+Affected\+By\+Reservoir\+Removal}} ()
+\item 
+void \mbox{\hyperlink{class_application_a93a8d8804ad74ef33538d1c193bd858d}{list\+Cities\+Affected\+By\+Maintenance}} ()
+\item 
+void \mbox{\hyperlink{class_application_a53c43996b3d1c58f496eafa10352287a}{list\+Cities\+Affected\+By\+Pipe\+Rupture}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_application_ab7b151fe7350dc2a7d17ea76972ecc56}{env}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that manages the menu. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_application_a8a0c6f6989c32876137e4a8b6022ee81}\label{class_application_a8a0c6f6989c32876137e4a8b6022ee81} 
+\index{Application@{Application}!Application@{Application}}
+\index{Application@{Application}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{Application()}{Application()}}
+{\footnotesize\ttfamily Application\+::\+Application (\begin{DoxyParamCaption}\item[{std\+::string}]{env }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_application_aac9d01a21d22d8df6f9bc55ce1749e8f}\label{class_application_aac9d01a21d22d8df6f9bc55ce1749e8f} 
+\index{Application@{Application}!balaceNetworkLoad@{balaceNetworkLoad}}
+\index{balaceNetworkLoad@{balaceNetworkLoad}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{balaceNetworkLoad()}{balaceNetworkLoad()}}
+{\footnotesize\ttfamily void Application\+::balace\+Network\+Load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_application_ab0547067a5688fa2a17c067dacdf3f6a}\label{class_application_ab0547067a5688fa2a17c067dacdf3f6a} 
+\index{Application@{Application}!clearScreen@{clearScreen}}
+\index{clearScreen@{clearScreen}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{clearScreen()}{clearScreen()}}
+{\footnotesize\ttfamily void Application\+::clear\+Screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+clears (or simulates clearing) the screen, depending on the OS used 
+
+\Hypertarget{class_application_ad12666083e189dcf95c8b87bf59d95c2}\label{class_application_ad12666083e189dcf95c8b87bf59d95c2} 
+\index{Application@{Application}!delay@{delay}}
+\index{delay@{delay}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{delay()}{delay()}}
+{\footnotesize\ttfamily void Application\+::delay (\begin{DoxyParamCaption}\item[{long}]{sleep\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Small delay for design purposes. 
+
+\Hypertarget{class_application_a93a8d8804ad74ef33538d1c193bd858d}\label{class_application_a93a8d8804ad74ef33538d1c193bd858d} 
+\index{Application@{Application}!listCitiesAffectedByMaintenance@{listCitiesAffectedByMaintenance}}
+\index{listCitiesAffectedByMaintenance@{listCitiesAffectedByMaintenance}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{listCitiesAffectedByMaintenance()}{listCitiesAffectedByMaintenance()}}
+{\footnotesize\ttfamily void Application\+::list\+Cities\+Affected\+By\+Maintenance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_application_a53c43996b3d1c58f496eafa10352287a}\label{class_application_a53c43996b3d1c58f496eafa10352287a} 
+\index{Application@{Application}!listCitiesAffectedByPipeRupture@{listCitiesAffectedByPipeRupture}}
+\index{listCitiesAffectedByPipeRupture@{listCitiesAffectedByPipeRupture}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{listCitiesAffectedByPipeRupture()}{listCitiesAffectedByPipeRupture()}}
+{\footnotesize\ttfamily void Application\+::list\+Cities\+Affected\+By\+Pipe\+Rupture (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_application_aa1dc913a7baf452da982591be420fd45}\label{class_application_aa1dc913a7baf452da982591be420fd45} 
+\index{Application@{Application}!listCitiesAffectedByReservoirRemoval@{listCitiesAffectedByReservoirRemoval}}
+\index{listCitiesAffectedByReservoirRemoval@{listCitiesAffectedByReservoirRemoval}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{listCitiesAffectedByReservoirRemoval()}{listCitiesAffectedByReservoirRemoval()}}
+{\footnotesize\ttfamily void Application\+::list\+Cities\+Affected\+By\+Reservoir\+Removal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_application_a2ae9fef54782fae04a389cec27a772bf}\label{class_application_a2ae9fef54782fae04a389cec27a772bf} 
+\index{Application@{Application}!listwaterNeeds@{listwaterNeeds}}
+\index{listwaterNeeds@{listwaterNeeds}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{listwaterNeeds()}{listwaterNeeds()}}
+{\footnotesize\ttfamily void Application\+::listwater\+Needs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_application_a2329c5db2625c987ea554fadc5c51839}\label{class_application_a2329c5db2625c987ea554fadc5c51839} 
+\index{Application@{Application}!maxWater@{maxWater}}
+\index{maxWater@{maxWater}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{maxWater()}{maxWater()}}
+{\footnotesize\ttfamily void Application\+::max\+Water (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_application_a6889e8e33946b8931ccff6f419630331}\label{class_application_a6889e8e33946b8931ccff6f419630331} 
+\index{Application@{Application}!processKey@{processKey}}
+\index{processKey@{processKey}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{processKey()}{processKey()}}
+{\footnotesize\ttfamily int Application\+::process\+Key (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{option }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Handles the exception thrown by std\+::stoi. 
+
+\Hypertarget{class_application_a27c58712d868d161ec1f407fcab72e24}\label{class_application_a27c58712d868d161ec1f407fcab72e24} 
+\index{Application@{Application}!run@{run}}
+\index{run@{run}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void Application\+::run (\begin{DoxyParamCaption}\item[{int}]{processed\+Key }\end{DoxyParamCaption})}
+
+\Hypertarget{class_application_a07eba7cd2a9fcfd846da6ab3e5d2067e}\label{class_application_a07eba7cd2a9fcfd846da6ab3e5d2067e} 
+\index{Application@{Application}!showGoBackMenu@{showGoBackMenu}}
+\index{showGoBackMenu@{showGoBackMenu}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{showGoBackMenu()}{showGoBackMenu()}}
+{\footnotesize\ttfamily void Application\+::show\+Go\+Back\+Menu (\begin{DoxyParamCaption}\item[{int}]{option,  }\item[{const std\+::string \&}]{function\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_application_a8dc9c233e74d5b6cb129eeda5b62fd64}\label{class_application_a8dc9c233e74d5b6cb129eeda5b62fd64} 
+\index{Application@{Application}!showMainMenu@{showMainMenu}}
+\index{showMainMenu@{showMainMenu}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{showMainMenu()}{showMainMenu()}}
+{\footnotesize\ttfamily std\+::string Application\+::show\+Main\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Shows the main menu. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_application_ab7b151fe7350dc2a7d17ea76972ecc56}\label{class_application_ab7b151fe7350dc2a7d17ea76972ecc56} 
+\index{Application@{Application}!env@{env}}
+\index{env@{env}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{env}{env}}
+{\footnotesize\ttfamily std\+::string Application\+::env\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/antonioabilio/\+Desktop/proj-\/da-\/1/src/\mbox{\hyperlink{_application_8h}{Application.\+h}}\item 
+/\+Users/antonioabilio/\+Desktop/proj-\/da-\/1/src/\mbox{\hyperlink{_application_8cpp}{Application.\+cpp}}\end{DoxyCompactItemize}
