@@ -23,6 +23,7 @@ add_executable(DA
         src/WSM.h
         src/main.cpp
         src/WaterElement.h
+        src/Graph.h
 )
 
 # Doxygen Build
