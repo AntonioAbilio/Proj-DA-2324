@@ -7,11 +7,13 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
+#include "WaterManager.h"
 
 /**@brief Class that manages the menu.*/
 class Application{
 public:
     Application(std::string env){
+        waterManager.parseData();
         this->env = env;
     }
 
@@ -21,6 +23,8 @@ public:
     static int processKey(const std::string& option);
 
 private:
+
+    WaterManager waterManager;
 
     // WaterManager options
     std::string showMainMenu();

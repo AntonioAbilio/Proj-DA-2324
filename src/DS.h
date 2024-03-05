@@ -9,10 +9,10 @@ class DS : public WaterElement{
 private:
     std::string city;
     double demand;
-    double population;
+    int population;
 
 public:
-    DS(const std::string &code, int id, const std::string &city, double demand, double population);
+    DS(const std::string &code, int id, const std::string &city, double demand, int population);
 
     const std::string &getCity() const;
 
@@ -22,9 +22,9 @@ public:
 
     void setDemand(double demand);
 
-    double getPopulation() const;
+    int getPopulation() const;
 
-    void setPopulation(double population);
+    void setPopulation(int population);
 
 
 };

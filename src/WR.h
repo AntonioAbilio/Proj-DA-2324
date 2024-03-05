@@ -11,7 +11,7 @@ private:
     int maxDelivery;
 
 public:
-    WR(const std::string &code, int id, const std::string &reservoir, const std::string &municipality, int maxDelivery);
+    WR(const std::string &code, int id, const std::string &reservoir, const std::string &municipality, double maxDelivery);
 
     const std::string &getReservoir() const;
 
@@ -21,9 +21,9 @@ public:
 
     void setMunicipality(const std::string &municipality);
 
-    int getMaxDelivery() const;
+    double getMaxDelivery() const;
 
-    void setMaxDelivery(int maxDelivery);
+    void setMaxDelivery(double maxDelivery);
 };
 
 

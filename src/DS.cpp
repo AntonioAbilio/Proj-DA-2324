@@ -1,8 +1,7 @@
 #include "DS.h"
 
 using namespace std;
-DS::DS(const string &code, int id, const string &city, double demand, double population) : WaterElement(code,
-                                                                                                                  id){
+DS::DS(const string &code, int id, const string &city, double demand, int population) : WaterElement(code,id){
     this->city = city;
     this->demand = demand;
     this->population = population;
@@ -24,10 +23,10 @@ void DS::setDemand(double demand) {
     DS::demand = demand;
 }
 
-double DS::getPopulation() const {
+int DS::getPopulation() const {
     return population;
 }
 
-void DS::setPopulation(double population) {
+void DS::setPopulation(int population) {
     DS::population = population;
 }

@@ -19,8 +19,6 @@ add_executable(DA
         src/PS.h
         src/WR.cpp
         src/WR.h
-        src/WSM.cpp
-        src/WSM.h
         src/main.cpp
         src/WaterElement.h
         src/Graph.h
