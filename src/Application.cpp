@@ -160,9 +160,36 @@ void Application::showGoBackMenu(int functionNumber, const std::string& function
 
 // T2.1
 void Application::maxWater(){
+restartMaxWater:
     clearScreen();
 
-    //Code here
+    std::string targetOpt;
+    std::cout << "\nWhat would you like to do?\n"
+              << "1 - See maximum amount of water that can reach all cities.\n"
+              << "2 - See maximum amount of water that can reach a specific city.\n"
+              << "Input: ";
+    std::cin >> targetOpt;
+
+    clearScreen();
+
+    std::string cityCode;
+    switch (processKey(targetOpt)) {
+        case 1:
+            // Show all maximum flow to all cities.
+            waterManager.maximumFlowAllCities();
+            break;
+        case 2:
+            std::cout << "\nPlease specify the city's code:";
+            std::getline(std::cin >> std::ws, cityCode); // Use std::ws to consume whitespaces
+            std::cout << "\n";
+
+            // Show maximum flow to specified city.
+            waterManager.maximumFlowSpecificCities(cityCode);
+
+            break;
+        default:
+            goto restartMaxWater;
+    }
 
     showGoBackMenu(1,"Maximum amount of water that can reach each or a specific city."); // At the end make a call to goBackMenu()
 }
