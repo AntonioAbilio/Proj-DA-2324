@@ -217,7 +217,28 @@ void Application::balaceNetworkLoad(){
 void Application::listCitiesAffectedByReservoirRemoval(){
     clearScreen();
 
-    //Code here
+    /* You might be concerned about the network's resiliency. In this context, you should
+    evaluate what happens in terms of the delivery capacity of the network if one specific water reservoir
+    is out of commission. How are the various delivery sites affected? Your system must allow it to take as
+    input the water reservoir that will be out of service and determine which cities are affected by having
+    their water supply not being met. Your interface should thus allow the user to selectively remove one
+    reservoir and list the affected cities whose water supply does not meet its demand. Could you think
+    about an algorithm that only sometimes needs to run the entire Max-Flow algorithm from scratch to
+    evaluate the impact of removing all the reservoirs, one at a time? Discuss this in your presentation.*/
+
+    //1. User input: Water reservoir that will be out of service
+
+
+    std::cout << "Water reservoir to be removed\n";
+    // TODO: Different option for choosing water reservoir (not just using code)
+
+    clearScreen();
+    std::string wr_code;
+    std::cout << "Please input water reservoir code: ";
+    std::cin >> wr_code;
+
+    clearScreen();
+    waterManager.listCitiesAffectedByReservoirRemoval(wr_code);
 
     showGoBackMenu(4, "List cities affected by reservoir removal."); // At the end make a call to goBackMenu()
 }

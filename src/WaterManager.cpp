@@ -1,3 +1,4 @@
+#include <cmath>
 #include "WaterManager.h"
 
 
@@ -453,11 +454,44 @@ void WaterManager::maximumFlowSpecificCities(std::string cityCode) {
 }
 
 // T2.2
+/**
+ * @brief //TODO
+ */
 void WaterManager::listwaterNeeds(){
-    // TODO
-    std::cout << "AAA";
+    // TODO: Make maximumFlowAllCities() return a vector with pairs of (ds_code, flow)
+    std::vector<std::pair<std::string, int>> flowPerDS;
+    std::vector<std::pair<std::string, int>> DSInNeed;
+    //flowPerDS = maximumFlowAllCities();  // TODO: use when maximumFlowAllCities() fixed
+
+    for (std::pair<std::string, int> p : flowPerDS){
+        int demand = waterCityMap[p.first]->getDemand();
+        if (p.second < demand){  // Demand higher than water delivered
+            DSInNeed.push_back(std::make_pair(p.first, demand));
+        }
+    }
+    // for each city:
+    //      if flowDelivered < demand:
+    //          add city to list
+    // print cities in list + (demand - flowDelivered)
 
     // 1. run maxFlow algorithm
-    // 2. Compare maxflow with demand (for each city)
+    // 2. Compare maxFlow with demand (for each city)
 }
 
+
+// T3.1
+void WaterManager::listCitiesAffectedByReservoirRemoval(std::string wr_code) {
+    // Find the water reservoir
+    WaterElement* WRToRemove;
+    try {
+        WRToRemove = waterReservoirMap.at(wr_code);
+    } catch (std::out_of_range& ofr) {
+        std::cout << "No water reservoir with code " << wr_code << " was found\n";
+        return;
+    }
+    Vertex<WaterElement*>* WR = waterNetwork.findVertex(WRToRemove);
+
+    // TODO: Option for "Do you really want to remove the water reservoir? Or just visualize the flow without it?"
+
+    // TODO: Add option to reset the graph
+}
