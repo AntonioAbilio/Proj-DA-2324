@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <regex>
+#include <unordered_map>
 
 #include "Graph.h"
 #include "WaterElement.h"
@@ -33,6 +34,7 @@ private:
     void processCities(std::ifstream &in); // Parsing of Cities (Delivery Sites).
     void processPipes(std::ifstream &in); // Parsing of Pipes.
 
+    std::map<std::string,std::string> CitiesAffectedByPipeRupture(std::string &city);
 };
 
 

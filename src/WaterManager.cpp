@@ -265,3 +265,28 @@ void WaterManager::processPipes(std::ifstream &in) {
 }
 
 /* Data Parsing End */
+
+std::map<std::string,std::string> WaterManager::CitiesAffectedByPipeRupture(std::string &city){
+    std::map<std::string,std::string> result;
+    std::string code = "-1";
+    for(auto g : waterCityMap){
+        if(g.second->getCity() == city){
+            code = g.second->getCode();
+            break;
+        }
+    }
+
+    if(code == "-1") std::cout << "ERROR ! city not found!";
+
+
+    for(auto waterelement : waterNetwork.getVertexSet()){
+        for(auto pipes : waterelement->getAdj()){
+            if(pipes->getDest()->getInfo()->getCode() == code){
+                //create aux graph and remove this pipe. Compare max flow results and if demand not in, add it to the answer
+            }
+        }
+    }
+
+
+}
+
