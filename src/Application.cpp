@@ -176,7 +176,7 @@ restartMaxWater:
     switch (processKey(targetOpt)) {
         case 1:
             // Show all maximum flow to all cities.
-            waterManager.maximumFlowAllCities();
+            std::cout << waterManager.maximumFlowAllCities();
             break;
         case 2:
             std::cout << "\nPlease specify the city's code:";

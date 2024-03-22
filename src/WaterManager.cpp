@@ -10,7 +10,7 @@ void WaterManager::parseData() {
     std::ifstream in;
 
     // Open the file using the provided path.
-    in.open("../inputFiles/MadeiraDataSet/Reservoirs_Madeira.csv");
+    in.open("../inputFiles/LargeDataSet/Reservoir.csv");
     if (!in.is_open()){
         std::cout << "Unable to open Reservoirs.csv.\n";
         return;
@@ -18,7 +18,7 @@ void WaterManager::parseData() {
     processReservoirs(in);
     in.close();
 
-    in.open("../inputFiles/MadeiraDataSet/Stations_Madeira.csv");
+    in.open("../inputFiles/LargeDataSet/Stations.csv");
     if (!in.is_open()){
         std::cout << "Unable to open Stations.csv.\n";
         return;
@@ -26,7 +26,7 @@ void WaterManager::parseData() {
     processPumps(in);
     in.close();
 
-    in.open("../inputFiles/MadeiraDataSet/Cities_Madeira.csv");
+    in.open("../inputFiles/LargeDataSet/Cities.csv");
     if (!in.is_open()){
         std::cout << "Unable to open Cities.csv.\n";
         return;
@@ -47,7 +47,7 @@ void WaterManager::parseData() {
 
     for (auto e : this->waterCityMap) std::cout << e.first << "\n";*/
 
-    in.open("../inputFiles/MadeiraDataSet/Pipes_Madeira.csv");
+    in.open("../inputFiles/LargeDataSet/Pipes.csv");
     if (!in.is_open()){
         std::cout << "Unable to open Pipes.csv.\n";
         return;
@@ -398,7 +398,9 @@ void WaterManager::augmentFlowAlongPath(WaterElement*& source, WaterElement*& ta
     }
 }
 
-void WaterManager::maximumFlowAllCities() {
+std::string WaterManager::maximumFlowAllCities() {
+
+    std::ostringstream oss;
 
     // Add superSource and superTarget
     WaterElement* superWaterReservoir = new WR("superWR", -1, "superWR", "none", 0);
@@ -438,11 +440,12 @@ void WaterManager::maximumFlowAllCities() {
             tot += incomingPipe->getFlow();
         }
 
-        std::cout << "The city " << city.second->getCity() << " has a maximum flow of " << tot << " cubic meters per second.\n";
+        oss << "The city " << city.second->getCity() << " has a maximum flow of " << tot << " cubic meters per second.\n";
     }
 
     waterNetwork.removeVertex(superWaterReservoir);
     waterNetwork.removeVertex(superDeliverySite);
+    return oss.str();
 }
 
 void WaterManager::maximumFlowSpecificCities(std::string cityCode) {

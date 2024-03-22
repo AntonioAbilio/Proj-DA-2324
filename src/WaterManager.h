@@ -26,7 +26,7 @@ public:
 
     void augmentFlowAlongPath(WaterElement*& source, WaterElement*& target, double f); // HelperFunction
 
-    void maximumFlowAllCities();
+    std::string maximumFlowAllCities();
     void maximumFlowSpecificCities(std::string cityCode);
 
 
