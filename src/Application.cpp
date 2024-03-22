@@ -233,7 +233,11 @@ void Application::listCitiesAffectedByMaintenance(){
 // T3.3
 void Application::listCitiesAffectedByPipeRupture(){
     clearScreen();
-
+    std::string cityCode;
+    std::cout << "\nPlease specify the city's code:";
+    std::getline(std::cin >> std::ws, cityCode); // Use std::ws to consume whitespaces
+    std::cout << "\n";
+    std::map<std::string, std::vector<std::string>> res = waterManager.CitiesAffectedByPipeRupture(cityCode);
     //Code here
 
     showGoBackMenu(6, "List cities affected by pipe rupture."); // At the end make a call to goBackMenu()

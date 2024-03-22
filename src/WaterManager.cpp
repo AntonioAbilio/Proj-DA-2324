@@ -1,3 +1,4 @@
+#include <cmath>
 #include "WaterManager.h"
 
 
@@ -448,12 +449,36 @@ std::string WaterManager::maximumFlowAllCities() {
     return oss.str();
 }
 
+
+
 void WaterManager::maximumFlowSpecificCities(std::string cityCode) {
 
 }
-std::map<std::string,std::string> WaterManager::CitiesAffectedByPipeRupture(std::string &city){
-    std::map<std::string,std::string> result;
+
+std::map<DS * , double> WaterManager::auxMaxFlow(){
+
+    if(maximumFlowAllCities().empty()) std::cout << "ERROR! maxFlow failed.";
+
+    std::map<DS * , double>cities;
+    for (const auto& city : waterCityMap) {
+        auto cityVertex = waterNetwork.findVertex(city.second);
+
+        double tot = 0;
+        for (Edge<WaterElement *> *incomingPipe: cityVertex->getIncoming()) {
+            tot += incomingPipe->getFlow();
+        }
+
+        cities.insert({city.second,tot});
+
+    }
+
+    return cities;
+}
+
+std::map<std::string, std::vector<std::string>> WaterManager::CitiesAffectedByPipeRupture(std::string &city){
+    std::map<std::string, std::vector<std::string>> result;
     std::string code = "-1";
+    //O(1)
     for(auto g : waterCityMap){
         if(g.second->getCity() == city){
             code = g.second->getCode();
@@ -463,15 +488,46 @@ std::map<std::string,std::string> WaterManager::CitiesAffectedByPipeRupture(std:
 
     if(code == "-1") std::cout << "ERROR ! city not found!";
 
+    std::map<DS * , double>cities = auxMaxFlow();
 
     for(auto waterelement : waterNetwork.getVertexSet()){
         for(auto pipes : waterelement->getAdj()){
-            if(pipes->getDest()->getInfo()->getCode() == code){
-                //create aux graph and remove this pipe. Compare max flow results and if demand not in, add it to the answer
+
+            if((pipes->getDest()->getInfo()->getCode() == code) || (pipes->getOrig()->getInfo()->getCode() == code)){
+
+                double aux = pipes->getFlow();
+                pipes->setFlow(0);
+                std::map<DS * , double> compareCities = auxMaxFlow();
+
+                for(auto it = compareCities.begin(); it != compareCities.end(); it++){
+                    if((it->first->getDemand() < it->second)&&(cities[it->first] <= it->second)){
+                        std::ostringstream ossPipe;
+                        std::ostringstream ossAffected;
+                        ossPipe << "The rupture from " << pipes->getOrig()->getInfo()->getCode() << " to "  << pipes->getDest()->getInfo()->getCode() << " would affect ";
+                        ossAffected << it->first->getCity() << " by " <<  -1 * (it->first->getDemand() - it->second) << std::endl;
+                        if(result.find(ossPipe.str())==result.end()){
+                            std::vector<std::string> affected;
+                            affected.push_back(ossAffected.str());
+                            result[ossPipe.str()] = affected;
+                        }else{
+                            result[ossPipe.str()].push_back(ossAffected.str());
+                        }
+                    }
+                }
+
+                pipes->setFlow(aux);
             }
         }
     }
 
+    for(auto it = result.begin(); it != result.end(); it++){
+        std::cout << it->first;
+        for(auto str : it->second){
+            std::cout << str;
+        }
+    }
+
+    return result;
 
 }
 

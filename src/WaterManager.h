@@ -29,7 +29,7 @@ public:
 
     std::string maximumFlowAllCities();
     void maximumFlowSpecificCities(std::string cityCode);
-
+    std::map<std::string, std::vector<std::string>> CitiesAffectedByPipeRupture(std::string &city);
 
 private:
 
@@ -46,7 +46,8 @@ private:
     void processCities(std::ifstream &in); // Parsing of Cities (Delivery Sites).
     void processPipes(std::ifstream &in); // Parsing of Pipes.
 
-    std::map<std::string,std::string> CitiesAffectedByPipeRupture(std::string &city);
+
+    std::map<DS * , double> auxMaxFlow();
 };
 
 
