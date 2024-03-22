@@ -1,7 +1,3 @@
-//
-// Created by leona on 03/03/2024.
-//
-
 #ifndef DA_WATERELEMENT_H
 #define DA_WATERELEMENT_H
 
@@ -16,6 +12,8 @@ private:
 public:
 
     WaterElement(const std::string &code, int id) : code(code), id(id) {}
+
+    virtual ~WaterElement() {} // Necessary for dynamic cast to work.
 
     const std::string &getCode() const {
         return code;
