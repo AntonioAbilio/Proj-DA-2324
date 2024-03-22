@@ -10,7 +10,7 @@ void WaterManager::parseData() {
     std::ifstream in;
 
     // Open the file using the provided path.
-    in.open("../inputFiles/MadeiraDataSet/Reservoirs_Madeira.csv");
+    in.open("../inputFiles/LargeDataSet/Reservoir.csv");
     if (!in.is_open()){
         std::cout << "Unable to open Reservoirs.csv.\n";
         return;
@@ -18,7 +18,7 @@ void WaterManager::parseData() {
     processReservoirs(in);
     in.close();
 
-    in.open("../inputFiles/MadeiraDataSet/Stations_Madeira.csv");
+    in.open("../inputFiles/LargeDataSet/Stations.csv");
     if (!in.is_open()){
         std::cout << "Unable to open Stations.csv.\n";
         return;
@@ -26,7 +26,7 @@ void WaterManager::parseData() {
     processPumps(in);
     in.close();
 
-    in.open("../inputFiles/MadeiraDataSet/Cities_Madeira.csv");
+    in.open("../inputFiles/LargeDataSet/Cities.csv");
     if (!in.is_open()){
         std::cout << "Unable to open Cities.csv.\n";
         return;
@@ -47,7 +47,7 @@ void WaterManager::parseData() {
 
     for (auto e : this->waterCityMap) std::cout << e.first << "\n";*/
 
-    in.open("../inputFiles/MadeiraDataSet/Pipes_Madeira.csv");
+    in.open("../inputFiles/LargeDataSet/Pipes.csv");
     if (!in.is_open()){
         std::cout << "Unable to open Pipes.csv.\n";
         return;
@@ -265,6 +265,192 @@ void WaterManager::processPipes(std::ifstream &in) {
 }
 
 /* Data Parsing End */
+
+/**
+ * @brief Helper function. Checks if there exists an augmenting path.
+ * @details This function does a Breadth First Search (BFS) and tries to construct a path from source node to a target node.
+ * @details The path in question can either be a normal path or it can be a residual path.
+ * @details The time complexity for this function is O(V + V + E). This is because first we
+ * @details iterate over every vertex and set visited to false. After this we perform a BFS
+ * @details which iterates over the graph's vertexes (V) and for each one, over it's outgoing edges (E).
+ *
+ * @param source - This is the starting node.
+ * @param target - This is the ending node.
+ *
+ *
+ * @return If it manages to find a path then it return true otherwise it returns false.
+ **/
+bool WaterManager::existsAugmentingPath(WaterElement*& source, WaterElement*& target){
+    Vertex<WaterElement*>* sourceVertex = waterNetwork.findVertex(source);
+    Vertex<WaterElement*>* targetVertex = waterNetwork.findVertex(target);
+
+    for(auto& vertex : waterNetwork.getVertexSet()){
+        vertex->setVisited(false);
+    }
+
+    sourceVertex->setVisited(true);
+    std::queue<Vertex<WaterElement*> *> q;
+    q.push(sourceVertex);
+
+    while(!q.empty() && !targetVertex->isVisited()){
+        auto v = q.front();
+        q.pop();
+
+        // Process outgoing edges
+        for(auto& e: v->getAdj()) {
+            Vertex<WaterElement*>* adj = e->getDest();
+
+            // Normal Path, the outgoing edge is not full.
+            if (!adj->isVisited() && (e->getWeight() - e->getFlow() > 0)) {
+                //std::cout << " new to queue " << adj->getInfo() << "\n";
+                adj->setVisited(true);
+                adj->setPath(e);
+                q.push(adj);
+            }
+        }
+
+        // Process incoming edges
+        for(auto& e: v->getIncoming()) {
+            Vertex<WaterElement*>* adj = e->getOrig();
+
+            // Residual Network Edge.
+            if (!adj->isVisited() && e->getFlow() > 0) {
+                //std::cout << " new to queue " << adj->getInfo() << "\n";
+                adj->setVisited(true);
+                adj->setPath(e);
+                q.push(adj);
+            }
+        }
+    }
+
+    // Return true if a path to the target is found, false otherwise
+    return targetVertex->isVisited();
+}
+
+/**
+ * @brief Helper function.
+ * @details Beginning from the target vertex we are going to follow the previously saved path
+ * @details to determine what is the minimum residual capacity of the path.
+ * @details The time complexity for this function is O(V). This is because in the worst case we
+ * @details need to go trough V vertexes (from the target to the source node).
+ *
+ * @param source - This is the ending node.
+ * @param target - This is the starting node.
+ *
+ *
+ * @return Minimum residual capacity of the path that goes from target to source.
+ **/
+double WaterManager::findMinResidualAlongPath(WaterElement*& source, WaterElement*& target){
+    Vertex<WaterElement*>* sourceVertex = waterNetwork.findVertex(source);
+
+    // Note -> currentVertex starts at the target node and follows the path until it reaches the source node.
+    Vertex<WaterElement*>* currentVertex = waterNetwork.findVertex(target);
+
+    double minFlow = INFINITY;
+
+    while (currentVertex != sourceVertex){
+        auto e = currentVertex->getPath();
+        //std::cout << "we are on vertex " << v->getInfo() << " the path is " << e->getWeight() << " and going to vertex " << e->getOrig()->getInfo() << "\n";
+        if (e->getDest() == currentVertex) {
+            minFlow = std::min(minFlow, e->getWeight() - e->getFlow());
+            currentVertex = e->getOrig();
+        } else {
+            //std::cout << " The current edge is " << e->getWeight() << " the destination is " << e->getDest()->getInfo() << " and the source is" << e->getOrig()->getInfo() << "\n";
+            minFlow = std::min(minFlow, e->getFlow());
+            currentVertex = e->getDest();
+        }
+
+    }
+    return minFlow;
+}
+
+/**
+ * @brief Helper function.
+ * @details Beginning from the target vertex we are going to follow the previously saved path
+ * @details and add [In case the path belongs to the normal graph] or subtract
+ * @details [In case we have found a path in the residual graph] the minimum residual capacity.
+ * @details The time complexity for this function is O(V). This is because in the worst case we
+ * @details need to go trough V vertexes (from the target to the source node).
+ *
+ * @param source - This is the ending node.
+ * @param target - This is the starting node.
+ * @param minFlow - Minimum residual capacity.
+ **/
+void WaterManager::augmentFlowAlongPath(WaterElement*& source, WaterElement*& target, double minFlow) {
+    // Traverse the augmenting path and update the flow values accordingly
+    Vertex<WaterElement*>* sourceVertex = waterNetwork.findVertex(source);
+
+    Vertex<WaterElement*>* targetVertex = waterNetwork.findVertex(target);
+
+    auto& currentVertex = targetVertex;
+
+    // Note -> currentVertex starts at the target node and follows the path until it reaches the source node.
+    while (currentVertex != sourceVertex){
+        auto e = currentVertex->getPath();
+        double flow = e->getFlow();
+        if (e->getDest() == currentVertex) {
+            e->setFlow(flow + minFlow);
+            currentVertex = e->getOrig(); }
+        else {
+            e->setFlow(flow - minFlow);
+            currentVertex = e->getDest();
+        }
+    }
+}
+
+std::string WaterManager::maximumFlowAllCities() {
+
+    std::ostringstream oss;
+
+    // Add superSource and superTarget
+    WaterElement* superWaterReservoir = new WR("superWR", -1, "superWR", "none", 0);
+    WaterElement* superDeliverySite = new DS("superDS",-1,"superDS",0,0);
+    waterNetwork.addVertex(superWaterReservoir);
+    waterNetwork.addVertex(superDeliverySite);
+
+    // Calculate the max delivery for the superWaterReservoir.
+    for (const auto& waterReservoir : waterReservoirMap){
+        ((WR*)superWaterReservoir)->setMaxDelivery(((WR*)superWaterReservoir)->getMaxDelivery() + waterReservoir.second->getMaxDelivery());
+        waterNetwork.addEdge(superWaterReservoir, waterReservoir.second, INFINITY);
+    }
+
+    // Calculate the demand for the superDeliverySite.
+    for (const auto& city : waterCityMap){
+        ((DS*)superDeliverySite)->setDemand(((DS*)superDeliverySite)->getDemand() + city.second->getDemand());
+        waterNetwork.addEdge(city.second, superDeliverySite, INFINITY);
+    }
+
+    // Set flow to 0.
+    for (Vertex<WaterElement*>*& vertex : waterNetwork.getVertexSet()){
+        for (Edge<WaterElement*>*& edge : vertex->getAdj()){
+            edge->setFlow(0);
+        }
+    }
+
+    while (existsAugmentingPath(superWaterReservoir, superDeliverySite)){
+        double minFlow = findMinResidualAlongPath(superWaterReservoir, superDeliverySite);
+        augmentFlowAlongPath(superWaterReservoir, superDeliverySite, minFlow);
+    }
+
+    for (const auto& city : waterCityMap){
+        auto cityVertex = waterNetwork.findVertex(city.second);
+
+        double tot = 0;
+        for (Edge<WaterElement*>* incomingPipe : cityVertex->getIncoming()){
+            tot += incomingPipe->getFlow();
+        }
+
+        oss << "The city " << city.second->getCity() << " has a maximum flow of " << tot << " cubic meters per second.\n";
+    }
+
+    waterNetwork.removeVertex(superWaterReservoir);
+    waterNetwork.removeVertex(superDeliverySite);
+    return oss.str();
+}
+
+void WaterManager::maximumFlowSpecificCities(std::string cityCode) {
+
+}
 
 // T2.2
 void WaterManager::listwaterNeeds(){

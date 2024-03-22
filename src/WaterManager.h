@@ -21,6 +21,18 @@ public:
 
     void listwaterNeeds(); // T2.2
 
+
+    // Exercise T2.1
+    bool existsAugmentingPath(WaterElement*& source, WaterElement*& target); //HelperFunction
+
+    double findMinResidualAlongPath(WaterElement*& source, WaterElement*& target); // HelperFunction
+
+    void augmentFlowAlongPath(WaterElement*& source, WaterElement*& target, double f); // HelperFunction
+
+    std::string maximumFlowAllCities();
+    void maximumFlowSpecificCities(std::string cityCode);
+
+
 private:
 
     Graph<WaterElement*> waterNetwork;
