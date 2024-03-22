@@ -184,7 +184,7 @@ restartMaxWater:
             std::cout << "\n";
 
             // Show maximum flow to specified city.
-            waterManager.maximumFlowSpecificCities(cityCode);
+            std::cout << waterManager.maximumFlowSpecificCities(cityCode);
 
             break;
         default:
