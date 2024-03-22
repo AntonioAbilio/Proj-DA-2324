@@ -28,7 +28,8 @@ public:
     void augmentFlowAlongPath(WaterElement*& source, WaterElement*& target, double f); // HelperFunction
 
     std::string maximumFlowAllCities();
-    void maximumFlowSpecificCities(std::string cityCode);
+    std::string maximumFlowSpecificCities(std::string cityCode);
+
     std::map<std::string, std::vector<std::string>> CitiesAffectedByPipeRupture(std::string &city);
 
 private:
