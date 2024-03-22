@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <regex>
+#include <unordered_map>
 
 #include "Graph.h"
 #include "WaterElement.h"
@@ -17,6 +18,8 @@ public:
     void parseData(); // Data Parsing.
 
     void dataGoBoom(); // Free allocated space.
+
+    void listwaterNeeds(); // T2.2
 
 private:
 
@@ -32,7 +35,6 @@ private:
     void processPumps(std::ifstream &in); // Parsing of Pumping Stations.
     void processCities(std::ifstream &in); // Parsing of Cities (Delivery Sites).
     void processPipes(std::ifstream &in); // Parsing of Pipes.
-
 };
 
 

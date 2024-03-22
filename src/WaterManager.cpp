@@ -265,3 +265,13 @@ void WaterManager::processPipes(std::ifstream &in) {
 }
 
 /* Data Parsing End */
+
+// T2.2
+void WaterManager::listwaterNeeds(){
+    // TODO
+    std::cout << "AAA";
+
+    // 1. run maxFlow algorithm
+    // 2. Compare maxflow with demand (for each city)
+}
+

@@ -171,6 +171,7 @@ void Application::maxWater(){
 void Application::listwaterNeeds(){
     clearScreen();
 
+    waterManager.listwaterNeeds();
     //Code here
 
     showGoBackMenu(2, "Show water needs."); // At the end make a call to goBackMenu()
