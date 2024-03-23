@@ -520,59 +520,66 @@ std::map<DS * , double> WaterManager::auxMaxFlow(){
     return cities;
 }
 
-std::map<std::string, std::vector<std::string>> WaterManager::CitiesAffectedByPipeRupture(std::string &city){
-    std::map<std::string, std::vector<std::string>> result;
-    std::string code = "-1";
-    //O(1)
-    for(auto g : waterCityMap){
-        if(g.second->getCity() == city){
-            code = g.second->getCode();
-            break;
-        }
+
+std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager::CitiesAffectedByPipeRupture(std::string &cityCode) {
+    std::map<std::string, std::vector<std::pair<std::string, double>>> result;
+
+    // Find the target city vertex
+    Vertex<WaterElement*>* targetCityVertex = waterNetwork.findVertex(waterCityMap[cityCode]);
+
+    // If the target city vertex is not found, return an empty result
+    if (targetCityVertex == nullptr) {
+        std::cout << "Error: City not found!\n";
+        return result;
     }
 
-    if(code == "-1") std::cout << "ERROR ! city not found!";
 
-    std::map<DS * , double>cities = auxMaxFlow();
+    // Calculate original flows for all cities
+    std::map<std::string,double> originalFlows;
+    if(maximumFlowAllCities().empty()) std::cout << "ERROR! maxFlow failed.";
+    for (const auto& cityPair : waterCityMap) {
+        auto cityVertex = waterNetwork.findVertex(cityPair.second);
+        double tot = 0;
+        for (Edge<WaterElement*>* incomingPipe : cityVertex->getIncoming()) {
+            tot += incomingPipe->getFlow();
+        }
+        originalFlows.insert({cityPair.second->getCode(), tot});
+    }
 
-    for(auto waterelement : waterNetwork.getVertexSet()){
-        for(auto pipes : waterelement->getAdj()){
+    // Loop through all the edges connected to the target city vertex
+    for (Edge<WaterElement*>* pipe : targetCityVertex->getIncoming()) {
+        // Simulate pipe rupture by setting its flow capacity to 0
+        double originalFlow = pipe->getFlow();
+        waterNetwork.removeEdge(pipe->getOrig()->getInfo(),pipe->getDest()->getInfo());
 
-            if((pipes->getDest()->getInfo()->getCode() == code) || (pipes->getOrig()->getInfo()->getCode() == code)){
+        // Calculate the maximum flow after the pipe rupture
+        std::map<DS*, double> maxFlows = auxMaxFlow();
 
-                double aux = pipes->getFlow();
-                pipes->setFlow(0);
-                std::map<DS * , double> compareCities = auxMaxFlow();
+        // Check if the desired water supply cannot be met for any city
+        for (const auto& city : maxFlows) {
 
-                for(auto it = compareCities.begin(); it != compareCities.end(); it++){
-                    if((it->first->getDemand() < it->second)&&(cities[it->first] <= it->second)){
-                        std::ostringstream ossPipe;
-                        std::ostringstream ossAffected;
-                        ossPipe << "The rupture from " << pipes->getOrig()->getInfo()->getCode() << " to "  << pipes->getDest()->getInfo()->getCode() << " would affect ";
-                        ossAffected << it->first->getCity() << " by " <<  -1 * (it->first->getDemand() - it->second) << std::endl;
-                        if(result.find(ossPipe.str())==result.end()){
-                            std::vector<std::string> affected;
-                            affected.push_back(ossAffected.str());
-                            result[ossPipe.str()] = affected;
-                        }else{
-                            result[ossPipe.str()].push_back(ossAffected.str());
-                        }
-                    }
-                }
-
-                pipes->setFlow(aux);
+            if ((city.second < city.first->getDemand())&&(originalFlows[city.first->getCode()] > city.second)) {
+                // Record the affected city and the deficit in water supply
+                std::string affectedCityCode = city.first->getCode().substr(2); // Remove the prefix 'c_'
+                double deficit = city.first->getDemand() - city.second;
+                result[pipe->getOrig()->getInfo()->getCode()].push_back(std::make_pair(affectedCityCode, deficit));
             }
         }
+
+        // Restore the original flow capacity of the pipe
+        waterNetwork.addEdge(pipe->getOrig()->getInfo(),pipe->getDest()->getInfo(),pipe->getWeight());
     }
 
     for(auto it = result.begin(); it != result.end(); it++){
         std::cout << it->first;
         for(auto str : it->second){
-            std::cout << str;
+            std::cout << " " << str.first << " by " << str.second << std::endl;
         }
     }
-
     return result;
-
 }
+
+
+
+
 
