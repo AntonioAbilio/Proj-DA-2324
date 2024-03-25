@@ -31,6 +31,7 @@ public:
     std::string maximumFlowSpecificCities(std::string cityCode);
 
     std::map<std::string, std::vector<std::pair<std::string, double>>> CitiesAffectedByPipeRupture(std::string &cityCode);
+    std::map<std::string, std::vector<std::pair<std::string, double>>> CitiesAffectedByPipeRupture();
 private:
 
     Graph<WaterElement*> waterNetwork;

@@ -452,6 +452,7 @@ std::string WaterManager::maximumFlowAllCities() {
         }
     }
 
+
     waterNetwork.removeVertex(superWaterReservoir);
     waterNetwork.removeVertex(superDeliverySite);
     return oss.str();
@@ -497,10 +498,13 @@ std::string WaterManager::maximumFlowSpecificCities(std::string cityCode) {
         augmentFlowAlongPath(superWaterReservoir, superWaterSource, minFlow);
     }
 
+
     double tot = 0;
     for (auto edge : waterNetwork.findVertex(superWaterSource)->getIncoming()){
         tot += edge->getFlow();
     }
+
+
 
     oss << "The city " << ((DS*)superWaterSource)->getCity() << " has a maximum flow of " << tot << " cubic meters per second.\n";
 
@@ -535,6 +539,7 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
     // Find the target city vertex
     Vertex<WaterElement*>* targetCityVertex = waterNetwork.findVertex(waterCityMap[cityCode]);
 
+
     // If the target city vertex is not found, return an empty result
     if (targetCityVertex == nullptr) {
         std::cout << "Error: City not found!\n";
@@ -557,36 +562,87 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
     // Loop through all the edges connected to the target city vertex
     for (Edge<WaterElement*>* pipe : targetCityVertex->getIncoming()) {
         // Simulate pipe rupture by setting its flow capacity to 0
-        double originalFlow = pipe->getFlow();
-        waterNetwork.removeEdge(pipe->getOrig()->getInfo(),pipe->getDest()->getInfo());
+        auto destination = pipe->getDest()->getInfo();
+        auto origin = pipe->getOrig()->getInfo();
+        double weight = pipe->getWeight();
+        waterNetwork.removeEdge(pipe->getOrig()->getInfo(), pipe->getDest()->getInfo());
 
         // Calculate the maximum flow after the pipe rupture
-        std::map<DS*, double> maxFlows = auxMaxFlow();
+        std::map<DS *, double> maxFlows = auxMaxFlow();
 
         // Check if the desired water supply cannot be met for any city
-        for (const auto& city : maxFlows) {
+        for (const auto &city: maxFlows) {
 
-            if ((city.second < city.first->getDemand())&&(originalFlows[city.first->getCode()] > city.second)) {
+            if ((city.second < city.first->getDemand()) && (originalFlows[city.first->getCode()] > city.second)) {
                 // Record the affected city and the deficit in water supply
-                std::string affectedCityCode = city.first->getCode().substr(2); // Remove the prefix 'c_'
+                std::string affectedCity = city.first->getCity(); // Remove the prefix 'c_'
                 double deficit = city.first->getDemand() - city.second;
-                result[pipe->getOrig()->getInfo()->getCode()].push_back(std::make_pair(affectedCityCode, deficit));
+                std::ostringstream oss;
+
+                oss << " from service point " << origin->getCode() << " to service point " << destination->getCode();
+                result[oss.str()].push_back(std::make_pair(affectedCity, deficit));
             }
         }
 
         // Restore the original flow capacity of the pipe
-        waterNetwork.addEdge(pipe->getOrig()->getInfo(),pipe->getDest()->getInfo(),pipe->getWeight());
+
+        waterNetwork.addEdge(origin, destination, weight);
     }
 
-    for(auto it = result.begin(); it != result.end(); it++){
-        std::cout << it->first;
-        for(auto str : it->second){
-            std::cout << " " << str.first << " by " << str.second << std::endl;
+
+    return result;
+}
+
+std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager::CitiesAffectedByPipeRupture() {
+    std::map<std::string, std::vector<std::pair<std::string, double>>> result;
+
+
+
+    // Calculate original flows for all cities
+    std::map<std::string,double> originalFlows;
+    if(maximumFlowAllCities().empty()) std::cout << "ERROR! maxFlow failed.";
+    for (const auto& cityPair : waterCityMap) {
+        auto cityVertex = waterNetwork.findVertex(cityPair.second);
+        double tot = 0;
+        for (Edge<WaterElement*>* incomingPipe : cityVertex->getIncoming()) {
+            tot += incomingPipe->getFlow();
+        }
+        originalFlows[cityPair.second->getCode()] = tot;
+    }
+
+    for(Vertex<WaterElement*>* we : waterNetwork.getVertexSet()) {
+        // Loop through all the edges connected to the target city vertex
+        for (Edge<WaterElement *> *pipe: we->getAdj()) {
+            // Simulate pipe rupture by setting its flow capacity to 0
+            auto destination = pipe->getDest()->getInfo();
+            auto origin = pipe->getOrig()->getInfo();
+            double weight = pipe->getWeight();
+            waterNetwork.removeEdge(pipe->getOrig()->getInfo(), pipe->getDest()->getInfo());
+
+            // Calculate the maximum flow after the pipe rupture
+            std::map<DS *, double> maxFlows = auxMaxFlow();
+
+            // Check if the desired water supply cannot be met for any city
+            for (const auto &city: maxFlows) {
+
+                if ((city.second < city.first->getDemand()) && (originalFlows[city.first->getCode()] > city.second)) {
+                    // Record the affected city and the deficit in water supply
+                    std::string affectedCity = city.first->getCity(); // Remove the prefix 'c_'
+                    double deficit = city.first->getDemand() - city.second;
+                    std::ostringstream oss;
+
+                    oss << " from service point " << origin->getCode() << " to service point " << destination->getCode();
+                    result[oss.str()].push_back(std::make_pair(affectedCity, deficit));
+                }
+            }
+
+            // Restore the original flow capacity of the pipe
+
+            waterNetwork.addEdge(origin, destination, weight);
         }
     }
     return result;
 }
-
 
 
 
