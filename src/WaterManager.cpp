@@ -443,6 +443,14 @@ std::string WaterManager::maximumFlowAllCities() {
         oss << "The city " << city.second->getCity() << " has a maximum flow of " << tot << " cubic meters per second.\n";
     }
 
+    for (Vertex<WaterElement*>* vertex : waterNetwork.getVertexSet()){
+        for (Edge<WaterElement*>* edge : vertex->getIncoming()){
+            if (edge->getDest()->getInfo()->getCode() == "superDS"){
+                waterNetwork.removeEdge(edge->getOrig()->getInfo(), edge->getDest()->getInfo());
+            }
+        }
+    }
+
     waterNetwork.removeVertex(superWaterReservoir);
     waterNetwork.removeVertex(superDeliverySite);
     return oss.str();
