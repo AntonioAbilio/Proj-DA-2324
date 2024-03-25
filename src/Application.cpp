@@ -229,16 +229,21 @@ void Application::listCitiesAffectedByReservoirRemoval(){
     //1. User input: Water reservoir that will be out of service
 
 
-    std::cout << "Water reservoir to be removed\n";
+    std::cout << "Which water reservoir would you like to remove?\n";
     // TODO: Different option for choosing water reservoir (not just using code)
-
-    clearScreen();
     std::string wr_code;
-    std::cout << "Please input water reservoir code: ";
+    std::cout << "Input (code): ";
     std::cin >> wr_code;
-
+    std::string remove_str;
+    bool remove = false;
     clearScreen();
-    waterManager.listCitiesAffectedByReservoirRemoval(wr_code);
+    std::cout << "Would you like to remove it permanently? (Y/n)\n";
+    std::cin >> remove_str;
+    if (remove_str == "Y" || remove_str == "y") remove = true;
+    clearScreen();
+    waterManager.listCitiesAffectedByReservoirRemoval(wr_code, remove);
+
+    // TODO: Reflect changes in actual file?
 
     showGoBackMenu(4, "List cities affected by reservoir removal."); // At the end make a call to goBackMenu()
 }

@@ -480,9 +480,9 @@ void WaterManager::listwaterNeeds(){
 
 
 // T3.1
-void WaterManager::listCitiesAffectedByReservoirRemoval(std::string wr_code) {
+void WaterManager::listCitiesAffectedByReservoirRemoval(std::string wr_code, bool remove) {
     // Find the water reservoir
-    WaterElement* WRToRemove;
+    WR* WRToRemove;
     try {
         WRToRemove = waterReservoirMap.at(wr_code);
     } catch (std::out_of_range& ofr) {
@@ -491,7 +491,18 @@ void WaterManager::listCitiesAffectedByReservoirRemoval(std::string wr_code) {
     }
     Vertex<WaterElement*>* WR = waterNetwork.findVertex(WRToRemove);
 
-    // TODO: Option for "Do you really want to remove the water reservoir? Or just visualize the flow without it?"
 
+    // Remove vertex
+    waterNetwork.removeVertex(WR->getInfo());
+    waterReservoirMap.erase(WRToRemove->getCode());
+
+    //maximumFlowAllCities();
+
+    // Add vertex again (if remove is false)
+    if (!remove){
+        waterNetwork.addVertex(WR->getInfo());
+        waterReservoirMap[WRToRemove->getCode()] = WRToRemove;
+    }
+    
     // TODO: Add option to reset the graph
 }

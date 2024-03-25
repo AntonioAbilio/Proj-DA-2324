@@ -20,7 +20,7 @@ public:
     void dataGoBoom(); // Free allocated space.
 
     void listwaterNeeds(); // T2.2
-    void listCitiesAffectedByReservoirRemoval(std::string wr_code); // T3.1
+    void listCitiesAffectedByReservoirRemoval(std::string wr_code, bool remove); // T3.1
 
 
     // Exercise T2.1
