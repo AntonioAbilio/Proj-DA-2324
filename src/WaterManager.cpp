@@ -455,27 +455,27 @@ void WaterManager::maximumFlowSpecificCities(std::string cityCode) {
 
 // T2.2
 /**
- * @brief //TODO
+ * @brief Lists the cities that are in need of water, by checking the actual flow delivered to them
+ * @details Time Complexity: O(V * E^2), because of Edmond's Karp Algorithm
  */
 void WaterManager::listwaterNeeds(){
-    // TODO: Make maximumFlowAllCities() return a vector with pairs of (ds_code, flow)
-    std::vector<std::pair<std::string, int>> flowPerDS;
-    std::vector<std::pair<std::string, int>> DSInNeed;
-    //flowPerDS = maximumFlowAllCities();  // TODO: use when maximumFlowAllCities() fixed
+    maximumFlowAllCities();  // Run Edmond's Karp algorithm
 
-    for (std::pair<std::string, int> p : flowPerDS){
-        int demand = waterCityMap[p.first]->getDemand();
-        if (p.second < demand){  // Demand higher than water delivered
-            DSInNeed.push_back(std::make_pair(p.first, demand));
+    for (auto ds : waterCityMap){ // Only check flow for delivery sites
+        int receivedFlow = 0;
+        WaterElement* ds_to_we = ds.second;
+        Vertex<WaterElement*>* v = waterNetwork.findVertex(ds_to_we);
+        if (v == nullptr){  // FIXME
+            std::cout << "An error has occurred...\n";
+            return;
+        }
+        for (auto e : v->getIncoming()) receivedFlow += e->getFlow();
+        int demand = ds.second->getDemand();
+        if (receivedFlow < demand){
+            std::cout << ds.second->getCity() << "(" << ds.first << ") is in need -> demand: "
+                      << demand << ", received flow: " << receivedFlow << std::endl;
         }
     }
-    // for each city:
-    //      if flowDelivered < demand:
-    //          add city to list
-    // print cities in list + (demand - flowDelivered)
-
-    // 1. run maxFlow algorithm
-    // 2. Compare maxFlow with demand (for each city)
 }
 
 
