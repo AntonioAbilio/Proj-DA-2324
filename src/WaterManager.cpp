@@ -512,6 +512,18 @@ std::string WaterManager::maximumFlowSpecificCities(std::string cityCode) {
     return oss.str();
 }
 
+/**
+ * @brief Helper function to calculate maximum flow.
+ * @details This function calls the maximumFlowAllCities function (Edmond's Karp) and calculates
+ * the updated maximum flow of each city, storing it into a map of delivery sites as keys and the
+ * respective flow value.
+ * @details Time Complexity: O(VE²), where V is the number of water elements in the system and E
+ * is the number of pipes.
+ *
+ * @return A map containing the delivery sites as keys and the respective updated maximum flow
+ * values.
+ **/
+
 std::map<DS * , double> WaterManager::auxMaxFlow(){
 
     if(maximumFlowAllCities().empty()) std::cout << "ERROR! maxFlow failed.";
@@ -532,6 +544,21 @@ std::map<DS * , double> WaterManager::auxMaxFlow(){
     return cities;
 }
 
+/**
+ * @brief Determine the cities affected by pipe ruptures based on a given city code.
+ * @details This function examines each pipe connected to the specified city and calculates
+ * the maximum flow after simulating the rupture of each pipe. It records the affected cities
+ * and the deficit in water supply caused by each pipe rupture.
+ * @details Time Complexity: O(VE³), where V is the number of vertices (water elements) and E is the
+ * number of edges (pipes) in the network. This is because for each pipe examined, an Edmond's
+ * Karp maximum flow algorithm is performed, and in the worst case, a city is connected to all
+ * the pipes of the system.
+ *
+ * @param cityCode The city code of the city to be analyzed.
+ * @return A map containing information about the affected cities and the deficit in water supply
+ * caused by each pipe rupture. The keys are strings representing the pipes, and the values are
+ * vectors of pairs, where each pair contains the affected city code and the deficit in water supply.
+ **/
 
 std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager::CitiesAffectedByPipeRupture(std::string &cityCode) {
     std::map<std::string, std::vector<std::pair<std::string, double>>> result;
@@ -548,16 +575,8 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
 
 
     // Calculate original flows for all cities
-    std::map<std::string,double> originalFlows;
-    if(maximumFlowAllCities().empty()) std::cout << "ERROR! maxFlow failed.";
-    for (const auto& cityPair : waterCityMap) {
-        auto cityVertex = waterNetwork.findVertex(cityPair.second);
-        double tot = 0;
-        for (Edge<WaterElement*>* incomingPipe : cityVertex->getIncoming()) {
-            tot += incomingPipe->getFlow();
-        }
-        originalFlows.insert({cityPair.second->getCode(), tot});
-    }
+    std::map<DS*,double> originalFlows = auxMaxFlow();
+
 
     // Loop through all the edges connected to the target city vertex
     for (Edge<WaterElement*>* pipe : targetCityVertex->getIncoming()) {
@@ -573,7 +592,7 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
         // Check if the desired water supply cannot be met for any city
         for (const auto &city: maxFlows) {
 
-            if ((city.second < city.first->getDemand()) && (originalFlows[city.first->getCode()] > city.second)) {
+            if ((city.second < city.first->getDemand()) && (originalFlows[city.first] > city.second)) {
                 // Record the affected city and the deficit in water supply
                 std::string affectedCity = city.first->getCity(); // Remove the prefix 'c_'
                 double deficit = city.first->getDemand() - city.second;
@@ -593,22 +612,28 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
     return result;
 }
 
+/**
+ * @brief Determine the cities affected by pipe ruptures.
+ * @details This function examines each pipe in the water network and calculates the maximum flow
+ * after simulating the rupture of each pipe. It records the affected cities and the deficit in
+ * water supply caused by each pipe rupture.
+ * @details Time Complexity: O(VE³), where V is the number of vertices (water elements) and E is the
+ * number of edges (pipes) in the network. This is because for each pipe examined, an Edmond's
+ * Karp maximum flow algorithm is performed.
+ *
+ * @return A map containing information about the affected cities and the deficit in water supply
+ * caused by each pipe rupture. The keys are strings representing the pipes (from origin to
+ * destination), and the values are vectors of pairs, where each pair contains the affected city
+ * and the deficit in water supply.
+ **/
+
 std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager::CitiesAffectedByPipeRupture() {
     std::map<std::string, std::vector<std::pair<std::string, double>>> result;
 
 
 
     // Calculate original flows for all cities
-    std::map<std::string,double> originalFlows;
-    if(maximumFlowAllCities().empty()) std::cout << "ERROR! maxFlow failed.";
-    for (const auto& cityPair : waterCityMap) {
-        auto cityVertex = waterNetwork.findVertex(cityPair.second);
-        double tot = 0;
-        for (Edge<WaterElement*>* incomingPipe : cityVertex->getIncoming()) {
-            tot += incomingPipe->getFlow();
-        }
-        originalFlows[cityPair.second->getCode()] = tot;
-    }
+    std::map<DS*,double> originalFlows = auxMaxFlow();
 
     for(Vertex<WaterElement*>* we : waterNetwork.getVertexSet()) {
         // Loop through all the edges connected to the target city vertex
@@ -625,7 +650,7 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
             // Check if the desired water supply cannot be met for any city
             for (const auto &city: maxFlows) {
 
-                if ((city.second < city.first->getDemand()) && (originalFlows[city.first->getCode()] > city.second)) {
+                if ((city.second < city.first->getDemand()) && (originalFlows[city.first] > city.second)) {
                     // Record the affected city and the deficit in water supply
                     std::string affectedCity = city.first->getCity(); // Remove the prefix 'c_'
                     double deficit = city.first->getDemand() - city.second;
