@@ -233,7 +233,7 @@ void Application::listCitiesAffectedByMaintenance(){
 // T3.3
 void Application::listCitiesAffectedByPipeRupture(){
     clearScreen();
-/*
+
     std::string cityCode;
     std::cout << "\nPlease specify the city's code: ";
     std::getline(std::cin >> std::ws, cityCode); // Use std::ws to consume whitespaces
@@ -241,8 +241,8 @@ void Application::listCitiesAffectedByPipeRupture(){
 
     // Call the function to get cities affected by pipe rupture
     std::map<std::string, std::vector<std::pair<std::string, double>>> result = waterManager.CitiesAffectedByPipeRupture(cityCode);
-*/
-    std::map<std::string, std::vector<std::pair<std::string, double>>> result = waterManager.CitiesAffectedByPipeRupture();
+
+    //std::map<std::string, std::vector<std::pair<std::string, double>>> result = waterManager.CitiesAffectedByPipeRupture();
 
     if (result.empty()) {
         std::cout << "No cities affected by pipe rupture found for the specified city code.\n";

@@ -578,34 +578,37 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
     std::map<DS*,double> originalFlows = auxMaxFlow();
 
 
-    // Loop through all the edges connected to the target city vertex
-    for (Edge<WaterElement*>* pipe : targetCityVertex->getIncoming()) {
-        // Simulate pipe rupture by setting its flow capacity to 0
-        auto destination = pipe->getDest()->getInfo();
-        auto origin = pipe->getOrig()->getInfo();
-        double weight = pipe->getWeight();
-        waterNetwork.removeEdge(pipe->getOrig()->getInfo(), pipe->getDest()->getInfo());
+    for(Vertex<WaterElement*>* we : waterNetwork.getVertexSet()){
+        // Loop through all the edges connected to the target city vertex
+        for (Edge<WaterElement*>* pipe : we->getAdj()) {
+            // Simulate pipe rupture by setting its flow capacity to 0
+            auto destination = pipe->getDest()->getInfo();
+            auto origin = pipe->getOrig()->getInfo();
+            double weight = pipe->getWeight();
+            waterNetwork.removeEdge(pipe->getOrig()->getInfo(), pipe->getDest()->getInfo());
 
-        // Calculate the maximum flow after the pipe rupture
-        std::map<DS *, double> maxFlows = auxMaxFlow();
+            // Calculate the maximum flow after the pipe rupture
+            std::map<DS *, double> maxFlows = auxMaxFlow();
 
-        // Check if the desired water supply cannot be met for any city
-        for (const auto &city: maxFlows) {
+            // Check if the desired water supply cannot be met for any city
+            for (const auto &city: maxFlows) {
 
-            if ((city.second < city.first->getDemand()) && (originalFlows[city.first] > city.second)) {
-                // Record the affected city and the deficit in water supply
-                std::string affectedCity = city.first->getCity(); // Remove the prefix 'c_'
-                double deficit = city.first->getDemand() - city.second;
-                std::ostringstream oss;
+                if ((city.second < city.first->getDemand()) && (originalFlows[city.first] > city.second) && (targetCityVertex->getInfo()->getCode() == city.first->getCode())) {
+                    // Record the affected city and the deficit in water supply
+                    std::string affectedCity = city.first->getCity(); // Remove the prefix 'c_'
+                    double deficit = city.first->getDemand() - city.second;
+                    std::ostringstream oss;
 
-                oss << " from service point " << origin->getCode() << " to service point " << destination->getCode();
-                result[oss.str()].push_back(std::make_pair(affectedCity, deficit));
+                    oss << " from service point " << origin->getCode() << " to service point " << destination->getCode();
+                    result[oss.str()].push_back(std::make_pair(affectedCity, deficit));
+                }
             }
+            // Restore the original flow capacity of the pipe
+
+            waterNetwork.addEdge(origin, destination, weight);
         }
 
-        // Restore the original flow capacity of the pipe
 
-        waterNetwork.addEdge(origin, destination, weight);
     }
 
 
