@@ -265,6 +265,28 @@ void WaterManager::processPipes(std::ifstream &in) {
 }
 
 /* Data Parsing End */
+/**
+ * @brief Helper function. Checks if a given delivery site already has the needed demand.
+ * @details It's time complexity in the worst case is O(E) where E is the amount of edges that are
+ * @details incoming and outgoing of a given delivery Site.
+ *
+ * @param adj - This is the vertex that contains the delivery Site.
+ * @param deliverySite - This is the delivery site.
+ *
+ * @return If the demand has been fulfilled then it returns true, false otherwise.
+ **/
+bool demandFulfilled(Vertex<WaterElement*>* adj, DS* deliverySite){
+    double tot = 0.0;
+    for (Edge<WaterElement*>* edge : adj->getIncoming()){
+        tot += edge->getFlow();
+    }
+
+    for (Edge<WaterElement*>* edge : adj->getAdj()){
+        tot -= edge->getFlow();
+    }
+
+    return tot >= deliverySite->getDemand();
+}
 
 /**
  * @brief Helper function. Checks if there exists an augmenting path.
@@ -303,6 +325,17 @@ bool WaterManager::existsAugmentingPath(WaterElement*& source, WaterElement*& ta
             // Normal Path, the outgoing edge is not full.
             if (!adj->isVisited() && (e->getWeight() - e->getFlow() > 0)) {
                 //std::cout << " new to queue " << adj->getInfo() << "\n";
+
+                auto* isDS = dynamic_cast<DS*>(adj->getInfo());
+
+                if (isDS){
+                    if (demandFulfilled(adj, isDS)){
+                        std::cout << "Found delivery site but already full " << isDS->getCity() << "\n";
+                        continue;
+                    }
+                }
+
+
                 adj->setVisited(true);
                 adj->setPath(e);
                 q.push(adj);
