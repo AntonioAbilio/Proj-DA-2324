@@ -265,6 +265,21 @@ void WaterManager::processPipes(std::ifstream &in) {
 }
 
 /* Data Parsing End */
+
+
+double getTotVertex(Vertex<WaterElement*>* adj, DS* deliverySite){
+    double tot = 0.0;
+    for (Edge<WaterElement*>* edge : adj->getIncoming()){
+        tot += edge->getFlow();
+    }
+
+    /*for (Edge<WaterElement*>* edge : adj->getAdj()){
+        tot -= edge->getFlow();
+    }*/
+    //std::cout << "Value is " << tot << std::endl;
+    return tot;
+}
+
 /**
  * @brief Helper function. Checks if a given delivery site already has the needed demand.
  * @details It's time complexity in the worst case is O(E) where E is the amount of edges that are
@@ -276,16 +291,7 @@ void WaterManager::processPipes(std::ifstream &in) {
  * @return If the demand has been fulfilled then it returns true, false otherwise.
  **/
 bool demandFulfilled(Vertex<WaterElement*>* adj, DS* deliverySite){
-    double tot = 0.0;
-    for (Edge<WaterElement*>* edge : adj->getIncoming()){
-        tot += edge->getFlow();
-    }
-
-    for (Edge<WaterElement*>* edge : adj->getAdj()){
-        tot -= edge->getFlow();
-    }
-
-    return tot >= deliverySite->getDemand();
+    return getTotVertex(adj, deliverySite) >= deliverySite->getDemand();
 }
 
 /**
@@ -335,7 +341,6 @@ bool WaterManager::existsAugmentingPath(WaterElement*& source, WaterElement*& ta
                     }
                 }
 
-
                 adj->setVisited(true);
                 adj->setPath(e);
                 q.push(adj);
@@ -381,9 +386,19 @@ double WaterManager::findMinResidualAlongPath(WaterElement*& source, WaterElemen
 
     double minFlow = INFINITY;
 
+    auto* isDS2 = dynamic_cast<DS*>(sourceVertex->getInfo());
+    if (isDS2){
+        minFlow = std::min(minFlow, (isDS2->getDemand() - getTotVertex(sourceVertex, isDS2)));
+    }
+
     while (currentVertex != sourceVertex){
+        auto* isDS = dynamic_cast<DS*>(currentVertex->getInfo());
+        if (isDS){
+            minFlow = std::min(minFlow, (isDS->getDemand() - getTotVertex(currentVertex, isDS)));
+        }
+
         auto e = currentVertex->getPath();
-        //std::cout << "we are on vertex " << v->getInfo() << " the path is " << e->getWeight() << " and going to vertex " << e->getOrig()->getInfo() << "\n";
+        //std::cout << "we are on vertex " << currentVertex->getInfo() << " the path is " << e->getWeight() << " and going to vertex " << e->getOrig()->getInfo() << "\n";
         if (e->getDest() == currentVertex) {
             minFlow = std::min(minFlow, e->getWeight() - e->getFlow());
             currentVertex = e->getOrig();
