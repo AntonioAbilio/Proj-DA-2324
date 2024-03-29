@@ -9,14 +9,19 @@ class DS : public WaterElement{
 private:
     std::string city;
     double demand;
+    double currentFlow;
     int population;
 
 public:
-    DS(const std::string &code, int id, const std::string &city, double demand, int population);
+    DS(const std::string &code, int id, const std::string &city, double demand, int population, double currentFlow);
 
     const std::string &getCity() const;
 
     void setCity(const std::string &city);
+
+    double getCurrentFlow() const;
+
+    void setCurrentFlow(double flow);
 
     double getDemand() const;
 

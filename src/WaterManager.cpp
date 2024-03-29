@@ -172,7 +172,7 @@ void WaterManager::processCities(std::ifstream &in) {
             }
         }
 
-        DS* deliverySite = new DS(code, stoi(id), city, std::stod(demand), std::stoi(actualPopulation));
+        DS* deliverySite = new DS(code, stoi(id), city, std::stod(demand), std::stoi(actualPopulation), 0.0);
 
         this->waterCityMap[code] = deliverySite;
 
@@ -272,11 +272,6 @@ double getTotVertex(Vertex<WaterElement*>* adj, DS* deliverySite){
     for (Edge<WaterElement*>* edge : adj->getIncoming()){
         tot += edge->getFlow();
     }
-
-    /*for (Edge<WaterElement*>* edge : adj->getAdj()){
-        tot -= edge->getFlow();
-    }*/
-    //std::cout << "Value is " << tot << std::endl;
     return tot;
 }
 
@@ -436,11 +431,22 @@ void WaterManager::augmentFlowAlongPath(WaterElement*& source, WaterElement*& ta
     while (currentVertex != sourceVertex){
         auto e = currentVertex->getPath();
         double flow = e->getFlow();
+        auto* isDS = dynamic_cast<DS*>(currentVertex->getInfo());
         if (e->getDest() == currentVertex) {
             e->setFlow(flow + minFlow);
-            currentVertex = e->getOrig(); }
-        else {
+
+            if (isDS){
+                isDS->setCurrentFlow(getTotVertex(currentVertex, isDS));
+            }
+
+            currentVertex = e->getOrig();
+        } else {
             e->setFlow(flow - minFlow);
+
+            if (isDS){
+                isDS->setCurrentFlow(getTotVertex(currentVertex, isDS));
+            }
+
             currentVertex = e->getDest();
         }
     }
@@ -452,7 +458,7 @@ std::string WaterManager::maximumFlowAllCities() {
 
     // Add superSource and superTarget
     WaterElement* superWaterReservoir = new WR("superWR", -1, "superWR", "none", 0);
-    WaterElement* superDeliverySite = new DS("superDS",-1,"superDS",0,0);
+    WaterElement* superDeliverySite = new DS("superDS",-1,"superDS",0,0,0);
     waterNetwork.addVertex(superWaterReservoir);
     waterNetwork.addVertex(superDeliverySite);
 
@@ -481,14 +487,7 @@ std::string WaterManager::maximumFlowAllCities() {
     }
 
     for (const auto& city : waterCityMap){
-        auto cityVertex = waterNetwork.findVertex(city.second);
-
-        double tot = 0;
-        for (Edge<WaterElement*>* incomingPipe : cityVertex->getIncoming()){
-            tot += incomingPipe->getFlow();
-        }
-
-        oss << "The city " << city.second->getCity() << " has a maximum flow of " << tot << " cubic meters per second.\n";
+        oss << "The city " << city.second->getCity() << " has a maximum flow of " << city.second->getCurrentFlow() << " cubic meters per second.\n";
     }
 
     for (Vertex<WaterElement*>* vertex : waterNetwork.getVertexSet()){
@@ -544,12 +543,7 @@ std::string WaterManager::maximumFlowSpecificCities(std::string cityCode) {
         augmentFlowAlongPath(superWaterReservoir, superWaterSource, minFlow);
     }
 
-    double tot = 0;
-    for (auto edge : waterNetwork.findVertex(superWaterSource)->getIncoming()){
-        tot += edge->getFlow();
-    }
-
-    oss << "The city " << ((DS*)superWaterSource)->getCity() << " has a maximum flow of " << tot << " cubic meters per second.\n";
+    oss << "The city " << ((DS*)superWaterSource)->getCity() << " has a maximum flow of " << ((DS*)superWaterSource)->getCurrentFlow() << " cubic meters per second.\n";
 
     waterNetwork.removeVertex(superWaterReservoir);
     return oss.str();
