@@ -173,7 +173,7 @@ void WaterManager::processCities(std::ifstream &in) {
             }
         }
 
-        DS* deliverySite = new DS(code, stoi(id), city, std::stod(demand), std::stoi(actualPopulation));
+        DS* deliverySite = new DS(code, stoi(id), city, std::stod(demand), std::stoi(actualPopulation), 0.0);
 
         this->waterCityMap[code] = deliverySite;
 
@@ -267,6 +267,29 @@ void WaterManager::processPipes(std::ifstream &in) {
 
 /* Data Parsing End */
 
+
+double getTotVertex(Vertex<WaterElement*>* adj, DS* deliverySite){
+    double tot = 0.0;
+    for (Edge<WaterElement*>* edge : adj->getIncoming()){
+        tot += edge->getFlow();
+    }
+    return tot;
+}
+
+/**
+ * @brief Helper function. Checks if a given delivery site already has the needed demand.
+ * @details It's time complexity in the worst case is O(E) where E is the amount of edges that are
+ * @details incoming and outgoing of a given delivery Site.
+ *
+ * @param adj - This is the vertex that contains the delivery Site.
+ * @param deliverySite - This is the delivery site.
+ *
+ * @return If the demand has been fulfilled then it returns true, false otherwise.
+ **/
+bool demandFulfilled(Vertex<WaterElement*>* adj, DS* deliverySite){
+    return getTotVertex(adj, deliverySite) >= deliverySite->getDemand();
+}
+
 /**
  * @brief Helper function. Checks if there exists an augmenting path.
  * @details This function does a Breadth First Search (BFS) and tries to construct a path from source node to a target node.
@@ -304,6 +327,16 @@ bool WaterManager::existsAugmentingPath(WaterElement*& source, WaterElement*& ta
             // Normal Path, the outgoing edge is not full.
             if (!adj->isVisited() && (e->getWeight() - e->getFlow() > 0)) {
                 //std::cout << " new to queue " << adj->getInfo() << "\n";
+
+                auto* isDS = dynamic_cast<DS*>(adj->getInfo());
+
+                if (isDS){
+                    if (demandFulfilled(adj, isDS)){
+                        std::cout << "Found delivery site but already full " << isDS->getCity() << "\n";
+                        continue;
+                    }
+                }
+
                 adj->setVisited(true);
                 adj->setPath(e);
                 q.push(adj);
@@ -349,9 +382,19 @@ double WaterManager::findMinResidualAlongPath(WaterElement*& source, WaterElemen
 
     double minFlow = INFINITY;
 
+    auto* isDS2 = dynamic_cast<DS*>(sourceVertex->getInfo());
+    if (isDS2){
+        minFlow = std::min(minFlow, (isDS2->getDemand() - getTotVertex(sourceVertex, isDS2)));
+    }
+
     while (currentVertex != sourceVertex){
+        auto* isDS = dynamic_cast<DS*>(currentVertex->getInfo());
+        if (isDS){
+            minFlow = std::min(minFlow, (isDS->getDemand() - getTotVertex(currentVertex, isDS)));
+        }
+
         auto e = currentVertex->getPath();
-        //std::cout << "we are on vertex " << v->getInfo() << " the path is " << e->getWeight() << " and going to vertex " << e->getOrig()->getInfo() << "\n";
+        //std::cout << "we are on vertex " << currentVertex->getInfo() << " the path is " << e->getWeight() << " and going to vertex " << e->getOrig()->getInfo() << "\n";
         if (e->getDest() == currentVertex) {
             minFlow = std::min(minFlow, e->getWeight() - e->getFlow());
             currentVertex = e->getOrig();
@@ -389,11 +432,22 @@ void WaterManager::augmentFlowAlongPath(WaterElement*& source, WaterElement*& ta
     while (currentVertex != sourceVertex){
         auto e = currentVertex->getPath();
         double flow = e->getFlow();
+        auto* isDS = dynamic_cast<DS*>(currentVertex->getInfo());
         if (e->getDest() == currentVertex) {
             e->setFlow(flow + minFlow);
-            currentVertex = e->getOrig(); }
-        else {
+
+            if (isDS){
+                isDS->setCurrentFlow(getTotVertex(currentVertex, isDS));
+            }
+
+            currentVertex = e->getOrig();
+        } else {
             e->setFlow(flow - minFlow);
+
+            if (isDS){
+                isDS->setCurrentFlow(getTotVertex(currentVertex, isDS));
+            }
+
             currentVertex = e->getDest();
         }
     }
@@ -405,7 +459,7 @@ std::string WaterManager::maximumFlowAllCities() {
 
     // Add superSource and superTarget
     WaterElement* superWaterReservoir = new WR("superWR", -1, "superWR", "none", 0);
-    WaterElement* superDeliverySite = new DS("superDS",-1,"superDS",0,0);
+    WaterElement* superDeliverySite = new DS("superDS",-1,"superDS",0,0,0);
     waterNetwork.addVertex(superWaterReservoir);
     waterNetwork.addVertex(superDeliverySite);
 
@@ -434,14 +488,7 @@ std::string WaterManager::maximumFlowAllCities() {
     }
 
     for (const auto& city : waterCityMap){
-        auto cityVertex = waterNetwork.findVertex(city.second);
-
-        double tot = 0;
-        for (Edge<WaterElement*>* incomingPipe : cityVertex->getIncoming()){
-            tot += incomingPipe->getFlow();
-        }
-
-        oss << "The city " << city.second->getCity() << " has a maximum flow of " << tot << " cubic meters per second.\n";
+        oss << "The city " << city.second->getCity() << " has a maximum flow of " << city.second->getCurrentFlow() << " cubic meters per second.\n";
     }
 
     for (Vertex<WaterElement*>* vertex : waterNetwork.getVertexSet()){
@@ -498,15 +545,7 @@ std::string WaterManager::maximumFlowSpecificCities(std::string cityCode) {
         augmentFlowAlongPath(superWaterReservoir, superWaterSource, minFlow);
     }
 
-
-    double tot = 0;
-    for (auto edge : waterNetwork.findVertex(superWaterSource)->getIncoming()){
-        tot += edge->getFlow();
-    }
-
-
-
-    oss << "The city " << ((DS*)superWaterSource)->getCity() << " has a maximum flow of " << tot << " cubic meters per second.\n";
+    oss << "The city " << ((DS*)superWaterSource)->getCity() << " has a maximum flow of " << ((DS*)superWaterSource)->getCurrentFlow() << " cubic meters per second.\n";
 
     waterNetwork.removeVertex(superWaterReservoir);
     return oss.str();
