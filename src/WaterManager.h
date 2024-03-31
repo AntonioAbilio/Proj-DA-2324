@@ -32,10 +32,14 @@ public:
 
     std::map<std::string, std::vector<std::pair<std::string, double>>> CitiesAffectedByPipeRupture(std::string &cityCode);
     std::map<std::string, std::vector<std::pair<std::string, double>>> CitiesAffectedByPipeRupture();
+    double avgDifference(double &maxDifference);
+    double variance();
+    void balancingAlgorithm();
+
 private:
 
     Graph<WaterElement*> waterNetwork;
-
+    int pipesSize = 0;
     std::unordered_map<std::string, WR*> waterReservoirMap;
 
     std::unordered_map<std::string, PS*> waterPumpMap;

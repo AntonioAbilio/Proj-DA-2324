@@ -207,6 +207,7 @@ void Application::listwaterNeeds(){
 void Application::balaceNetworkLoad(){
     clearScreen();
 
+    waterManager.balancingAlgorithm();
     //Code here
 
     showGoBackMenu(3, "Balance network load."); // At the end make a call to goBackMenu()
@@ -232,17 +233,37 @@ void Application::listCitiesAffectedByMaintenance(){
 
 // T3.3
 void Application::listCitiesAffectedByPipeRupture(){
+    restartPipelineFailure:
     clearScreen();
 
+
+    std::string targetOpt;
+    std::cout << "\nWhat would you like to do?\n"
+              << "1 - See cities affected by a pipe belonging to a specific city.\n"
+              << "2 - See global results for pipeline failures.\n"
+              << "Input: ";
+    std::cin >> targetOpt;
+
+    clearScreen();
     std::string cityCode;
-    std::cout << "\nPlease specify the city's code: ";
-    std::getline(std::cin >> std::ws, cityCode); // Use std::ws to consume whitespaces
-    std::cout << "\n";
+    std::map<std::string, std::vector<std::pair<std::string, double>>> result;
+    switch (processKey(targetOpt)) {
+        case 1:
 
-    // Call the function to get cities affected by pipe rupture
-    std::map<std::string, std::vector<std::pair<std::string, double>>> result = waterManager.CitiesAffectedByPipeRupture(cityCode);
+            std::cout << "\nPlease specify the city's code: ";
+            std::getline(std::cin >> std::ws, cityCode); // Use std::ws to consume whitespaces
+            std::cout << "\n";
 
-    //std::map<std::string, std::vector<std::pair<std::string, double>>> result = waterManager.CitiesAffectedByPipeRupture();
+            // Call the function to get cities affected by pipe rupture
+            result = waterManager.CitiesAffectedByPipeRupture(cityCode);
+            break;
+        case 2:
+            result = waterManager.CitiesAffectedByPipeRupture();
+            break;
+        default:
+            goto restartPipelineFailure;
+    }
+
 
     if (result.empty()) {
         std::cout << "No cities affected by pipe rupture found for the specified city code.\n";

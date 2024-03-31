@@ -245,7 +245,7 @@ void WaterManager::processPipes(std::ifstream &in) {
         if (!this->waterNetwork.addEdge(waterElementA, waterElementB, std::stod(capacity))){
             std::cerr << "Problem while adding an edge to the graph\n";
             return;
-        }
+        } else pipesSize++;
 
         if (std::stoi(direction)){
             if (!this->waterNetwork.addEdge(waterElementB, waterElementA, std::stod(capacity))){
@@ -332,7 +332,7 @@ bool WaterManager::existsAugmentingPath(WaterElement*& source, WaterElement*& ta
 
                 if (isDS){
                     if (demandFulfilled(adj, isDS)){
-                        std::cout << "Found delivery site but already full " << isDS->getCity() << "\n";
+                        //std::cout << "Found delivery site but already full " << isDS->getCity() << "\n";
                         continue;
                     }
                 }
@@ -571,12 +571,7 @@ std::map<DS * , double> WaterManager::auxMaxFlow(){
     for (const auto& city : waterCityMap) {
         auto cityVertex = waterNetwork.findVertex(city.second);
 
-        double tot = 0;
-        for (Edge<WaterElement *> *incomingPipe: cityVertex->getIncoming()) {
-            tot += incomingPipe->getFlow();
-        }
-
-        cities.insert({city.second,tot});
+        cities.insert({city.second,city.second->getCurrentFlow()});
 
     }
 
@@ -603,7 +598,7 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
     std::map<std::string, std::vector<std::pair<std::string, double>>> result;
 
     // Find the target city vertex
-    Vertex<WaterElement*>* targetCityVertex = waterNetwork.findVertex(waterCityMap[cityCode]);
+    Vertex<WaterElement*>* targetCityVertex = waterNetwork.findVertex(waterCityMap["c_"+ cityCode]);
 
 
     // If the target city vertex is not found, return an empty result
@@ -709,6 +704,70 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
         }
     }
     return result;
+}
+
+double WaterManager::avgDifference(double &maxDifference) {
+    double sumDifference = 0.0;
+    for(auto we : waterNetwork.getVertexSet()){
+        for(auto edge : we->getAdj()){
+            double difference = abs(edge->getWeight() - edge->getFlow());
+            maxDifference = std::max(maxDifference, difference);
+            sumDifference += difference;
+        }
+    }
+    return sumDifference / static_cast<double>(pipesSize);
+}
+
+double WaterManager::variance() {
+    double maxDifference = 0.0;
+    double avg = avgDifference(maxDifference);
+    double sumVariance = 0.0;
+    for(auto we : waterNetwork.getVertexSet()){
+        for(auto edge : we->getAdj()){
+            double difference = abs(edge->getWeight() - edge->getFlow());
+            sumVariance += std::pow((difference - avg),2);
+        }
+    }
+    return sumVariance / static_cast<double>(pipesSize);
+}
+
+void WaterManager::balancingAlgorithm() {
+    maximumFlowAllCities();
+    double initialMaxDifference = 0.0;
+    double initialAvgDifference = avgDifference(initialMaxDifference);
+    double initialVariance = variance();
+
+    for(auto we : waterNetwork.getVertexSet()){
+        for(auto edge : we->getAdj()){
+            double difference = abs(edge->getWeight() - edge->getFlow());
+            std::vector<Edge<WaterElement*>*> neighboringPipes;
+            if(difference > 0){
+                for(auto adj : edge->getDest()->getAdj()){
+                    if(abs(edge->getWeight() - edge->getFlow()) < difference){
+                        neighboringPipes.push_back(adj);
+                    }
+                }
+
+            }
+            for(auto neighbor : neighboringPipes){
+                double thisDifference = abs(neighbor->getWeight() - neighbor->getFlow());
+                difference = abs(edge->getWeight() - edge->getFlow());
+                if(thisDifference > difference) {
+                    double redistributed = thisDifference - difference;
+                    edge->setFlow(edge->getFlow() + redistributed);
+                    neighbor->setFlow(neighbor->getFlow() - redistributed);
+                    }
+                }
+        }
+    }
+
+    double finalMaxDifference = 0.0;
+    double finalAvgDifference = avgDifference(finalMaxDifference);
+    double finalVariance = variance();
+
+    std::cout << initialMaxDifference <<  " | " <<finalMaxDifference << std::endl;
+    std::cout << initialAvgDifference <<" | " << finalAvgDifference << std::endl;
+    std::cout << initialVariance <<" | " << finalVariance << std::endl;
 }
 
 
