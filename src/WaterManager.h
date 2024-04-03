@@ -7,6 +7,7 @@
 #include <regex>
 #include <unordered_map>
 #include <map>
+#include <cmath>
 
 #include "Graph.h"
 #include "WaterElement.h"
@@ -29,8 +30,6 @@ public:
     void dataGoBoom(); // Free allocated space.
 
     void listwaterNeeds(); // T2.2
-    void listCitiesAffectedByReservoirRemoval(std::string wr_code, bool remove); // T3.1
-
 
     // Exercise T2.1
     bool existsAugmentingPath(WaterElement*& source, WaterElement*& target); //HelperFunction
@@ -45,6 +44,11 @@ public:
     double avgDifference(double &maxDifference);
     double variance();
     void balancingAlgorithm();
+
+    // Exercise T3.1
+    void removeWR(WR* wr, std::vector<Edge<WaterElement*>>* outgoing, std::vector<Edge<WaterElement*>>* incoming);
+    void addWR(WR* wr, const std::vector<Edge<WaterElement*>>& outgoing, const std::vector<Edge<WaterElement*>>& incoming);
+    void listCitiesAffectedByReservoirRemoval(std::string wr_code, bool remove);
 
     // Exercice T3.2
     void removePS(PS* ps, std::vector<Edge<WaterElement*>>* outgoing, std::vector<Edge<WaterElement*>>* incoming);

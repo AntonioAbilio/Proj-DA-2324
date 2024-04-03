@@ -771,6 +771,37 @@ void WaterManager::updateFlow(Vertex<WaterElement*>* WR){
 }
 
 
+
+void WaterManager::removeWR(WR* wr, std::vector<Edge<WaterElement*>>* outgoing, std::vector<Edge<WaterElement*>>* incoming){
+    Vertex<WaterElement*>* PSVertex = waterNetwork.findVertex(wr);
+
+    for (Edge<WaterElement*>* edge : PSVertex->getAdj()){
+        auto dest = edge->getDest();
+        outgoing->push_back((*edge));
+        waterNetwork.removeEdge(wr, dest->getInfo());
+    }
+
+    for (Edge<WaterElement*>* edge : PSVertex->getIncoming()){
+        auto src = edge->getOrig();
+        incoming->push_back((*edge));
+        waterNetwork.removeEdge(src->getInfo(), wr);
+    }
+
+    waterNetwork.removeVertex(wr);
+}
+void WaterManager::addWR(WR* wr, const std::vector<Edge<WaterElement*>>& outgoing, const std::vector<Edge<WaterElement*>>& incoming){
+    waterNetwork.addVertex(wr);
+
+    for (Edge<WaterElement*> edge : outgoing){
+        waterNetwork.addEdge(wr, edge.getDest()->getInfo(), edge.getWeight());
+    }
+
+    for (Edge<WaterElement*> edge : incoming){
+        waterNetwork.addEdge(edge.getOrig()->getInfo(), wr , edge.getWeight());
+    }
+
+}
+
 // T3.1
 /**
  * @brief Lists the cities that are in need of water, by checking the actual flow delivered to them
@@ -787,22 +818,24 @@ void WaterManager::listCitiesAffectedByReservoirRemoval(std::string wr_code, boo
     }
     Vertex<WaterElement*>* WR = waterNetwork.findVertex(WRToRemove);
 
-    //updateFlow(WR);
+    std::vector<Edge<WaterElement*>> outgoingEdges;
+    std::vector<Edge<WaterElement*>> incomingEdges;
 
-    // Remove vertex
-    waterNetwork.removeVertex(WR->getInfo());
+    std::string flowBeforeRemoval = maximumFlowAllCities();
+
+    removeWR(WRToRemove, &outgoingEdges, &incomingEdges);
     waterReservoirMap.erase(WRToRemove->getCode());
 
-    // FIXME
+    std::string flowAfterRemoval = maximumFlowAllCities();
+
+    //updateFlow(WR); //FIXME
+
     listwaterNeeds(); // listwaterNeeds() already runs Edmonds-Karp Algorithm
 
     // Insert WR again after temporary removal (if option selected)
     if (!remove){
-        waterReservoirMap.erase(WRToRemove->getCode());
         this->waterReservoirMap[WRToRemove->getCode()] = WRToRemove;
-        if (!waterNetwork.addVertex(WRToRemove)){
-            std::cout << "Error while adding vertex to graph.";
-        }
+        addWR(WRToRemove, outgoingEdges, incomingEdges);
     }
 
     // Algorithm to only run complete Edmonds-Karp sometimes:
