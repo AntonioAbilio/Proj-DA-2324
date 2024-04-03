@@ -33,6 +33,8 @@ public:
     std::string maximumFlowAllCities();
     void maximumFlowSpecificCities(std::string cityCode);
 
+    void dfsAffectedByRemoval(Vertex<WaterElement*>* v, std::vector<WaterElement*> &res);
+    void updateFlow(Vertex<WaterElement*>* WR );
 
 private:
 

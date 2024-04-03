@@ -478,6 +478,41 @@ void WaterManager::listwaterNeeds(){
     }
 }
 
+void WaterManager::dfsAffectedByRemoval(Vertex<WaterElement*>* v, std::vector<WaterElement*> &res){
+    v->setVisited(true);
+    res.push_back(v->getInfo());
+    std::cout << "Pushed back\n";
+    for (Edge<WaterElement*>* e : v->getAdj()) {  //FIXME: keeps crashing
+        auto w = e->getDest();
+        if (!w->isVisited()) {
+            dfsAffectedByRemoval(w, res);
+        }
+    }
+}
+
+
+void WaterManager::updateFlow(Vertex<WaterElement*>* WR){
+    // 1. Run DFS from the Reservoir to be removed
+    std::vector<WaterElement*> affectedSubset;
+    for (auto v : waterNetwork.getVertexSet()) // Set all vertices to unvisited
+        v->setVisited(false);
+    dfsAffectedByRemoval(WR, affectedSubset);
+
+    // DEBUG
+    std::cout << "\nAffected Nodes:\n";
+    for (auto a : affectedSubset){
+        std::cout << a->getCode() << "\n";
+    }
+    std::cout << "\n";
+    //
+
+    // 2. Reset the flow in the subgraph found by the DFS
+    //dfsResetFlowByRemoval();  // FIXME
+
+    // 3. Rerun Edomds-Karp but just for that subgraph
+    //maxFlowSubgraph(); // FIXME
+}
+
 
 // T3.1
 /**
@@ -495,10 +530,13 @@ void WaterManager::listCitiesAffectedByReservoirRemoval(std::string wr_code, boo
     }
     Vertex<WaterElement*>* WR = waterNetwork.findVertex(WRToRemove);
 
+    //updateFlow(WR);
+
     // Remove vertex
     waterNetwork.removeVertex(WR->getInfo());
     waterReservoirMap.erase(WRToRemove->getCode());
 
+    // FIXME
     listwaterNeeds(); // listwaterNeeds() already runs Edmonds-Karp Algorithm
 
     // Insert WR again after temporary removal (if option selected)
