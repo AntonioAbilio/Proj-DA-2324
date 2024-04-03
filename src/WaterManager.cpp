@@ -1,4 +1,3 @@
-#include <cmath>
 #include "WaterManager.h"
 
 
@@ -105,7 +104,7 @@ void WaterManager::processReservoirs(std::ifstream &in) {
         }
 
         // ToDo remove
-        std::cout << reservoir << " " << municipality << " " << id << " " << code << " " << maximumDelivery << std::endl;
+        //std::cout << reservoir << " " << municipality << " " << id << " " << code << " " << maximumDelivery << std::endl;
     }
 }
 
@@ -245,7 +244,7 @@ void WaterManager::processPipes(std::ifstream &in) {
         if (!this->waterNetwork.addEdge(waterElementA, waterElementB, std::stod(capacity))){
             std::cerr << "Problem while adding an edge to the graph\n";
             return;
-        }
+        } else pipesSize++;
 
         if (std::stoi(direction)){
             if (!this->waterNetwork.addEdge(waterElementB, waterElementA, std::stod(capacity))){
@@ -517,6 +516,7 @@ std::string WaterManager::maximumFlowAllCities() {
             }
         }
     }
+
 
     waterNetwork.removeVertex(superWaterReservoir);
     waterNetwork.removeVertex(superDeliverySite);
@@ -812,3 +812,270 @@ void WaterManager::listCitiesAffectedByReservoirRemoval(std::string wr_code, boo
 
     // TODO: Add option to reset the graph (to main menu)
 }
+
+/**
+ * @brief Helper function to calculate maximum flow.
+ * @details This function calls the maximumFlowAllCities function (Edmond's Karp) and calculates
+ * the updated maximum flow of each city, storing it into a map of delivery sites as keys and the
+ * respective flow value.
+ * @details Time Complexity: O(VE²), where V is the number of water elements in the system and E
+ * is the number of pipes.
+ *
+ * @return A map containing the delivery sites as keys and the respective updated maximum flow
+ * values.
+ **/
+
+std::map<DS * , double> WaterManager::auxMaxFlow(){
+
+    if(maximumFlowAllCities().empty()) std::cout << "ERROR! maxFlow failed.";
+
+    std::map<DS * , double>cities;
+    for (const auto& city : waterCityMap) {
+        auto cityVertex = waterNetwork.findVertex(city.second);
+
+        cities.insert({city.second,city.second->getCurrentFlow()});
+
+    }
+
+    return cities;
+}
+
+/**
+ * @brief Determine the cities affected by pipe ruptures based on a given city code.
+ * @details This function examines each pipe connected to the specified city and calculates
+ * the maximum flow after simulating the rupture of each pipe. It records the affected cities
+ * and the deficit in water supply caused by each pipe rupture.
+ * @details Time Complexity: O(VE³), where V is the number of vertices (water elements) and E is the
+ * number of edges (pipes) in the network. This is because for each pipe examined, an Edmond's
+ * Karp maximum flow algorithm is performed, and in the worst case, a city is connected to all
+ * the pipes of the system.
+ *
+ * @param cityCode The city code of the city to be analyzed.
+ * @return A map containing information about the affected cities and the deficit in water supply
+ * caused by each pipe rupture. The keys are strings representing the pipes, and the values are
+ * vectors of pairs, where each pair contains the affected city code and the deficit in water supply.
+ **/
+
+std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager::CitiesAffectedByPipeRupture(std::string &cityCode) {
+    std::map<std::string, std::vector<std::pair<std::string, double>>> result;
+
+    // Find the target city vertex
+    Vertex<WaterElement*>* targetCityVertex = waterNetwork.findVertex(waterCityMap["c_"+ cityCode]);
+
+
+    // If the target city vertex is not found, return an empty result
+    if (targetCityVertex == nullptr) {
+        std::cout << "Error: City not found!\n";
+        return result;
+    }
+
+
+    // Calculate original flows for all cities
+    std::map<DS*,double> originalFlows = auxMaxFlow();
+
+
+    for(Vertex<WaterElement*>* we : waterNetwork.getVertexSet()){
+        // Loop through all the edges connected to the target city vertex
+        for (Edge<WaterElement*>* pipe : we->getAdj()) {
+            // Simulate pipe rupture by setting its flow capacity to 0
+            auto destination = pipe->getDest()->getInfo();
+            auto origin = pipe->getOrig()->getInfo();
+            double weight = pipe->getWeight();
+            waterNetwork.removeEdge(pipe->getOrig()->getInfo(), pipe->getDest()->getInfo());
+
+            // Calculate the maximum flow after the pipe rupture
+            std::map<DS *, double> maxFlows = auxMaxFlow();
+
+            // Check if the desired water supply cannot be met for any city
+            for (const auto &city: maxFlows) {
+
+                if ((city.second < city.first->getDemand()) && (originalFlows[city.first] > city.second) && (targetCityVertex->getInfo()->getCode() == city.first->getCode())) {
+                    // Record the affected city and the deficit in water supply
+                    std::string affectedCity = city.first->getCity(); // Remove the prefix 'c_'
+                    double deficit = city.first->getDemand() - city.second;
+                    std::ostringstream oss;
+
+                    oss << " from service point " << origin->getCode() << " to service point " << destination->getCode();
+                    result[oss.str()].push_back(std::make_pair(affectedCity, deficit));
+                }
+            }
+            // Restore the original flow capacity of the pipe
+
+            waterNetwork.addEdge(origin, destination, weight);
+        }
+
+
+    }
+
+
+    return result;
+}
+
+/**
+ * @brief Determine the cities affected by pipe ruptures.
+ * @details This function examines each pipe in the water network and calculates the maximum flow
+ * after simulating the rupture of each pipe. It records the affected cities and the deficit in
+ * water supply caused by each pipe rupture.
+ * @details Time Complexity: O(VE³), where V is the number of vertices (water elements) and E is the
+ * number of edges (pipes) in the network. This is because for each pipe examined, an Edmond's
+ * Karp maximum flow algorithm is performed.
+ *
+ * @return A map containing information about the affected cities and the deficit in water supply
+ * caused by each pipe rupture. The keys are strings representing the pipes (from origin to
+ * destination), and the values are vectors of pairs, where each pair contains the affected city
+ * and the deficit in water supply.
+ **/
+
+std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager::CitiesAffectedByPipeRupture() {
+    std::map<std::string, std::vector<std::pair<std::string, double>>> result;
+
+
+
+    // Calculate original flows for all cities
+    std::map<DS*,double> originalFlows = auxMaxFlow();
+
+    for(Vertex<WaterElement*>* we : waterNetwork.getVertexSet()) {
+        // Loop through all the edges connected to the target city vertex
+        for (Edge<WaterElement *> *pipe: we->getAdj()) {
+            // Simulate pipe rupture by setting its flow capacity to 0
+            auto destination = pipe->getDest()->getInfo();
+            auto origin = pipe->getOrig()->getInfo();
+            double weight = pipe->getWeight();
+            waterNetwork.removeEdge(pipe->getOrig()->getInfo(), pipe->getDest()->getInfo());
+
+            // Calculate the maximum flow after the pipe rupture
+            std::map<DS *, double> maxFlows = auxMaxFlow();
+
+            // Check if the desired water supply cannot be met for any city
+            for (const auto &city: maxFlows) {
+
+                if ((city.second < city.first->getDemand()) && (originalFlows[city.first] > city.second)) {
+                    // Record the affected city and the deficit in water supply
+                    std::string affectedCity = city.first->getCity(); // Remove the prefix 'c_'
+                    double deficit = city.first->getDemand() - city.second;
+                    std::ostringstream oss;
+
+                    oss << " from service point " << origin->getCode() << " to service point " << destination->getCode();
+                    result[oss.str()].push_back(std::make_pair(affectedCity, deficit));
+                }
+            }
+
+            // Restore the original flow capacity of the pipe
+
+            waterNetwork.addEdge(origin, destination, weight);
+        }
+    }
+    return result;
+}
+
+double WaterManager::avgDifference(double &maxDifference) {
+    double sumDifference = 0.0;
+    for(auto we : waterNetwork.getVertexSet()){
+        for(auto edge : we->getAdj()){
+            double difference = abs(edge->getWeight() - edge->getFlow());
+            maxDifference = std::max(maxDifference, difference);
+            sumDifference += difference;
+        }
+    }
+    return sumDifference / static_cast<double>(pipesSize);
+}
+
+double WaterManager::variance() {
+    double maxDifference = 0.0;
+    double avg = avgDifference(maxDifference);
+    double sumVariance = 0.0;
+    for(auto we : waterNetwork.getVertexSet()){
+        for(auto edge : we->getAdj()){
+            double difference = abs(edge->getWeight() - edge->getFlow());
+            sumVariance += std::pow((difference - avg),2);
+        }
+    }
+    return sumVariance / static_cast<double>(pipesSize);
+}
+/*
+
+void WaterManager::balancingAlgorithm() {
+    maximumFlowAllCities();
+    double initialMaxDifference = 0.0;
+    double initialAvgDifference = avgDifference(initialMaxDifference);
+    double initialVariance = variance();
+
+    std::multimap<double, Edge<WaterElement*>*, CompareDifference> differenceMap;
+
+
+    for(auto we : waterNetwork.getVertexSet()){
+        for(auto edge : we->getAdj()){
+            //double difference = abs(edge->getWeight() - edge->getFlow());
+            //std::vector<Edge<WaterElement*>*> neighboringPipes;
+            //differenceMap.insert({difference,edge});
+            edge->setWeight(initialAvgDifference);
+        }
+    }
+    int count = 0;
+    auto itl = differenceMap.begin();
+    itl++;
+    auto itr = differenceMap.rbegin();
+    while (count < differenceMap.size() / 2 && itl != differenceMap.end() && itr != differenceMap.rend()) {
+        double redistributed = itl->first - itr->first;
+        std::cout << redistributed << " " << itl->second->getWeight() - redistributed << " " << itr->second->getWeight() + redistributed << std::endl;
+        itl->second->setWeight(itl->second->getWeight() - redistributed);
+        itr->second->setWeight(itr->second->getWeight() + redistributed);
+        ++count;
+        ++itr;
+        ++itl;
+    }
+    maximumFlowAllCities();
+    double finalMaxDifference = 0.0;
+    double finalAvgDifference = avgDifference(finalMaxDifference);
+    double finalVariance = variance();
+
+    std::cout << initialMaxDifference <<  " | " <<finalMaxDifference << std::endl;
+    std::cout << initialAvgDifference <<" | " << finalAvgDifference << std::endl;
+    std::cout << initialVariance <<" | " << finalVariance << std::endl;
+}
+
+
+
+*/
+
+void WaterManager::balancingAlgorithm() {
+    maximumFlowAllCities();
+    double initialMaxDifference = 0.0;
+    double initialAvgDifference = avgDifference(initialMaxDifference);
+    double initialVariance = variance();
+
+    for(auto we : waterNetwork.getVertexSet()){
+        for(auto edge : we->getAdj()){
+            double difference = abs(edge->getWeight() - edge->getFlow());
+            std::vector<Edge<WaterElement*>*> neighboringPipes;
+            if(difference > 0){
+                for(auto adj : edge->getDest()->getAdj()){
+                    if(abs(adj->getWeight() - adj->getFlow()) < difference){
+                        neighboringPipes.push_back(adj);
+                    }
+                }
+
+            }
+            for(auto neighbor : neighboringPipes){
+                double thisDifference = abs(neighbor->getWeight() - neighbor->getFlow());
+                difference = abs(edge->getWeight() - edge->getFlow());
+                if(thisDifference < difference) {
+                    double redistributed = difference - thisDifference;
+                    edge->setWeight(edge->getFlow() - redistributed);
+                    neighbor->setWeight(neighbor->getFlow() + redistributed);
+                }
+            }
+        }
+    }
+    maximumFlowAllCities();
+    double finalMaxDifference = 0.0;
+    double finalAvgDifference = avgDifference(finalMaxDifference);
+    double finalVariance = variance();
+
+    std::cout << "Initial Max Difference: " << initialMaxDifference <<  " | "<< "After Balancing Max Difference: " <<finalMaxDifference << std::endl;
+    std::cout << "Initial Average Difference: " << initialAvgDifference <<" | "<< "After Balancing Average Difference: " << finalAvgDifference << std::endl;
+    std::cout << "Initial Variance: " << initialVariance <<" | " << "After Balancing Variance: "<< finalVariance << std::endl;
+}
+
+
+

@@ -70,6 +70,9 @@ public:
     void setSelected(bool selected);
     void setReverse(Edge<T> *reverse);
     void setFlow(double flow);
+
+    void setWeight(double weight);
+
 protected:
     Vertex<T> * dest; // destination vertex
     double weight; // edge weight, can also be used for capacity
@@ -283,6 +286,11 @@ Vertex<T> * Edge<T>::getDest() const {
 template <class T>
 double Edge<T>::getWeight() const {
     return this->weight;
+}
+
+template<class T>
+void Edge<T>::setWeight(double weight) {
+    Edge::weight = weight;
 }
 
 template <class T>

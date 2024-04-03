@@ -39,6 +39,12 @@ public:
     std::string maximumFlowAllCities();
     std::string maximumFlowSpecificCities(std::string cityCode);
 
+    std::map<std::string, std::vector<std::pair<std::string, double>>> CitiesAffectedByPipeRupture(std::string &cityCode);
+    std::map<std::string, std::vector<std::pair<std::string, double>>> CitiesAffectedByPipeRupture();
+    double avgDifference(double &maxDifference);
+    double variance();
+    void balancingAlgorithm();
+
     // Exercice T3.2
     void removePS(PS* ps, std::vector<Edge<WaterElement*>>* outgoing, std::vector<Edge<WaterElement*>>* incoming);
     void addPS(PS* ps, const std::vector<Edge<WaterElement*>>& outgoing, const std::vector<Edge<WaterElement*>>& incoming);
@@ -51,7 +57,7 @@ public:
 private:
 
     Graph<WaterElement*> waterNetwork;
-
+    int pipesSize = 0;
     std::unordered_map<std::string, WR*> waterReservoirMap;
 
     std::unordered_map<std::string, PS*> waterPumpMap;
@@ -62,6 +68,9 @@ private:
     void processPumps(std::ifstream &in); // Parsing of Pumping Stations.
     void processCities(std::ifstream &in); // Parsing of Cities (Delivery Sites).
     void processPipes(std::ifstream &in); // Parsing of Pipes.
+
+
+    std::map<DS * , double> auxMaxFlow();
 };
 
 
