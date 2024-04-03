@@ -454,16 +454,16 @@ void WaterManager::augmentFlowAlongPath(WaterElement*& source, WaterElement*& ta
 
 
 /**
- * @details Function finds the maximum flow across all cities
- *
- * @details Time complexity is O(X + Y + Z).
- *
- * @details X - Time complexity related to the addition of the superWaterReservoir and the superDeliverySite. X = V
- *
- * @details Y - The for loops that set the flow of edges and the currentFlow of vertexes to zero. Y = VE
- *
- * @details Z - Edmonds-Karp Algorithm for Max Flow. Z = VE^2
- *
+ * @brief Maximum flow across all cities.
+ * @details This functions uses a slightly modified Edmonds-Karp algorithm to
+ * find the maximum amount of flow that can reach all cities. The modifications
+ * are the addition of a super source and a super sink and the use of a variable
+ * named currentFlow that helps us check if a given city already has it's demand fulfilled.
+ * @details The time complexity for this functions is O(X + Y + Z) = O(V + VE + VE^2) where
+ * X is the time complexity related to the addition of the superWaterReservoir (super source) and the
+ * superDeliverySite (super sink) (X = V), Y is the time complexity of the for loops that set the flow
+ * of edges and the currentFlow of vertexes to zero (Y = VE) and finally Z is the time complexity
+ * for the Edmonds-Karp Algorithm for Max Flow (Z = VE^2).
  * **/
 std::string WaterManager::maximumFlowAllCities() {
     std::ostringstream oss;
@@ -523,7 +523,13 @@ std::string WaterManager::maximumFlowAllCities() {
     return oss.str();
 }
 
-
+/**
+ * @brief Maximum flow to a specific city
+ * @details This function depends on the function above [maximumFlowAllCities()]
+ * @details The time complexity for this functions is is O(n + Y) = O(V + VE + VE^2) where
+ * n is the time complexity for the worst case of finding the city and Y is the time
+ * complexity of the maximumFlowAllCities() function.
+ * **/
 std::string WaterManager::maximumFlowSpecificCities(std::string idCode) {
     std::ostringstream oss;
     size_t pos;
@@ -579,10 +585,8 @@ std::string WaterManager::maximumFlowSpecificCities(std::string idCode) {
 /**
  * @brief Helper function
  * @details This function takes two string and checks the differences between them.
- *
- * @details The complexity for string::find is unspecified but according to c++ reference
- * @details it's O(n). Total complexity for function is in the worst case O(n^2).
- *
+ * The complexity for string::find is unspecified but according to c++ reference it's O(n).
+ * Total complexity for function is in the worst case O(n^2).
  * @param before The old string.
  * @param after The new string.
  *
@@ -627,6 +631,14 @@ std::string checkDifferences(const std::string& before, const std::string& after
     return oss.str();
 }
 
+
+/**
+ * @brief Helper function
+ * @details This function helps with the temporary removal of a given pumping station.
+ * @details It's time complexity is O(n + E^2) where n is the time it takes to find a given
+ * pumping station across all the graph's vertexes and E^2 is the time it takes to remove
+ * an edge.
+ **/
 void WaterManager::removePS(PS* ps, std::vector<Edge<WaterElement*>>* outgoing, std::vector<Edge<WaterElement*>>* incoming){
     Vertex<WaterElement*>* PSVertex = waterNetwork.findVertex(ps);
 
@@ -644,6 +656,12 @@ void WaterManager::removePS(PS* ps, std::vector<Edge<WaterElement*>>* outgoing, 
 
     waterNetwork.removeVertex(ps);
 }
+
+/**
+ * @brief Helper function
+ * @details This function helps add the previously removed pumping stations.
+ * @details It's time complexity is O(E) where E is the time it takes to add an edge.
+ **/
 void WaterManager::addPS(PS* ps, const std::vector<Edge<WaterElement*>>& outgoing, const std::vector<Edge<WaterElement*>>& incoming){
     waterNetwork.addVertex(ps);
 
@@ -657,7 +675,16 @@ void WaterManager::addPS(PS* ps, const std::vector<Edge<WaterElement*>>& outgoin
 
 }
 
-std::string WaterManager::citiesAffectedByMaintenance_SpecificPipe(std::string idCode){
+/**
+ * @brief This function aids in checking which cities are affected if a given pump is taken offline.
+ * @details It first executes the algorithm to find the maximum flow to all cities,
+ * removes the specified pump if it is found, executes the max flow algorithm again and
+ * it compares the results.
+ * @details The Time Complexity for this function is (X + Y) where X is the time complexity of the max flow
+ * algorithm which is O(V + VE + VE^2) and Y is the time complexity of the functions removePS() and addPS()
+ * which is O(n + E^2) + O(E).
+ **/
+std::string WaterManager::citiesAffectedByMaintenance_SpecificPump(std::string idCode){
     std::ostringstream oss;
     size_t pos;
 
@@ -691,19 +718,28 @@ std::string WaterManager::citiesAffectedByMaintenance_SpecificPipe(std::string i
     removePS(iter->second, &outgoingEdges, &incomingEdges);
 
     std::string flowAfterRemoval = maximumFlowAllCities();
-    //oss << flowAfterRemoval;
+
     oss << checkDifferences(flowBeforeRemoval, flowAfterRemoval);
 
     addPS(iter->second, outgoingEdges, incomingEdges);
     return oss.str();
 }
-std::string WaterManager::citiesAffectedByMaintenance_AllPipes(){
+
+
+/**
+ * @brief This function aids in checking which cities are affected if each one of the pumps is taken offline.
+ * @details This function uses the previous function citiesAffectedByMaintenance_SpecificPump().
+ * @details The Time Complexity for this function is O(XY) = O(V + VE + VE^2 + n + E^2 + E) where X is
+ * in the worst case the number of total amount of pumps that are in the graph
+ * and Y is the time complexity for the previously used function, O(X + V + VE + VE^2 + n + E^2 + E).
+ **/
+std::string WaterManager::citiesAffectedByMaintenance_AllPumps(){
     std::ostringstream oss;
 
     for (const auto& pumps : this->waterPumpMap){
 
         oss << "Removing pumping station with code " << pumps.first << ". Result:\n";
-        oss << citiesAffectedByMaintenance_SpecificPipe(pumps.first);
+        oss << citiesAffectedByMaintenance_SpecificPump(pumps.first);
         oss << "\n\n";
     }
 

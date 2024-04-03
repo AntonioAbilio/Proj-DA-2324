@@ -158,6 +158,25 @@ void Application::showGoBackMenu(int functionNumber, const std::string& function
  *
  * */
 
+/**
+ * @brief Helper function to output text to file.
+ * @details This function adds a header composed of the current time plus a specified
+ * header and the actual text that is due to be written.
+ * **/
+void Application::outputToFile(std::string header, std::string text){
+    std::ofstream out("../outputFiles/functions.txt", std::ios::app);
+
+    // Get current time
+    std::time_t currentTime = std::time(nullptr);
+    // Convert the current time to a struct tm
+    std::tm* localTime = std::localtime(&currentTime);
+
+    out  <<  std::put_time(localTime, "%Y-%m-%d %H:%M:%S") << " -> "
+        << header << "\n\n" << text << "\n\n";
+
+    out.close();
+}
+
 // T2.1
 void Application::maxWater(){
 restartMaxWater:
@@ -173,26 +192,28 @@ restartMaxWater:
     clearScreen();
 
     std::string cityCode;
+    std::string res;
     switch (processKey(targetOpt)) {
         case 1:
             // Show all maximum flow to all cities.
-            std::cout << waterManager.maximumFlowAllCities();
+            res = waterManager.maximumFlowAllCities();
+            std::cout << res;
+            outputToFile("Exercice T2.1 - Max Flow All Cities", res);
             break;
         case 2:
             std::cout << "\nPlease specify the city's code or id or city name\n"
-                      << "id example -> [Input: 1]\n"
-                      << "code example -> [Input: PS_1]\n"
+                      << "id example -> [Input: 7]\n"
+                      << "code example -> [Input: C_7]\n"
                       << "name example -> [Input: câmara de lobos]\n"
                       << "Input: ";
-
-
 
             std::getline(std::cin >> std::ws, cityCode); // Use std::ws to consume whitespaces
             std::cout << "\n";
 
             // Show maximum flow to specified city.
-            std::cout << waterManager.maximumFlowSpecificCities(cityCode);
-
+            res = waterManager.maximumFlowSpecificCities(cityCode);
+            std::cout << res;
+            outputToFile("Exercice T2.1 Max Flow to city " + cityCode, res);
             break;
         default:
             goto restartMaxWater;
@@ -280,10 +301,10 @@ restartLCAFBM:
                       << "Input: ";
             std::cin >> idCode;
 
-            std::cout << waterManager.citiesAffectedByMaintenance_SpecificPipe(idCode);
+            std::cout << waterManager.citiesAffectedByMaintenance_SpecificPump(idCode);
             break;
         case 2:
-            std::cout << waterManager.citiesAffectedByMaintenance_AllPipes();
+            std::cout << waterManager.citiesAffectedByMaintenance_AllPumps();
             break;
         default:
             goto restartLCAFBM;
