@@ -12,6 +12,14 @@
 #include "PS.h"
 #include "DS.h"
 
+#define cityCodePrefix "c_"
+#define reservoirCodePrefix "r_"
+#define pumpingStationCodePrefix "ps_"
+
+#define cityCodeRegex "c_[0-9]+"
+#define reservoirCodeRegex "r_[0-9]+"
+#define pumpingStationCodeRegex "ps_[0-9]+"
+
 class WaterManager {
 public:
     void parseData(); // Data Parsing.
@@ -21,13 +29,17 @@ public:
 
     // Exercise T2.1
     bool existsAugmentingPath(WaterElement*& source, WaterElement*& target); //HelperFunction
-
     double findMinResidualAlongPath(WaterElement*& source, WaterElement*& target); // HelperFunction
-
     void augmentFlowAlongPath(WaterElement*& source, WaterElement*& target, double f); // HelperFunction
 
     std::string maximumFlowAllCities();
     std::string maximumFlowSpecificCities(std::string cityCode);
+
+    // Exercice T3.2
+    void removePS(PS* ps, std::vector<Edge<WaterElement*>>* outgoing, std::vector<Edge<WaterElement*>>* incoming);
+    void addPS(PS* ps, const std::vector<Edge<WaterElement*>>& outgoing, const std::vector<Edge<WaterElement*>>& incoming);
+    std::string citiesAffectedByMaintenance_SpecificPipe(std::string idCode);
+    std::string citiesAffectedByMaintenance_AllPipes();
 
 
 private:

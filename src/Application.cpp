@@ -179,7 +179,14 @@ restartMaxWater:
             std::cout << waterManager.maximumFlowAllCities();
             break;
         case 2:
-            std::cout << "\nPlease specify the city's code:";
+            std::cout << "\nPlease specify the city's code or id or city name\n"
+                      << "id example -> [Input: 1]\n"
+                      << "code example -> [Input: PS_1]\n"
+                      << "name example -> [Input: câmara de lobos]\n"
+                      << "Input: ";
+
+
+
             std::getline(std::cin >> std::ws, cityCode); // Use std::ws to consume whitespaces
             std::cout << "\n";
 
@@ -223,9 +230,36 @@ void Application::listCitiesAffectedByReservoirRemoval(){
 
 // T3.2
 void Application::listCitiesAffectedByMaintenance(){
+restartLCAFBM:
     clearScreen();
 
-    //Code here
+    std::string targetOpt;
+    std::cout << "\nWhat would you like to do?\n"
+              << "1 - Remove a specific pumping station and check the affected delivery sites.\n"
+              << "2 - Check for each removed pumping station the affected delivery sites.\n"
+              << "Input: ";
+    std::cin >> targetOpt;
+
+    clearScreen();
+
+    std::string idCode;
+    switch (processKey(targetOpt)) {
+        case 1:
+
+            std::cout << "\nPlease provide the id/code for the pumping station that is to be removed.\n"
+                      << "id example -> [Input: 1]\n"
+                      << "code example -> [Input: PS_1]\n"
+                      << "Input: ";
+            std::cin >> idCode;
+
+            std::cout << waterManager.citiesAffectedByMaintenance_SpecificPipe(idCode);
+            break;
+        case 2:
+            std::cout << waterManager.citiesAffectedByMaintenance_AllPipes();
+            break;
+        default:
+            goto restartLCAFBM;
+    }
 
     showGoBackMenu(5, "List cities affected by maintenance."); // At the end make a call to goBackMenu()
 }
