@@ -480,6 +480,10 @@ void WaterManager::listwaterNeeds(){
 
 
 // T3.1
+/**
+ * @brief Lists the cities that are in need of water, by checking the actual flow delivered to them
+ * @details Time Complexity: O(V * E^2), because of Edmonds-Karp Algorithm
+ */
 void WaterManager::listCitiesAffectedByReservoirRemoval(std::string wr_code, bool remove) {
     // Find the water reservoir
     WR* WRToRemove;
@@ -506,6 +510,10 @@ void WaterManager::listCitiesAffectedByReservoirRemoval(std::string wr_code, boo
         }
     }
 
+    // Algorithm to only run complete Edmonds-Karp sometimes:
+    // 1. Run DFS from the Reservoir to be removed
+    // 2. Reset the flow in the subgraph found by the DFS
+    // 3. Rerun Edomds-Karp but just for that subgraph
 
     // TODO: Add option to reset the graph (to main menu)
 }
