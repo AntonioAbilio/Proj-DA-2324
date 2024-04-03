@@ -456,10 +456,10 @@ void WaterManager::maximumFlowSpecificCities(std::string cityCode) {
 // T2.2
 /**
  * @brief Lists the cities that are in need of water, by checking the actual flow delivered to them
- * @details Time Complexity: O(V * E^2), because of Edmond's Karp Algorithm
+ * @details Time Complexity: O(V * E^2), because of Edmonds-Karp Algorithm
  */
 void WaterManager::listwaterNeeds(){
-    maximumFlowAllCities();  // Run Edmond's Karp algorithm
+    maximumFlowAllCities();  // Run Edmonds-Karp algorithm
 
     for (auto ds : waterCityMap){ // Only check flow for delivery sites
         int receivedFlow = 0;
@@ -491,18 +491,21 @@ void WaterManager::listCitiesAffectedByReservoirRemoval(std::string wr_code, boo
     }
     Vertex<WaterElement*>* WR = waterNetwork.findVertex(WRToRemove);
 
-
     // Remove vertex
     waterNetwork.removeVertex(WR->getInfo());
     waterReservoirMap.erase(WRToRemove->getCode());
 
-    //maximumFlowAllCities();
+    listwaterNeeds(); // listwaterNeeds() already runs Edmonds-Karp Algorithm
 
-    // Add vertex again (if remove is false)
+    // Insert WR again after temporary removal (if option selected)
     if (!remove){
-        waterNetwork.addVertex(WR->getInfo());
-        waterReservoirMap[WRToRemove->getCode()] = WRToRemove;
+        waterReservoirMap.erase(WRToRemove->getCode());
+        this->waterReservoirMap[WRToRemove->getCode()] = WRToRemove;
+        if (!waterNetwork.addVertex(WRToRemove)){
+            std::cout << "Error while adding vertex to graph.";
+        }
     }
-    
-    // TODO: Add option to reset the graph
+
+
+    // TODO: Add option to reset the graph (to main menu)
 }
