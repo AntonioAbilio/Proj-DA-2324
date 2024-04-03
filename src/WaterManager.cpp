@@ -489,7 +489,13 @@ std::string WaterManager::maximumFlowAllCities() {
 
     // Set flow to 0.
     for (Vertex<WaterElement*>*& vertex : waterNetwork.getVertexSet()){
-        ((DS*)vertex->getInfo())->setCurrentFlow(0.0);
+        auto* isDS = dynamic_cast<DS*>(vertex->getInfo());
+
+        if (isDS){
+            isDS->setCurrentFlow(0.0);
+        }
+
+
         for (Edge<WaterElement*>*& edge : vertex->getAdj()){
             edge->setFlow(0);
         }
