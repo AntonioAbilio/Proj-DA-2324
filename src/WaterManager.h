@@ -6,6 +6,7 @@
 #include <sstream>
 #include <regex>
 #include <unordered_map>
+#include <map>
 
 #include "Graph.h"
 #include "WaterElement.h"
