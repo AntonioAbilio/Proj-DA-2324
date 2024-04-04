@@ -213,10 +213,33 @@ void Application::listwaterNeeds(){
 
 // T2.3
 void Application::balaceNetworkLoad(){
+    restartbalanceNetworkLoad:
     clearScreen();
 
-    waterManager.balancingAlgorithm();
-    //Code here
+
+    std::string targetOpt;
+    std::cout << "\nWhat would you like to do?\n"
+              << "1 - Balancing algorithm based of redistribution by sorting of differences of pipe capacity and pipe flow.\n\n"
+              << "2 - Balancing algorithm based of redistribution of differences of pipe capacity and pipe flow between neighboring pipes.\n"
+              << "3 - Balancing algorithm based of all pipes having the average difference of the initial water network.\n\n"
+              << "Input: ";
+    std::cin >> targetOpt;
+
+    clearScreen();
+    switch (processKey(targetOpt)) {
+        case 1:
+
+            waterManager.balancingAlgorithmSortingDistribution();
+            break;
+        case 2:
+            waterManager.balancingAlgorithmNeighborDistribution();
+            break;
+        case 3:
+            waterManager.balancingAlgorithmAverageDistribution();
+            break;
+        default:
+            goto restartbalanceNetworkLoad;
+    }
 
     showGoBackMenu(3, "Balance network load."); // At the end make a call to goBackMenu()
 }

@@ -833,8 +833,11 @@ std::map<DS * , double> WaterManager::auxMaxFlow(){
 
     for (const auto& city : waterCityMap) {
         auto cityVertex = waterNetwork.findVertex(city.second);
+        auto* isDS = dynamic_cast<DS*>(cityVertex->getInfo());
 
-        cities.insert({city.second,city.second->getCurrentFlow()});
+        if (isDS){
+            cities.insert({isDS,isDS->getCurrentFlow()});
+        }
 
     }
 
@@ -973,6 +976,17 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
     return result;
 }
 
+double WaterManager::avgCapacity() {
+    double sumCapacity = 0.0;
+    for(auto we : waterNetwork.getVertexSet()){
+        for(auto edge : we->getAdj()){
+
+            sumCapacity += edge->getWeight();
+        }
+    }
+    return sumCapacity / static_cast<double>(pipesSize);
+}
+
 double WaterManager::avgDifference(double &maxDifference) {
     double sumDifference = 0.0;
     for(auto we : waterNetwork.getVertexSet()){
@@ -997,9 +1011,14 @@ double WaterManager::variance() {
     }
     return sumVariance / static_cast<double>(pipesSize);
 }
-/*
 
-void WaterManager::balancingAlgorithm() {
+struct CompareDifference {
+    bool operator()(double a, double b) const {
+        return a > b; // Ordem decrescente
+    }
+};
+
+void WaterManager::balancingAlgorithmSortingDistribution() {
     maximumFlowAllCities();
     double initialMaxDifference = 0.0;
     double initialAvgDifference = avgDifference(initialMaxDifference);
@@ -1010,10 +1029,9 @@ void WaterManager::balancingAlgorithm() {
 
     for(auto we : waterNetwork.getVertexSet()){
         for(auto edge : we->getAdj()){
-            //double difference = abs(edge->getWeight() - edge->getFlow());
-            //std::vector<Edge<WaterElement*>*> neighboringPipes;
-            //differenceMap.insert({difference,edge});
-            edge->setWeight(initialAvgDifference);
+            double difference = abs(edge->getWeight() - edge->getFlow());
+            differenceMap.insert({difference,edge});
+
         }
     }
     int count = 0;
@@ -1029,7 +1047,7 @@ void WaterManager::balancingAlgorithm() {
         ++itr;
         ++itl;
     }
-    maximumFlowAllCities();
+    std::cout << maximumFlowAllCities();
     double finalMaxDifference = 0.0;
     double finalAvgDifference = avgDifference(finalMaxDifference);
     double finalVariance = variance();
@@ -1041,9 +1059,9 @@ void WaterManager::balancingAlgorithm() {
 
 
 
-*/
 
-void WaterManager::balancingAlgorithm() {
+
+void WaterManager::balancingAlgorithmNeighborDistribution() {
     maximumFlowAllCities();
     double initialMaxDifference = 0.0;
     double initialAvgDifference = avgDifference(initialMaxDifference);
@@ -1053,26 +1071,41 @@ void WaterManager::balancingAlgorithm() {
         for(auto edge : we->getAdj()){
             double difference = abs(edge->getWeight() - edge->getFlow());
             std::vector<Edge<WaterElement*>*> neighboringPipes;
-            if(difference > 0){
-                for(auto adj : edge->getDest()->getAdj()){
-                    if(abs(adj->getWeight() - adj->getFlow()) < difference){
+
+            auto* isDS = dynamic_cast<DS*>(we->getPath()->getDest()->getInfo());
+
+            if (isDS){
+                if (demandFulfilled(we->getPath()->getDest(), isDS)){
+                    for(auto adj : edge->getDest()->getAdj()){
+                        if(abs(adj->getWeight() - adj->getFlow()) < difference){
+                            neighboringPipes.push_back(adj);
+                        }
+                    }
+
+                }
+            }else {
+                for (auto adj: edge->getDest()->getAdj()) {
+                    if (abs(adj->getWeight() - adj->getFlow()) < difference) {
                         neighboringPipes.push_back(adj);
                     }
                 }
-
             }
+
+
             for(auto neighbor : neighboringPipes){
                 double thisDifference = abs(neighbor->getWeight() - neighbor->getFlow());
                 difference = abs(edge->getWeight() - edge->getFlow());
                 if(thisDifference < difference) {
                     double redistributed = difference - thisDifference;
-                    edge->setWeight(edge->getFlow() - redistributed);
-                    neighbor->setWeight(neighbor->getFlow() + redistributed);
+                    edge->setWeight(edge->getWeight() - redistributed);
+                    neighbor->setWeight(neighbor->getWeight() + redistributed);
+
+
                 }
             }
         }
     }
-    maximumFlowAllCities();
+    std::cout << maximumFlowAllCities();
     double finalMaxDifference = 0.0;
     double finalAvgDifference = avgDifference(finalMaxDifference);
     double finalVariance = variance();
@@ -1080,6 +1113,29 @@ void WaterManager::balancingAlgorithm() {
     std::cout << "Initial Max Difference: " << initialMaxDifference <<  " | "<< "After Balancing Max Difference: " <<finalMaxDifference << std::endl;
     std::cout << "Initial Average Difference: " << initialAvgDifference <<" | "<< "After Balancing Average Difference: " << finalAvgDifference << std::endl;
     std::cout << "Initial Variance: " << initialVariance <<" | " << "After Balancing Variance: "<< finalVariance << std::endl;
+}
+
+void WaterManager::balancingAlgorithmAverageDistribution(){
+    maximumFlowAllCities();
+    double initialMaxDifference = 0.0;
+    double initialAvgDifference = avgDifference(initialMaxDifference);
+    double initialVariance = variance();
+    double avgCapacity_ = avgCapacity();
+
+    for(auto we : waterNetwork.getVertexSet()){
+        for(auto edge : we->getAdj()){
+            edge->setWeight(avgCapacity_);
+        }
+    }
+    std::cout << maximumFlowAllCities();
+    double finalMaxDifference = 0.0;
+    double finalAvgDifference = avgDifference(finalMaxDifference);
+    double finalVariance = variance();
+
+    std::cout << "Initial Max Difference: " << initialMaxDifference <<  " | "<< "After Balancing Max Difference: " <<finalMaxDifference << std::endl;
+    std::cout << "Initial Average Difference: " << initialAvgDifference <<" | "<< "After Balancing Average Difference: " << finalAvgDifference << std::endl;
+    std::cout << "Initial Variance: " << initialVariance <<" | " << "After Balancing Variance: "<< finalVariance << std::endl;
+
 }
 
 

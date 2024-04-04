@@ -44,8 +44,11 @@ public:
     std::map<std::string, std::vector<std::pair<std::string, double>>> CitiesAffectedByPipeRupture(std::string &cityCode);
     std::map<std::string, std::vector<std::pair<std::string, double>>> CitiesAffectedByPipeRupture();
     double avgDifference(double &maxDifference);
+    double avgCapacity();
     double variance();
-    void balancingAlgorithm();
+    void balancingAlgorithmNeighborDistribution();
+    void balancingAlgorithmSortingDistribution();
+    void balancingAlgorithmAverageDistribution();
 
     // Exercice T3.2
     void removePS(PS* ps, std::vector<Edge<WaterElement*>>* outgoing, std::vector<Edge<WaterElement*>>* incoming);
