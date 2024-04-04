@@ -830,6 +830,7 @@ std::map<DS * , double> WaterManager::auxMaxFlow(){
     if(maximumFlowAllCities().empty()) std::cout << "ERROR! maxFlow failed.";
 
     std::map<DS * , double>cities;
+
     for (const auto& city : waterCityMap) {
         auto cityVertex = waterNetwork.findVertex(city.second);
 
@@ -881,8 +882,9 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
             auto destination = pipe->getDest()->getInfo();
             auto origin = pipe->getOrig()->getInfo();
             double weight = pipe->getWeight();
+            bool bidirectional = false;
             waterNetwork.removeEdge(pipe->getOrig()->getInfo(), pipe->getDest()->getInfo());
-
+            if(waterNetwork.removeEdge(destination,origin)) bidirectional = true;
             // Calculate the maximum flow after the pipe rupture
             std::map<DS *, double> maxFlows = auxMaxFlow();
 
@@ -902,6 +904,7 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
             // Restore the original flow capacity of the pipe
 
             waterNetwork.addEdge(origin, destination, weight);
+            if(bidirectional) waterNetwork.addEdge(destination, origin, weight);
         }
 
 
@@ -941,8 +944,9 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
             auto destination = pipe->getDest()->getInfo();
             auto origin = pipe->getOrig()->getInfo();
             double weight = pipe->getWeight();
+            bool bidirectional = false;
             waterNetwork.removeEdge(pipe->getOrig()->getInfo(), pipe->getDest()->getInfo());
-
+            if(waterNetwork.removeEdge(destination,origin)) bidirectional = true;
             // Calculate the maximum flow after the pipe rupture
             std::map<DS *, double> maxFlows = auxMaxFlow();
 
@@ -955,7 +959,7 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
                     double deficit = city.first->getDemand() - city.second;
                     std::ostringstream oss;
 
-                    oss << " from service point " << origin->getCode() << " to service point " << destination->getCode();
+                    oss << " from service point " << origin->getCode() << " to service point " << destination->getCode() << " " << city.first->getCurrentFlow();
                     result[oss.str()].push_back(std::make_pair(affectedCity, deficit));
                 }
             }
@@ -963,6 +967,7 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
             // Restore the original flow capacity of the pipe
 
             waterNetwork.addEdge(origin, destination, weight);
+            if(bidirectional) waterNetwork.addEdge(destination, origin, weight);
         }
     }
     return result;
