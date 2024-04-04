@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <map>
 #include <cmath>
+#include <iomanip>
 
 #include "Graph.h"
 #include "WaterElement.h"
@@ -46,6 +47,8 @@ public:
     double avgDifference(double &maxDifference);
     double avgCapacity();
     double variance();
+    void restorePipes(std::vector<Edge<WaterElement*>> original);
+    std::vector<Edge<WaterElement*>> savePipes();
     void balancingAlgorithmNeighborDistribution();
     void balancingAlgorithmSortingDistribution();
     void balancingAlgorithmAverageDistribution();

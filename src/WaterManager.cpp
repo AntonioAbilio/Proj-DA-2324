@@ -975,7 +975,50 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
     }
     return result;
 }
+/**
+ *
+ * @brief Saves the pipes in the water network.
+ * @details This function iterates over all edges in the water network and saves them into a vector of edges.
+ * @details Each edge consists of a source vertex, a destination vertex, and the weight representing the capacity of the pipe.
+ * @details Has time complexity of O(E), since it visits every edge at least once.
+ * @return A vector containing all the pipes in the water network.
+ */
+std::vector<Edge<WaterElement*>> WaterManager::savePipes(){
+    std::vector<Edge<WaterElement*>> res;
+    for(auto we : waterNetwork.getVertexSet()){
+        for(auto edge : we->getAdj()){
+            Edge<WaterElement*> e = {edge->getOrig(),edge->getDest(),edge->getWeight()};
+            res.push_back(e);
+        }
+    }
+    return res;
+}
+/**
+ * @brief Restores the pipes in the water network to their original state.
+ * @details This function removes all edges in the water network and then adds the edges from the provided vector.
+ * @details The provided vector contains the original state of the pipes, including source vertices, destination vertices, and weights.
+ * @details Has time complexity of O(E), since it visits every edge at least once.
+ * @param original A vector containing the original state of the pipes.
+ */
+void WaterManager::restorePipes(std::vector<Edge<WaterElement*>> original){
+    for(auto we : waterNetwork.getVertexSet()){
+        for(auto edge : we->getAdj()){
+            waterNetwork.removeEdge(edge->getOrig()->getInfo(),edge->getDest()->getInfo());
+        }
+    }
 
+    for(auto edge : original){
+        waterNetwork.addEdge(edge.getOrig()->getInfo(),edge.getDest()->getInfo(),edge.getWeight());
+    }
+
+}
+/**
+ * @brief Calculates the average capacity of all pipes in the water network.
+ * @details This function iterates over all edges in the water network and computes the sum of their weights, representing their capacity.
+ * @details It then divides the sum of capacities by the total number of pipes to obtain the average capacity.
+ * @details The time complexity of this function is O(V + E), where V is the number of vertices and E is the number of edges in the water network.
+ * @return The average capacity of all pipes in the water network.
+ */
 double WaterManager::avgCapacity() {
     double sumCapacity = 0.0;
     for(auto we : waterNetwork.getVertexSet()){
@@ -986,7 +1029,15 @@ double WaterManager::avgCapacity() {
     }
     return sumCapacity / static_cast<double>(pipesSize);
 }
-
+/**
+ * @brief Calculates the average difference between the capacity and flow of each pipe in the water network.
+ * @details This function iterates over all edges in the water network and computes the absolute difference between their capacity and flow.
+ * @details Adittionaly, it updates the maximum difference found during the iteration.
+ * @details The time complexity of this function is O(V + E), where V is the number of vertices and E is the number of edges in the water network.
+ *
+ * @param maxDifference Reference to a variable that will store the maximum difference found during the iteration.
+ * @return The average difference between the capacity and flow of each pipe.
+ */
 double WaterManager::avgDifference(double &maxDifference) {
     double sumDifference = 0.0;
     for(auto we : waterNetwork.getVertexSet()){
@@ -998,6 +1049,14 @@ double WaterManager::avgDifference(double &maxDifference) {
     }
     return sumDifference / static_cast<double>(pipesSize);
 }
+
+/**
+ * @brief Calculates the variance of the differences between the capacity and flow of each pipe in the water network.
+ * @details This function computes the average difference first using the avgDifference() function.
+ * @details The time complexity of this function is O(V + E), where V is the number of vertices and E is the number of edges in the water network.
+ *
+ * @return The variance of the differences between the capacity and flow of each pipe.
+ */
 
 double WaterManager::variance() {
     double maxDifference = 0.0;
@@ -1017,9 +1076,30 @@ struct CompareDifference {
         return a > b; // Ordem decrescente
     }
 };
+/**
+ * @brief Performs a balancing algorithm using sorting distribution technique.
+ * @details This method balances the flow across the network by redistributing flow between pipes based on sorting distribution technique.
+ * @details It saves the original pipe configuration, computes initial metrics such as max difference, average difference
+ * @details Computes the difference between capacity and flow for each pipe and stores this value into a multimap of descending order.
+ * @details It iterates through the map (size/2 times), sending the overflow difference of the highest to the lowest. Using a sequencial and a reverse iterator.
+ * @details After the redistribution, it computes final metrics and displays the changes in max difference, average difference, and variance.
+ * @details Additionally, it displays the changes in maximum flow for each city before and after the balancing process.
+ * @details It has time complexity equal to the maximumFlowAllCities function, since it uses it twice.
+ * @details (
+ * @details     Time complexity is O(X + Y + Z).
+ *
+ * @details     X - Time complexity related to the addition of the superWaterReservoir and the superDeliverySite. X = V
+ *
+ * @details     Y - The for loops that set the flow of edges and the currentFlow of vertexes to zero. Y = VE
+ *
+ * @details     Z - Edmonds-Karp Algorithm for Max Flow. Z = VE^2
+ * @details )
+ * @details The method then restores the original pipe configuration.
 
+ */
 void WaterManager::balancingAlgorithmSortingDistribution() {
-    maximumFlowAllCities();
+    auto originalEdges = savePipes();
+    std::map<DS *, double> initialFlows = auxMaxFlow();
     double initialMaxDifference = 0.0;
     double initialAvgDifference = avgDifference(initialMaxDifference);
     double initialVariance = variance();
@@ -1047,22 +1127,50 @@ void WaterManager::balancingAlgorithmSortingDistribution() {
         ++itr;
         ++itl;
     }
-    std::cout << maximumFlowAllCities();
+    std::map<DS *, double> finalFlows = auxMaxFlow();
     double finalMaxDifference = 0.0;
     double finalAvgDifference = avgDifference(finalMaxDifference);
     double finalVariance = variance();
+    std::cout << std::setw(20) << "Initial Max Diff" << std::setw(20) << "Final Max Diff" << std::setw(20) << "Initial Avg Diff"
+              << std::setw(20) << "Final Avg Diff" << std::setw(20) << "Initial Variance" << std::setw(20) << "Final Variance"
+              << std::setw(20) << initialMaxDifference << std::setw(20) << finalMaxDifference << std::setw(20) << initialAvgDifference
+              << std::setw(20) << finalAvgDifference << std::setw(20) << initialVariance << std::setw(20) << finalVariance << std::endl;
 
-    std::cout << initialMaxDifference <<  " | " <<finalMaxDifference << std::endl;
-    std::cout << initialAvgDifference <<" | " << finalAvgDifference << std::endl;
-    std::cout << initialVariance <<" | " << finalVariance << std::endl;
+    // Output table header
+    std::cout << std::setw(20) << "City" << std::setw(35) << "Max Flow (Before)" << std::setw(25) << "Max Flow (After)"
+              << std::endl;
+    for(auto city : waterCityMap) {
+        // Output city data
+        std::cout << std::setw(20) << city.second->getCity() << std::setw(20) << initialFlows[city.second] << " m^3/s" << std::setw(20) << finalFlows[city.second] << " m^3/s"
+                  << std::endl;
+    }
+
+    restorePipes(originalEdges);
 }
-
-
-
-
+/**
+ * @brief Performs a balancing algorithm using neighbor distribution technique.
+ * @details This method balances the flow across the network by redistributing flow between neighboring pipes based on neighbor distribution technique.
+ * @details Access the neighbouring edges of a vertex and checks if the difference between capacity and flow is lower than its own, if it is, saves the neighbor edge and computes a redistribution function in order to balance.
+ *
+ * @details It saves the original pipe configuration, computes initial metrics such as max difference, average difference, and variance, then iteratively redistributes flow between neighboring pipes.
+ * @details After the redistribution, it computes final metrics and displays the changes in max difference, average difference, and variance.
+ * @details Additionally, it displays the changes in maximum flow for each city before and after the balancing process.
+ * @details The method then restores the original pipe configuration.
+ * @details It has time complexity equal to the maximumFlowAllCities function, since it uses it twice.
+ * @details (
+ * @details     Time complexity is O(X + Y + Z).
+ *
+ * @details     X - Time complexity related to the addition of the superWaterReservoir and the superDeliverySite. X = V
+ *
+ * @details     Y - The for loops that set the flow of edges and the currentFlow of vertexes to zero. Y = VE
+ *
+ * @details     Z - Edmonds-Karp Algorithm for Max Flow. Z = VE^2
+ * @details )
+ */
 
 void WaterManager::balancingAlgorithmNeighborDistribution() {
-    maximumFlowAllCities();
+    auto originalEdges = savePipes();
+    std::map<DS *, double> initialFlows = auxMaxFlow();
     double initialMaxDifference = 0.0;
     double initialAvgDifference = avgDifference(initialMaxDifference);
     double initialVariance = variance();
@@ -1072,24 +1180,13 @@ void WaterManager::balancingAlgorithmNeighborDistribution() {
             double difference = abs(edge->getWeight() - edge->getFlow());
             std::vector<Edge<WaterElement*>*> neighboringPipes;
 
-            auto* isDS = dynamic_cast<DS*>(we->getPath()->getDest()->getInfo());
 
-            if (isDS){
-                if (demandFulfilled(we->getPath()->getDest(), isDS)){
-                    for(auto adj : edge->getDest()->getAdj()){
-                        if(abs(adj->getWeight() - adj->getFlow()) < difference){
-                            neighboringPipes.push_back(adj);
-                        }
-                    }
-
-                }
-            }else {
                 for (auto adj: edge->getDest()->getAdj()) {
                     if (abs(adj->getWeight() - adj->getFlow()) < difference) {
                         neighboringPipes.push_back(adj);
                     }
                 }
-            }
+
 
 
             for(auto neighbor : neighboringPipes){
@@ -1105,18 +1202,46 @@ void WaterManager::balancingAlgorithmNeighborDistribution() {
             }
         }
     }
-    std::cout << maximumFlowAllCities();
+    std::map<DS *, double> finalFlows = auxMaxFlow();
     double finalMaxDifference = 0.0;
     double finalAvgDifference = avgDifference(finalMaxDifference);
     double finalVariance = variance();
+    std::cout << std::setw(20) << "Initial Max Diff" << std::setw(20) << "Final Max Diff" << std::setw(20) << "Initial Avg Diff"
+              << std::setw(20) << "Final Avg Diff" << std::setw(20) << "Initial Variance" << std::setw(20) << "Final Variance"
+              << std::setw(20) << initialMaxDifference << std::setw(20) << finalMaxDifference << std::setw(20) << initialAvgDifference
+              << std::setw(20) << finalAvgDifference << std::setw(20) << initialVariance << std::setw(20) << finalVariance << std::endl;
 
-    std::cout << "Initial Max Difference: " << initialMaxDifference <<  " | "<< "After Balancing Max Difference: " <<finalMaxDifference << std::endl;
-    std::cout << "Initial Average Difference: " << initialAvgDifference <<" | "<< "After Balancing Average Difference: " << finalAvgDifference << std::endl;
-    std::cout << "Initial Variance: " << initialVariance <<" | " << "After Balancing Variance: "<< finalVariance << std::endl;
+    // Output table header
+    std::cout << std::setw(20) << "City" << std::setw(35) << "Max Flow (Before)" << std::setw(25) << "Max Flow (After)"
+              << std::endl;
+    for(auto city : waterCityMap) {
+        // Output city data
+        std::cout << std::setw(20) << city.second->getCity() << std::setw(20) << initialFlows[city.second] << " m^3/s" << std::setw(20) << finalFlows[city.second] << " m^3/s"
+                  << std::endl;
+    }
+    restorePipes(originalEdges);
 }
-
+/**
+ * @brief Performs a balancing algorithm using average distribution technique.
+ * @details This method balances the flow across the network by setting the weight of each pipe to the average capacity of all pipes.
+ * @details It saves the original pipe configuration, computes initial metrics such as max difference, average difference, and variance, then sets the weight of each pipe to the average capacity.
+ * @details After setting the weights, it computes final metrics and displays the changes in max difference, average difference, and variance.
+ * @details Additionally, it displays the changes in maximum flow for each city before and after the balancing process.
+ * @details The method then restores the original pipe configuration.
+ * @details It has time complexity equal to the maximumFlowAllCities function, since it uses it twice.
+ * @details (
+ * @details     Time complexity is O(X + Y + Z).
+ *
+ * @details     X - Time complexity related to the addition of the superWaterReservoir and the superDeliverySite. X = V
+ *
+ * @details     Y - The for loops that set the flow of edges and the currentFlow of vertexes to zero. Y = VE
+ *
+ * @details     Z - Edmonds-Karp Algorithm for Max Flow. Z = VE^2
+ * @details )
+ */
 void WaterManager::balancingAlgorithmAverageDistribution(){
-    maximumFlowAllCities();
+    auto originalEdges = savePipes();
+    std::map<DS *, double> initialFlows = auxMaxFlow();
     double initialMaxDifference = 0.0;
     double initialAvgDifference = avgDifference(initialMaxDifference);
     double initialVariance = variance();
@@ -1127,15 +1252,24 @@ void WaterManager::balancingAlgorithmAverageDistribution(){
             edge->setWeight(avgCapacity_);
         }
     }
-    std::cout << maximumFlowAllCities();
+    std::map<DS *, double> finalFlows = auxMaxFlow();
     double finalMaxDifference = 0.0;
     double finalAvgDifference = avgDifference(finalMaxDifference);
     double finalVariance = variance();
+    std::cout << std::setw(20) << "Initial Max Diff" << std::setw(20) << "Final Max Diff" << std::setw(20) << "Initial Avg Diff"
+                 << std::setw(20) << "Final Avg Diff" << std::setw(20) << "Initial Variance" << std::setw(20) << "Final Variance"
+                 << std::setw(20) << initialMaxDifference << std::setw(20) << finalMaxDifference << std::setw(20) << initialAvgDifference
+                 << std::setw(20) << finalAvgDifference << std::setw(20) << initialVariance << std::setw(20) << finalVariance << std::endl;
 
-    std::cout << "Initial Max Difference: " << initialMaxDifference <<  " | "<< "After Balancing Max Difference: " <<finalMaxDifference << std::endl;
-    std::cout << "Initial Average Difference: " << initialAvgDifference <<" | "<< "After Balancing Average Difference: " << finalAvgDifference << std::endl;
-    std::cout << "Initial Variance: " << initialVariance <<" | " << "After Balancing Variance: "<< finalVariance << std::endl;
-
+    // Output table header
+    std::cout << std::setw(20) << "City" << std::setw(35) << "Max Flow (Before)" << std::setw(25) << "Max Flow (After)"
+              << std::endl;
+    for(auto city : waterCityMap) {
+        // Output city data
+        std::cout << std::setw(20) << city.second->getCity() << std::setw(20) << initialFlows[city.second] << " m^3/s" << std::setw(20) << finalFlows[city.second] << " m^3/s"
+                  << std::endl;
+    }
+    restorePipes(originalEdges);
 }
 
 
