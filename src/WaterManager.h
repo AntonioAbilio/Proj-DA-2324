@@ -7,6 +7,7 @@
 #include <regex>
 #include <unordered_map>
 #include <map>
+#include <cmath>
 
 #include "Graph.h"
 #include "WaterElement.h"
