@@ -241,16 +241,16 @@ void WaterManager::processPipes(std::ifstream &in) {
             return;
         }
 
-        if (!this->waterNetwork.addEdge(waterElementA, waterElementB, std::stod(capacity))){
-            std::cerr << "Problem while adding an edge to the graph\n";
-            return;
-        } else pipesSize++;
-
-        if (std::stoi(direction)){
-            if (!this->waterNetwork.addEdge(waterElementB, waterElementA, std::stod(capacity))){
+        if (!std::stoi(direction)){
+            if (!this->waterNetwork.addBidirectionalEdge(waterElementA, waterElementB, std::stod(capacity))){
                 std::cerr << "Problem while adding an edge to the graph\n";
                 return;
             }
+        } else {
+            if (!this->waterNetwork.addEdge(waterElementA, waterElementB, std::stod(capacity))){
+                std::cerr << "Problem while adding an edge to the graph\n";
+                return;
+            } else pipesSize++;
         }
 
         // ToDo remove
@@ -510,7 +510,7 @@ std::string WaterManager::maximumFlowAllCities() {
         tot += city.second->getCurrentFlow();
         oss << "The city " << city.second->getCity() << " has a maximum flow of " << city.second->getCurrentFlow() << " cubic meters per second.\n";
     }
-    oss << "The total of flow is " << tot << std::endl;
+    oss << "The total of flow is " << tot << ".\n";
 
     for (Vertex<WaterElement*>* vertex : waterNetwork.getVertexSet()){
         for (Edge<WaterElement*>* edge : vertex->getIncoming()){
@@ -603,6 +603,9 @@ std::string checkDifferences(const std::string& before, const std::string& after
     std::string lineBefore;
     std::string lineAfter;
     while(getline(bef_SS, lineBefore) && getline(aft_SS, lineAfter)) {
+
+        if (std::regex_match(lineBefore, std::regex("The total of flow is [0-9]+."))) continue;
+
         if (lineBefore != lineAfter){
 
             // Find the name of the city.
