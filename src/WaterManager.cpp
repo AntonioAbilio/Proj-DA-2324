@@ -505,9 +505,12 @@ std::string WaterManager::maximumFlowAllCities() {
         augmentFlowAlongPath(superWaterReservoir, superDeliverySite, minFlow);
     }
 
+    double tot = 0.0;
     for (const auto& city : waterCityMap){
+        tot += city.second->getCurrentFlow();
         oss << "The city " << city.second->getCity() << " has a maximum flow of " << city.second->getCurrentFlow() << " cubic meters per second.\n";
     }
+    oss << "The total of flow is " << tot << std::endl;
 
     for (Vertex<WaterElement*>* vertex : waterNetwork.getVertexSet()){
         for (Edge<WaterElement*>* edge : vertex->getIncoming()){
