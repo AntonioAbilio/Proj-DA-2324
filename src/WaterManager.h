@@ -60,8 +60,8 @@ public:
     // Exercice T3.2
     void removePS(PS* ps, std::vector<Edge<WaterElement*>>* outgoing, std::vector<Edge<WaterElement*>>* incoming);
     void addPS(PS* ps, const std::vector<Edge<WaterElement*>>& outgoing, const std::vector<Edge<WaterElement*>>& incoming);
-    std::string citiesAffectedByMaintenance_SpecificPipe(std::string idCode);
-    std::string citiesAffectedByMaintenance_AllPipes();
+    std::string citiesAffectedByMaintenance_SpecificPump(std::string idCode);
+    std::string citiesAffectedByMaintenance_AllPumps();
 
     void dfsAffectedByRemoval(Vertex<WaterElement*>* v, std::vector<WaterElement*> &res);
     void updateFlow(Vertex<WaterElement*>* WR );

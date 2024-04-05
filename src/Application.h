@@ -21,6 +21,7 @@ public:
     void clearScreen();
     static void delay(long sleepTime);
     static int processKey(const std::string& option);
+    void outputToFile(std::string header, std::string text);
 
 private:
 
