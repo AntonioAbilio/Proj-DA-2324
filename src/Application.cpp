@@ -361,7 +361,7 @@ void Application::listCitiesAffectedByPipeRupture(){
             int count = 0;
             for (const auto& city : it->second) {
                 ++count;
-                std::cout << "  " << count << ". City: " << city.first << ", Decrease in Capacity: " << city.second << " m^3/sec\n";
+                std::cout << "  " << count << ". City: " << city.first << ", Decrease in Demand: " << city.second << " m^3/sec\n";
             }
 
         }

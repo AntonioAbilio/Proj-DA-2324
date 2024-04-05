@@ -31,6 +31,7 @@ public:
     void dataGoBoom(); // Free allocated space.
 
     void listwaterNeeds(); // T2.2
+    //3.2
     void listCitiesAffectedByReservoirRemoval(std::string wr_code, bool remove); // T3.1
 
 
@@ -41,9 +42,10 @@ public:
 
     std::string maximumFlowAllCities();
     std::string maximumFlowSpecificCities(std::string cityCode);
-
+    //3.3
     std::map<std::string, std::vector<std::pair<std::string, double>>> CitiesAffectedByPipeRupture(std::string &cityCode);
     std::map<std::string, std::vector<std::pair<std::string, double>>> CitiesAffectedByPipeRupture();
+    //2.3
     double avgDifference(double &maxDifference);
     double avgCapacity();
     double variance();

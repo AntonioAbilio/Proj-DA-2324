@@ -962,7 +962,7 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
                     double deficit = city.first->getDemand() - city.second;
                     std::ostringstream oss;
 
-                    oss << " from service point " << origin->getCode() << " to service point " << destination->getCode() << " " << city.first->getCurrentFlow();
+                    oss << " from service point " << origin->getCode() << " to service point " << destination->getCode() ;
                     result[oss.str()].push_back(std::make_pair(affectedCity, deficit));
                 }
             }
@@ -1120,7 +1120,6 @@ void WaterManager::balancingAlgorithmSortingDistribution() {
     auto itr = differenceMap.rbegin();
     while (count < differenceMap.size() / 2 && itl != differenceMap.end() && itr != differenceMap.rend()) {
         double redistributed = itl->first - itr->first;
-        std::cout << redistributed << " " << itl->second->getWeight() - redistributed << " " << itr->second->getWeight() + redistributed << std::endl;
         itl->second->setWeight(itl->second->getWeight() - redistributed);
         itr->second->setWeight(itr->second->getWeight() + redistributed);
         ++count;
