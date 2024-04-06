@@ -226,7 +226,7 @@ double getTotVertex(Vertex<WaterElement *> *adj, DS *deliverySite) {
 
 /**
  * @brief Helper function. Checks if a given delivery site already has the needed demand.
- * @details It's time complexity in the worst case is O(E) where E is the amount of edges that are
+ * @details Its time complexity in the worst case is O(E) where E is the amount of edges that are
  * @details incoming and outgoing of a given delivery Site.
  *
  * @param adj - This is the vertex that contains the delivery Site.
@@ -351,8 +351,8 @@ double WaterManager::findMinResidualAlongPath(WaterElement *&source, WaterElemen
 /**
  * @brief Helper function.
  * @details Beginning from the target vertex we are going to follow the previously saved path
- * @details and add [In case the path belongs to the normal graph] or subtract
- * @details [In case we have found a path in the residual graph] the minimum residual capacity.
+ * @details and add (in case the path belongs to the normal graph) or subtract
+ * @details (in case we have found a path in the residual graph) the minimum residual capacity.
  * @details The time complexity for this function is O(V). This is because in the worst case we
  * @details need to go trough V vertexes (from the target to the source node).
  *
@@ -397,12 +397,12 @@ void WaterManager::augmentFlowAlongPath(WaterElement *&source, WaterElement *&ta
  * find the maximum amount of flow that can reach all cities. The modifications
  * are the addition of a super source and a super sink and the use of a variable
  * named currentFlow that helps us check if a given city already has it's demand fulfilled.
- * @details The time complexity for this functions is O(X + Y + Z) = O(V + VE + VE^2) where
+ * @details The time complexity for this functions is O(X + Y + Z) = O(V + VE + VE^2) = O(VE^2) where
  * X is the time complexity related to the addition of the superWaterReservoir (super source) and the
  * superDeliverySite (super sink) (X = V), Y is the time complexity of the for loops that set the flow
  * of edges and the currentFlow of vertexes to zero (Y = VE) and finally Z is the time complexity
  * for the Edmonds-Karp Algorithm for Max Flow (Z = VE^2).
- * **/
+ **/
 std::string WaterManager::maximumFlowAllCities() {
     std::ostringstream oss;
 
@@ -468,10 +468,10 @@ std::string WaterManager::maximumFlowAllCities() {
 /**
  * @brief Maximum flow to a specific city
  * @details This function depends on the function above [maximumFlowAllCities()]
- * @details The time complexity for this functions is is O(n + Y) = O(V + VE + VE^2) where
+ * @details The time complexity for this functions is is O(n + Y) = O(V + VE + VE^2) = O(VE^2) where
  * n is the time complexity for the worst case of finding the city and Y is the time
  * complexity of the maximumFlowAllCities() function.
- * **/
+ **/
 std::string WaterManager::maximumFlowSpecificCities(std::string idCode) {
     std::ostringstream oss;
     size_t pos;
@@ -536,7 +536,7 @@ std::string WaterManager::maximumFlowSpecificCities(std::string idCode) {
  * @param before The old string.
  * @param after The new string.
  *
- * **/
+ **/
 std::string checkDifferences(const std::string &before, const std::string &after) {
     std::ostringstream oss;
 
@@ -583,11 +583,10 @@ std::string checkDifferences(const std::string &before, const std::string &after
 /**
  * @brief This function aids in checking which cities are affected if a given pump is taken offline.
  * @details It first executes the algorithm to find the maximum flow to all cities,
- * removes the specified pump if it is found, executes the max flow algorithm again and
+ * "deactivates" the specified pump if it is found, executes the max flow algorithm again and
  * it compares the results.
- * @details The Time Complexity for this function is (X + Y) where X is the time complexity of the max flow
- * algorithm which is O(V + VE + VE^2) and Y is the time complexity of the functions removePS() and addPS()
- * which is O(n + E^2) + O(E).
+ * @details The Time Complexity for this function is (VE^2) which is also the time complexity of the max flow
+ * algorithm.
  **/
 std::string WaterManager::citiesAffectedByMaintenance_SpecificPump(std::string idCode) {
     std::ostringstream oss;
@@ -769,6 +768,10 @@ void WaterManager::listCitiesAffectedByReservoirRemoval(std::string idCode) {
     }
 }
 
+/**
+ * @brief "Reenable" all reservoirs
+ * @details Time Complexity: O(V), where V are all the disabled water reservoirs
+ */
 void WaterManager::resetWaterReservoirs() {
     for (Vertex<WaterElement *> *&currentlyDisabledWR: this->disabledWaterReservoirs) {
         currentlyDisabledWR->setProcesssing(false);
@@ -791,7 +794,6 @@ std::vector<Vertex<WaterElement *> *> WaterManager::getDisabledWaterReservoirs()
  * @return A map containing the delivery sites as keys and the respective updated maximum flow
  * values.
  **/
-
 std::map<DS *, double> WaterManager::auxMaxFlow() {
 
     if (maximumFlowAllCities().empty()) std::cout << "ERROR! maxFlow failed.";
@@ -826,9 +828,7 @@ std::map<DS *, double> WaterManager::auxMaxFlow() {
  * caused by each pipe rupture. The keys are strings representing the pipes, and the values are
  * vectors of pairs, where each pair contains the affected city code and the deficit in water supply.
  **/
-
-std::map<std::string, std::vector<std::pair<std::string, double>>>
-WaterManager::CitiesAffectedByPipeRupture(std::string &idCode) {
+std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager::CitiesAffectedByPipeRupture(std::string &idCode) {
     size_t pos;
     std::map<std::string, std::vector<std::pair<std::string, double>>> result;
 
@@ -933,7 +933,6 @@ WaterManager::CitiesAffectedByPipeRupture(std::string &idCode) {
  * destination), and the values are vectors of pairs, where each pair contains the affected city
  * and the deficit in water supply.
  **/
-
 std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager::CitiesAffectedByPipeRupture() {
     std::map<std::string, std::vector<std::pair<std::string, double>>> result;
 
@@ -980,7 +979,6 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
 }
 
 /**
- *
  * @brief Saves the pipes in the water network.
  * @details This function iterates over all edges in the water network and saves them into a vector of edges.
  * @details Each edge consists of a source vertex, a destination vertex, and the weight representing the capacity of the pipe.
@@ -1062,7 +1060,6 @@ double WaterManager::avgDifference(double &maxDifference) {
  *
  * @return The variance of the differences between the capacity and flow of each pipe.
  */
-
 double WaterManager::variance() {
     double maxDifference = 0.0;
     double avg = avgDifference(maxDifference);
@@ -1101,7 +1098,6 @@ struct CompareDifference {
  * @details     Z - Edmonds-Karp Algorithm for Max Flow. Z = VE^2
  * @details )
  * @details The method then restores the original pipe configuration.
-
  */
 void WaterManager::balancingAlgorithmSortingDistribution() {
     auto originalEdges = savePipes();
@@ -1182,7 +1178,6 @@ void WaterManager::balancingAlgorithmSortingDistribution() {
  * @details     Z - Edmonds-Karp Algorithm for Max Flow. Z = VE^2
  * @details )
  */
-
 void WaterManager::balancingAlgorithmNeighborDistribution() {
     auto originalEdges = savePipes();
     std::map<DS *, double> initialFlows = auxMaxFlow();
