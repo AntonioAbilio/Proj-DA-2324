@@ -7,7 +7,7 @@ int main() {
      *  @details This is done to use system specific commands like system("clear").
      *  @details Time Complexity: O(1)
     * */
-    const char* os = std::getenv("OS");
+    const char *os = std::getenv("OS");
     std::string env;
     if (os == nullptr) env = "null";
     else env = std::string(os);
@@ -23,7 +23,7 @@ int main() {
     goBack:
     try {
         app.run(nextRun);
-    } catch (std::invalid_argument& invalid_argument){
+    } catch (std::invalid_argument &invalid_argument) {
         nextRun = std::stoi(invalid_argument.what());
         goto goBack;
     }

@@ -1,4 +1,5 @@
 #include "WR.h"
+
 using namespace std;
 
 WR::WR(const string &code, int id, const string &reservoir, const string &municipality, double maxDelivery)

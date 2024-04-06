@@ -3,7 +3,7 @@
 void Application::run(int processedKey) {
     L1:
     clearScreen();
-    while (processedKey == -1){
+    while (processedKey == -1) {
         clearScreen();
         processedKey = processKey(showMainMenu());
     }
@@ -14,7 +14,7 @@ void Application::run(int processedKey) {
             std::cout << 1;
             break;
         case 2:
-            listwaterNeeds(); // T2.2
+            listWaterNeeds(); // T2.2
             std::cout << 2;
             break;
         case 3:
@@ -33,7 +33,7 @@ void Application::run(int processedKey) {
             std::cout << 4;
             break;
         case 7:
-            //dataGoBoom();
+            waterManager.dataGoBoom();
             std::cout << "Thank you very much and Bye-Bye.\n";
             break;
         default:
@@ -52,7 +52,7 @@ void Application::clearScreen() {
                      "\n\n\n\n\n\n\n\n\n"
                      "\n\n\n\n\n\n\n\n\n";
     else if (env == "unix")
-        if ( system("clear") == -1 ) goto L1;
+        if (system("clear") == -1) goto L1;
 }
 
 /**
@@ -64,12 +64,12 @@ void Application::delay(long sleepMS) {
 
 
 /** @brief Handles the exception thrown by std::stoi. */
-int Application::processKey(const std::string& option) {
+int Application::processKey(const std::string &option) {
     try {
         int intOPT = std::stoi(option);
         if (intOPT <= 0 || option.size() > 1 || intOPT > 7) throw std::invalid_argument("NegativeNumber");
         return intOPT;
-    } catch (std::invalid_argument& argument) {
+    } catch (std::invalid_argument &argument) {
         std::cout << "\n* Error while parsing option, please input a valid numeric option. *\n";
         delay(2000);
         return -1;
@@ -80,7 +80,7 @@ int Application::processKey(const std::string& option) {
  * @brief Shows the main menu
  */
 std::string Application::showMainMenu() {
-    std::string opti;
+    std::string option;
     std::cout << "Select an operation you would like to do:\n\n"
               << "1 - Maximum amount of water that can reach each or a specific city.\n"
               << "2 - Show water needs.\n"
@@ -91,12 +91,12 @@ std::string Application::showMainMenu() {
               << "7 - Exit.\n";
 
     std::cout << "\nInput: ";
-    std::cin >> opti;
+    std::cin >> option;
     std::cout << "\n";
-    return opti;
+    return option;
 }
 
-void Application::showGoBackMenu(int functionNumber, const std::string& functionName) {
+void Application::showGoBackMenu(int functionNumber, const std::string &functionName) {
     L1:
     std::cout << "\nPress enter to continue";
     std::string a;
@@ -133,24 +133,24 @@ void Application::showGoBackMenu(int functionNumber, const std::string& function
  * @details This function adds a header composed of the current time plus a specified
  * header and the actual text that is due to be written.
  * **/
-void Application::outputToFile(std::string header, std::string text){
+void Application::outputToFile(std::string header, std::string text) {
     std::ofstream out("../outputFiles/functions.txt", std::ios::app);
 
     // Get current time
     std::time_t currentTime = std::time(nullptr);
 
     // Convert the current time to a struct tm
-    std::tm* localTime = std::localtime(&currentTime);
+    std::tm *localTime = std::localtime(&currentTime);
 
-    out  <<  std::put_time(localTime, "%Y-%m-%d %H:%M:%S") << " -> "
+    out << std::put_time(localTime, "%Y-%m-%d %H:%M:%S") << " -> "
         << header << "\n\n" << text << "\n\n";
 
     out.close();
 }
 
 // T2.1
-void Application::maxWater(){
-restartMaxWater:
+void Application::maxWater() {
+    restartMaxWater:
     clearScreen();
     std::string targetOpt;
     std::cout << "What would you like to do?\n\n"
@@ -168,7 +168,7 @@ restartMaxWater:
             // Show all maximum flow to all cities.
             res = waterManager.maximumFlowAllCities();
             std::cout << res;
-            outputToFile("Exercice T2.1 - Max Flow All Cities", res);
+            outputToFile("Exercise T2.1 - Max Flow All Cities", res);
             break;
         case 2:
             std::cout << "Please specify the city's code or id or city name\n"
@@ -184,25 +184,25 @@ restartMaxWater:
             // Show maximum flow to specified city.
             res = waterManager.maximumFlowSpecificCities(cityCode);
             std::cout << res;
-            outputToFile("Exercice T2.1 Max Flow to city " + cityCode, res);
+            outputToFile("Exercise T2.1 Max Flow to city " + cityCode, res);
             break;
         default:
             goto restartMaxWater;
     }
 
-    showGoBackMenu(1,"Maximum amount of water that can reach each or a specific city.");
+    showGoBackMenu(1, "Maximum amount of water that can reach each or a specific city.");
 }
 
 // T2.2
-void Application::listwaterNeeds(){
+void Application::listWaterNeeds() {
     clearScreen();
     waterManager.listWaterNeeds();
     showGoBackMenu(2, "Show water needs.");
 }
 
 // T2.3
-void Application::balaceNetworkLoad(){
-    restartbalanceNetworkLoad:
+void Application::balaceNetworkLoad() {
+    restartBalanceNetworkLoad:
     clearScreen();
 
     std::string targetOpt;
@@ -225,13 +225,13 @@ void Application::balaceNetworkLoad(){
             waterManager.balancingAlgorithmAverageDistribution();
             break;
         default:
-            goto restartbalanceNetworkLoad;
+            goto restartBalanceNetworkLoad;
     }
     showGoBackMenu(3, "Balance network load.");
 }
 
 // T3.1
-void Application::listCitiesAffectedByReservoirRemoval(){
+void Application::listCitiesAffectedByReservoirRemoval() {
     clearScreen();
     std::cout << "Please select which water reservoir you would like to disable?\n"
               << "id example -> [Input: 1]\n"
@@ -244,15 +244,16 @@ void Application::listCitiesAffectedByReservoirRemoval(){
 
     clearScreen();
 
-    do{
+    do {
         waterManager.listCitiesAffectedByReservoirRemoval(idCode);
         std::cout << "\nWould you like to disable another water reservoir? (y/N)\n"
                   << "\nInput: ";
         std::cin >> opt;
         clearScreen();
         if (std::regex_match(opt, std::regex("n", std::regex_constants::icase))) break;
-        if (!waterManager.getDisabledWaterReservoirs().empty()) std::cout << "\nThe current disabled water reservoirs are:\n";
-        for (Vertex<WaterElement*>* vWE : waterManager.getDisabledWaterReservoirs()){
+        if (!waterManager.getDisabledWaterReservoirs().empty())
+            std::cout << "\nThe current disabled water reservoirs are:\n";
+        for (Vertex<WaterElement *> *vWE: waterManager.getDisabledWaterReservoirs()) {
             std::cout << vWE->getInfo()->getId() << std::endl;
         }
         std::cout << "\nPlease select which water reservoir you would like to disable?\n"
@@ -269,8 +270,8 @@ void Application::listCitiesAffectedByReservoirRemoval(){
 }
 
 // T3.2
-void Application::listCitiesAffectedByMaintenance(){
-restartLCAFBM:
+void Application::listCitiesAffectedByMaintenance() {
+    restartLCAFBM:
     clearScreen();
     std::string targetOpt;
     std::cout << "What would you like to do?\n\n"
@@ -303,7 +304,7 @@ restartLCAFBM:
 }
 
 // T3.3
-void Application::listCitiesAffectedByPipeRupture(){
+void Application::listCitiesAffectedByPipeRupture() {
     restartPipelineFailure:
     clearScreen();
 
@@ -341,20 +342,23 @@ void Application::listCitiesAffectedByPipeRupture(){
         std::cout << "No cities affected by pipe rupture found for the specified city code.\n";
     } else {
         // Iterate over the result map
-        for (auto& it : result) {
-            std::cout << "-----------------------------------------------------------------------------------------------------------\n";
+        for (auto &it: result) {
+            std::cout
+                    << "-----------------------------------------------------------------------------------------------------------\n";
             std::cout << "The removal of pipe" << it.first << " would affect the following cities:\n";
 
             // Iterate over the affected cities for the current pipe
             int count = 0;
-            for (const auto& city : it.second) {
+            for (const auto &city: it.second) {
                 ++count;
-                std::cout << "  " << count << ". City: " << city.first << ", Decrease in Demand: " << city.second << " m^3/sec\n";
+                std::cout << "  " << count << ". City: " << city.first << ", Decrease in Demand: " << city.second
+                          << " m^3/sec\n";
             }
 
         }
     }
-    std::cout << "-----------------------------------------------------------------------------------------------------------\n";
+    std::cout
+            << "-----------------------------------------------------------------------------------------------------------\n";
 
 
     showGoBackMenu(6, "List cities affected by pipe rupture.");

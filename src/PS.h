@@ -4,7 +4,7 @@
 #include "string"
 #include "WaterElement.h"
 
-class PS : public WaterElement{
+class PS : public WaterElement {
 public:
     PS(const std::string &code, int id);
 };

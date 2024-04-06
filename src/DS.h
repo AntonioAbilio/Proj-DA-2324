@@ -4,7 +4,7 @@
 #include "WaterElement.h"
 #include <string>
 
-class DS : public WaterElement{
+class DS : public WaterElement {
 
 private:
     std::string city;

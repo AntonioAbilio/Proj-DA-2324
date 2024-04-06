@@ -1,7 +1,9 @@
 #include "DS.h"
 
 using namespace std;
-DS::DS(const string &code, int id, const string &city, double demand, int population, double currentFlow) : WaterElement(code,id){
+
+DS::DS(const string &code, int id, const string &city, double demand, int population, double currentFlow)
+        : WaterElement(code, id) {
     this->city = city;
     this->demand = demand;
     this->population = population;

@@ -10,17 +10,21 @@
 #include "WaterManager.h"
 
 /**@brief Class that manages the menu.*/
-class Application{
+class Application {
 public:
-    Application(std::string env){
+    Application(std::string env) {
         waterManager.parseData();
         this->env = env;
     }
 
     void run(int processedKey);
+
     void clearScreen();
+
     static void delay(long sleepTime);
-    static int processKey(const std::string& option);
+
+    static int processKey(const std::string &option);
+
     void outputToFile(std::string header, std::string text);
 
 private:
@@ -30,11 +34,11 @@ private:
     // WaterManager options
     std::string showMainMenu();
 
-    void showGoBackMenu(int option, const std::string& functionName);
+    void showGoBackMenu(int option, const std::string &functionName);
 
     void maxWater(); // T2.1
 
-    void listwaterNeeds(); // T2.2
+    void listWaterNeeds(); // T2.2
 
     void balaceNetworkLoad(); // T2.3
 
