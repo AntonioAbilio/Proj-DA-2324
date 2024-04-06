@@ -1,6 +1,5 @@
 #include "WaterManager.h"
 
-
 /* Data Parsing Begin */
 
 /**
@@ -34,19 +33,6 @@ void WaterManager::parseData() {
     processCities(in);
     in.close();
 
-    // ToDo remove
-    /*std::cout << "\nWaterReservoirMap\n";
-
-    for (auto e : this->waterReservoirMap) std::cout << e.first << "\n";
-
-    std::cout << "\nWaterPumpMap\n";
-
-    for (auto e : this->waterPumpMap) std::cout << e.first << "\n";
-
-    std::cout << "\nwaterCityMap\n";
-
-    for (auto e : this->waterCityMap) std::cout << e.first << "\n";*/
-
     in.open("../inputFiles/MadeiraDataSet/Pipes.csv");
     if (!in.is_open()){
         std::cout << "Unable to open Pipes.csv.\n";
@@ -54,13 +40,6 @@ void WaterManager::parseData() {
     }
     processPipes(in);
     in.close();
-
-    // Test graph begin
-
-    /*for (Vertex<WaterElement*>* vertex : this->waterNetwork.getVertexSet()){
-        std::cout << " " << vertex->getInfo()->getCode() << "\n";
-    }*/
-
 }
 
 /**
@@ -76,9 +55,6 @@ void WaterManager::dataGoBoom() {
  * @brief Data parsing for reservoirs.
  */
 void WaterManager::processReservoirs(std::ifstream &in) {
-    // ToDo remove
-    //std::cout << "Now Reservoirs\n";
-
     std::string line;
     getline(in,line);
     while(getline(in, line)) {
@@ -102,9 +78,6 @@ void WaterManager::processReservoirs(std::ifstream &in) {
         if (!waterNetwork.addVertex(waterReservoir)){
             std::cout << "Error while adding vertex to graph.";
         }
-
-        // ToDo remove
-        //std::cout << reservoir << " " << municipality << " " << id << " " << code << " " << maximumDelivery << std::endl;
     }
 }
 
@@ -112,9 +85,6 @@ void WaterManager::processReservoirs(std::ifstream &in) {
  * @brief Data parsing for pumps
  */
 void WaterManager::processPumps(std::ifstream &in) {
-    // ToDo remove
-    //std::cout << "Now PumpingStations\n";
-
     std::string line;
     getline(in,line);
     while(getline(in, line)) {
@@ -135,9 +105,6 @@ void WaterManager::processPumps(std::ifstream &in) {
         if (!waterNetwork.addVertex(pumpingStation)){
             std::cout << "Error while adding vertex to graph.";
         }
-
-        // ToDo remove
-        //std::cout << id << " " << code << std::endl;
     }
 }
 
@@ -146,9 +113,6 @@ void WaterManager::processPumps(std::ifstream &in) {
  * @brief Data parsing for cities / deliverySites
  */
 void WaterManager::processCities(std::ifstream &in) {
-    // ToDo remove
-    //std::cout << "Now Cities\n";
-
     std::string line;
     getline(in,line);
     while(getline(in, line)) {
@@ -179,9 +143,6 @@ void WaterManager::processCities(std::ifstream &in) {
         if (!waterNetwork.addVertex(deliverySite)){
             std::cout << "Error while adding vertex to graph.";
         }
-
-        // ToDo remove
-        //std::cout << city << " " << id << " " << code << " " << demand << " " << population << std::endl;
     }
 }
 
@@ -189,9 +150,6 @@ void WaterManager::processCities(std::ifstream &in) {
  * @brief Data parsing for pipes.
  */
 void WaterManager::processPipes(std::ifstream &in) {
-    // ToDo remove
-    //std::cout << "Now Pipes\n";
-
     std::string line;
     getline(in,line);
     while(getline(in, line)) {
@@ -202,16 +160,13 @@ void WaterManager::processPipes(std::ifstream &in) {
             for (char& c : servicePointB) c = (char) tolower(c);
             for (char& c : capacity) c = (char) tolower(c);
             for (char& c : direction) c = (char) tolower(c);
-
         } else {
             std::cerr << "Invalid line in the CSV file" << line << std::endl;
         }
-
         std::string typeA;
         for (int i = 0; i < servicePointA.find_first_of('_'); i++){
             typeA += servicePointA[i];
         }
-
         std::string typeB;
         for (int i = 0; i < servicePointB.find_first_of('_'); i++){
             typeB += servicePointB[i];
@@ -252,15 +207,6 @@ void WaterManager::processPipes(std::ifstream &in) {
                 return;
             } else pipesSize++;
         }
-
-        // ToDo remove
-        //std::cout << "\nFound water element: " << waterElementA->getCode() << " and found water element B: " << waterElementB->getCode() << "\n";
-
-        // ToDo remove
-        //std::cout << "ServicePointA " << typeA << std::endl;
-
-        // ToDo remove
-        //std::cout << servicePointA << " " << servicePointB << " " << capacity << " " << direction << std::endl;
     }
 }
 
@@ -300,7 +246,6 @@ bool demandFulfilled(Vertex<WaterElement*>* adj, DS* deliverySite){
  * @param source - This is the starting node.
  * @param target - This is the ending node.
  *
- *
  * @return If it manages to find a path then it return true otherwise it returns false.
  **/
 bool WaterManager::existsAugmentingPath(WaterElement*& source, WaterElement*& target){
@@ -324,16 +269,11 @@ bool WaterManager::existsAugmentingPath(WaterElement*& source, WaterElement*& ta
         // Process outgoing edges
         for(auto& e: v->getAdj()) {
             Vertex<WaterElement*>* adj = e->getDest();
-
-            // Normal Path, the outgoing edge is not full.
             if (!adj->isVisited() && (e->getWeight() - e->getFlow() > 0)) {
-                //std::cout << " new to queue " << adj->getInfo() << "\n";
-
                 auto* isDS = dynamic_cast<DS*>(adj->getInfo());
 
                 if (isDS){
                     if (demandFulfilled(adj, isDS)){
-                        //std::cout << "Found delivery site but already full " << isDS->getCity() << "\n";
                         continue;
                     }
                 }
@@ -350,7 +290,6 @@ bool WaterManager::existsAugmentingPath(WaterElement*& source, WaterElement*& ta
 
             // Residual Network Edge.
             if (!adj->isVisited() && e->getFlow() > 0) {
-                //std::cout << " new to queue " << adj->getInfo() << "\n";
                 adj->setVisited(true);
                 adj->setPath(e);
                 q.push(adj);
@@ -358,7 +297,6 @@ bool WaterManager::existsAugmentingPath(WaterElement*& source, WaterElement*& ta
         }
     }
 
-    // Return true if a path to the target is found, false otherwise
     return targetVertex->isVisited();
 }
 
@@ -422,14 +360,11 @@ double WaterManager::findMinResidualAlongPath(WaterElement*& source, WaterElemen
  * @param minFlow - Minimum residual capacity.
  **/
 void WaterManager::augmentFlowAlongPath(WaterElement*& source, WaterElement*& target, double minFlow) {
-    // Traverse the augmenting path and update the flow values accordingly
     Vertex<WaterElement*>* sourceVertex = waterNetwork.findVertex(source);
-
     Vertex<WaterElement*>* targetVertex = waterNetwork.findVertex(target);
 
     auto& currentVertex = targetVertex;
 
-    // Note -> currentVertex starts at the target node and follows the path until it reaches the source node.
     while (currentVertex != sourceVertex){
         auto e = currentVertex->getPath();
         double flow = e->getFlow();
@@ -494,18 +429,12 @@ std::string WaterManager::maximumFlowAllCities() {
     for (Vertex<WaterElement*>*& vertex : waterNetwork.getVertexSet()){
         auto* isDS = dynamic_cast<DS*>(vertex->getInfo());
 
-        if (isDS){
-            isDS->setCurrentFlow(0.0);
-        }
+        if (isDS) isDS->setCurrentFlow(0.0);
 
-        if (!vertex->isProcessing()){
-            vertex->setProcesssing(false); // Ensure that values are initialized.
-        }
+        if (!vertex->isProcessing()) vertex->setProcesssing(false);
 
+        for (Edge<WaterElement*>*& edge : vertex->getAdj()) edge->setFlow(0);
 
-        for (Edge<WaterElement*>*& edge : vertex->getAdj()){
-            edge->setFlow(0);
-        }
     }
 
     while (existsAugmentingPath(superWaterReservoir, superDeliverySite)){
@@ -528,7 +457,6 @@ std::string WaterManager::maximumFlowAllCities() {
         }
     }
 
-
     waterNetwork.removeVertex(superWaterReservoir);
     waterNetwork.removeVertex(superDeliverySite);
     return oss.str();
@@ -550,18 +478,23 @@ std::string WaterManager::maximumFlowSpecificCities(std::string idCode) {
     }
 
     std::string cityCode = cityCodePrefix;
-    if ((pos = idCode.find('_')) != std::string::npos){ // Check if the provided string is a code
+    if ((pos = idCode.find('_')) != std::string::npos){
+
+        if (!std::regex_match(idCode.substr(0,pos+1), std::regex(cityCodePrefix, std::regex::icase))){
+            oss << "\nNo pumping station with id/code " << idCode << " was found.\n";
+            return oss.str();
+        }
+
         for (size_t i = pos + 1 ; i < idCode.size(); i++){
             cityCode += idCode[i];
         }
     } else {
-        cityCode += idCode; // Add the possible id to the string prefix.
+        cityCode += idCode;
     }
 
-    if (!std::regex_match(cityCode, std::regex(cityCodeRegex))){ // Check if it matches the regex.
+    if (!std::regex_match(cityCode, std::regex(cityCodeRegex))){
         bool validCity = false;
 
-        // Check if the user has given a city name instead of a code / id.
         for (auto possibleCity : waterCityMap){
             if (possibleCity.second->getCity() == idCode){
                 validCity = true;
@@ -575,7 +508,6 @@ std::string WaterManager::maximumFlowSpecificCities(std::string idCode) {
         }
     }
 
-    // Let's try to find the city
     auto iter = waterCityMap.find(cityCode);
 
     if (iter == waterCityMap.end()){
@@ -583,11 +515,11 @@ std::string WaterManager::maximumFlowSpecificCities(std::string idCode) {
         return oss.str();
     }
 
-    std::string cityToFind = iter->second->getCity(); // Get the city's name.
-    std::string res = maximumFlowAllCities(); // Get the results from the first function.
+    std::string cityToFind = iter->second->getCity();
+    std::string res = maximumFlowAllCities(); // Get the results from the Max Flow Algorithm
 
-    size_t begin = res.find(cityToFind); // Get the position where the city's name was first found.
-    size_t end = res.find('\n', begin); // Get the end of the string.
+    size_t begin = res.find(cityToFind);
+    size_t end = res.find('\n', begin);
 
     oss << "The city " << res.substr(begin, end-begin) << "\n";
     return oss.str();
@@ -617,12 +549,12 @@ std::string checkDifferences(const std::string& before, const std::string& after
         if (lineBefore != lineAfter){
 
             // Find the name of the city.
-            size_t beginDSName = 9; // Ideally this would ba a #define ...
+            size_t beginDSName = 9;
             size_t endDSName = lineBefore.find("has");
             std::string deliverySiteName = lineBefore.substr(beginDSName, endDSName - beginDSName);
 
             // Find where the flow number begins.
-            size_t begin_flow = endDSName + 22; // Ideally this would ba a #define ...
+            size_t begin_flow = endDSName + 22;
 
             // Find where the flow number ends [before changes].
             size_t before_end_flow = lineBefore.find("cubic");
@@ -632,7 +564,7 @@ std::string checkDifferences(const std::string& before, const std::string& after
             size_t after_end_flow = lineAfter.find("cubic");
             std::string DS_Flow_After = lineAfter.substr(begin_flow, after_end_flow - begin_flow);
 
-            oss << "The city " << deliverySiteName << "had a flow of " << DS_Flow_Before
+            oss << "\nThe city " << deliverySiteName << "had a flow of " << DS_Flow_Before
                 << "cubic meters per second" << " but now has a flow of " << DS_Flow_After
                 << "cubic meters per second.\n";
         }
@@ -643,50 +575,6 @@ std::string checkDifferences(const std::string& before, const std::string& after
     }
 
     return oss.str();
-}
-
-
-/**
- * @brief Helper function
- * @details This function helps with the temporary removal of a given pumping station.
- * @details It's time complexity is O(n + E^2) where n is the time it takes to find a given
- * pumping station across all the graph's vertexes and E^2 is the time it takes to remove
- * an edge.
- **/
-void WaterManager::removePS(PS* ps, std::vector<Edge<WaterElement*>>* outgoing, std::vector<Edge<WaterElement*>>* incoming){
-    Vertex<WaterElement*>* PSVertex = waterNetwork.findVertex(ps);
-
-    for (Edge<WaterElement*>* edge : PSVertex->getAdj()){
-        auto dest = edge->getDest();
-        outgoing->push_back((*edge));
-        waterNetwork.removeEdge(ps, dest->getInfo());
-    }
-
-    for (Edge<WaterElement*>* edge : PSVertex->getIncoming()){
-        auto src = edge->getOrig();
-        incoming->push_back((*edge));
-        waterNetwork.removeEdge(src->getInfo(), ps);
-    }
-
-    waterNetwork.removeVertex(ps);
-}
-
-/**
- * @brief Helper function
- * @details This function helps add the previously removed pumping stations.
- * @details It's time complexity is O(E) where E is the time it takes to add an edge.
- **/
-void WaterManager::addPS(PS* ps, const std::vector<Edge<WaterElement*>>& outgoing, const std::vector<Edge<WaterElement*>>& incoming){
-    waterNetwork.addVertex(ps);
-
-    for (Edge<WaterElement*> edge : outgoing){
-        waterNetwork.addEdge(ps, edge.getDest()->getInfo(), edge.getWeight());
-    }
-
-    for (Edge<WaterElement*> edge : incoming){
-        waterNetwork.addEdge(edge.getOrig()->getInfo(), ps , edge.getWeight());
-    }
-
 }
 
 /**
@@ -704,6 +592,12 @@ std::string WaterManager::citiesAffectedByMaintenance_SpecificPump(std::string i
 
     std::string pumpCode = pumpingStationCodePrefix;
     if ((pos = idCode.find('_')) != std::string::npos){
+
+        if (!std::regex_match(idCode.substr(0,pos+1), std::regex(pumpingStationCodePrefix, std::regex::icase))){
+            oss << "\nNo pumping station with id/code " << idCode << " was found.\n";
+            return oss.str();
+        }
+
         for (size_t i = pos + 1 ; i < idCode.size(); i++){
             pumpCode += idCode[i];
         }
@@ -733,15 +627,12 @@ std::string WaterManager::citiesAffectedByMaintenance_SpecificPump(std::string i
 
     PSVertex->setProcesssing(true); // Disable the vertex.
 
-    // ToDo remove removePS(iter->second, &outgoingEdges, &incomingEdges);
-
     std::string flowAfterRemoval = maximumFlowAllCities();
 
     oss << checkDifferences(flowBeforeRemoval, flowAfterRemoval);
 
     PSVertex->setProcesssing(false); // Disable the vertex.
 
-    // ToDo remove addPS(iter->second, outgoingEdges, incomingEdges);
     return oss.str();
 }
 
@@ -771,7 +662,7 @@ std::string WaterManager::citiesAffectedByMaintenance_AllPumps(){
  * @brief Lists the cities that are in need of water, by checking the actual flow delivered to them
  * @details Time Complexity: O(V * E^2), because of Edmonds-Karp Algorithm
  */
-void WaterManager::listwaterNeeds(){
+void WaterManager::listWaterNeeds(){
     maximumFlowAllCities();  // Run Edmonds-Karp algorithm
 
     for (auto ds : waterCityMap){ // Only check flow for delivery sites
@@ -793,55 +684,6 @@ void WaterManager::listwaterNeeds(){
     }
 }
 
-void WaterManager::dfsAffectedByRemoval(Vertex<WaterElement*>* v, std::vector<WaterElement*> &res){
-    v->setVisited(true);
-    res.push_back(v->getInfo());
-    std::cout << "Pushed back\n";
-    for (Edge<WaterElement*>* e : v->getAdj()) {  //FIXME: keeps crashing
-        auto w = e->getDest();
-        if (!w->isVisited()) {
-            dfsAffectedByRemoval(w, res);
-        }
-    }
-}
-
-
-void WaterManager::updateFlow(Vertex<WaterElement*>* WR){
-    // Run DFS from the Reservoir to be removed
-    std::vector<WaterElement*> affectedSubset;
-    for (auto v : waterNetwork.getVertexSet()) // Set all vertices to unvisited
-        v->setVisited(false);
-    dfsAffectedByRemoval(WR, affectedSubset);
-
-    // DEBUG
-    std::cout << "\nAffected Nodes:\n";
-    for (auto a : affectedSubset){
-        std::cout << a->getCode() << "\n";
-    }
-    std::cout << "\n";
-    //
-
-    for (auto a : affectedSubset){
-        Vertex<WaterElement*>* v = waterNetwork.findVertex(a);
-        if (v == nullptr){
-            std::cout << "Vertex not found\n";
-            return;
-        }
-
-        // Set flow to 0 (only in subgraph)
-        auto* isDS = dynamic_cast<DS*>(v->getInfo());
-        if (isDS){
-            isDS->setCurrentFlow(0.0);
-        }
-        for (Edge<WaterElement*>*& edge : v->getAdj()){
-            edge->setFlow(0);
-        }
-    }
-
-    // Run Edmonds-Karp but just with this subgraph
-    std::cout << maximumFlowAllCities();
-}
-
 // T3.1
 /**
  * @brief Lists the cities that are in need of water, by checking the actual flow delivered to them
@@ -856,6 +698,12 @@ void WaterManager::listCitiesAffectedByReservoirRemoval(std::string idCode) {
 
     std::string wrCode = reservoirCodePrefix;
     if ((pos = idCode.find('_')) != std::string::npos){
+
+        if (!std::regex_match(idCode.substr(0,pos+1), std::regex(reservoirCodePrefix, std::regex::icase))){
+            oss << "\nNo pumping station with id/code " << idCode << " was found.\n";
+            return;
+        }
+
         for (size_t i = pos + 1 ; i < idCode.size(); i++){
             wrCode += idCode[i];
         }
@@ -883,11 +731,9 @@ void WaterManager::listCitiesAffectedByReservoirRemoval(std::string idCode) {
         return;
     }
 
-    // updateFlow(WR); //FIXME: More efficient algorithm
-
     maximumFlowAllCities();  // Get flow before removal
     std::unordered_map<std::string, double> citiesOldFlow;
-    for (auto ds : waterCityMap){
+    for (const auto& ds : waterCityMap){
         citiesOldFlow.insert(std::make_pair(ds.first, ds.second->getCurrentFlow()));
     }
 
@@ -902,7 +748,7 @@ void WaterManager::listCitiesAffectedByReservoirRemoval(std::string idCode) {
 
     maximumFlowAllCities();  // Get flow after removal
 
-    for (auto ds : waterCityMap){ // Only check flow for delivery sites
+    for (const auto& ds : waterCityMap){ // Only check flow for delivery sites
         int receivedFlow = 0;
         WaterElement* ds_to_we = ds.second;
         Vertex<WaterElement*>* v = waterNetwork.findVertex(ds_to_we);
@@ -918,14 +764,6 @@ void WaterManager::listCitiesAffectedByReservoirRemoval(std::string idCode) {
                       << "\n- New flow: " << receivedFlow << "\n\n";
         }
     }
-
-    // -- More efficient algorithm --
-    // When running for the first time, run Edmonds-Karp, else:
-    // 1. Remove water reservoir
-    // 2. DFS (or BFS) from removed water reservoir (to find subgraph with all the nodes it can reach)
-    // 3. In the subgraph: Connect all water reservoirs to a super source and all the delivery sites to a super sink
-    // 4. Reset the flow in the subgraph
-    // 5. Run Edmonds-Karp Algorithm from the super source to the super sink
 }
 
 void WaterManager::resetWaterReservoirs(){
@@ -935,7 +773,7 @@ void WaterManager::resetWaterReservoirs(){
     this->disabledWaterReservoirs.clear();
 }
 
-const std::vector<Vertex<WaterElement*>*> WaterManager::getDisabledWaterReservoirs(){
+std::vector<Vertex<WaterElement*>*> WaterManager::getDisabledWaterReservoirs(){
     return disabledWaterReservoirs;
 }
 
@@ -995,18 +833,23 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
     }
 
     std::string cityCode = cityCodePrefix;
-    if ((pos = idCode.find('_')) != std::string::npos){ // Check if the provided string is a code
+    if ((pos = idCode.find('_')) != std::string::npos){
+
+        if (!std::regex_match(idCode.substr(0,pos+1), std::regex(cityCodePrefix, std::regex::icase))){
+            std::cout << "\nNo pumping station with id/code " << idCode << " was found.\n";
+            return result;
+        }
+
         for (size_t i = pos + 1 ; i < idCode.size(); i++){
             cityCode += idCode[i];
         }
     } else {
-        cityCode += idCode; // Add the possible id to the string prefix.
+        cityCode += idCode;
     }
 
-    if (!std::regex_match(cityCode, std::regex(cityCodeRegex))){ // Check if it matches the regex.
+    if (!std::regex_match(cityCode, std::regex(cityCodeRegex))){
         bool validCity = false;
 
-        // Check if the user has given a city name instead of a code / id.
         for (auto possibleCity : waterCityMap){
             if (possibleCity.second->getCity() == idCode){
                 validCity = true;
@@ -1023,17 +866,14 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
     // Find the target city vertex
     Vertex<WaterElement*>* targetCityVertex = waterNetwork.findVertex(waterCityMap.at(cityCode));
 
-
     // If the target city vertex is not found, return an empty result
     if (targetCityVertex == nullptr) {
         std::cout << "Error: City not found!\n";
         return result;
     }
 
-
-    // Calculate original flows for all cities
+    // Calculate original flow for all cities.
     std::map<DS*,double> originalFlows = auxMaxFlow();
-
 
     for(Vertex<WaterElement*>* we : waterNetwork.getVertexSet()){
         // Loop through all the edges connected to the target city vertex
@@ -1061,16 +901,12 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
                     result[oss.str()].push_back(std::make_pair(affectedCity, deficit));
                 }
             }
-            // Restore the original flow capacity of the pipe
 
+            // Restore the original flow capacity of the pipe
             waterNetwork.addEdge(origin, destination, weight);
             if(bidirectional) waterNetwork.addEdge(destination, origin, weight);
         }
-
-
     }
-
-
     return result;
 }
 
@@ -1091,8 +927,6 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
 
 std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager::CitiesAffectedByPipeRupture() {
     std::map<std::string, std::vector<std::pair<std::string, double>>> result;
-
-
 
     // Calculate original flows for all cities
     std::map<DS*,double> originalFlows = auxMaxFlow();
@@ -1125,13 +959,13 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
             }
 
             // Restore the original flow capacity of the pipe
-
             waterNetwork.addEdge(origin, destination, weight);
             if(bidirectional) waterNetwork.addEdge(destination, origin, weight);
         }
     }
     return result;
 }
+
 /**
  *
  * @brief Saves the pipes in the water network.
@@ -1150,6 +984,7 @@ std::vector<Edge<WaterElement*>> WaterManager::savePipes(){
     }
     return res;
 }
+
 /**
  * @brief Restores the pipes in the water network to their original state.
  * @details This function removes all edges in the water network and then adds the edges from the provided vector.
@@ -1167,7 +1002,6 @@ void WaterManager::restorePipes(std::vector<Edge<WaterElement*>> original){
     for(auto edge : original){
         waterNetwork.addEdge(edge.getOrig()->getInfo(),edge.getDest()->getInfo(),edge.getWeight());
     }
-
 }
 /**
  * @brief Calculates the average capacity of all pipes in the water network.
@@ -1180,7 +1014,6 @@ double WaterManager::avgCapacity() {
     double sumCapacity = 0.0;
     for(auto we : waterNetwork.getVertexSet()){
         for(auto edge : we->getAdj()){
-
             sumCapacity += edge->getWeight();
         }
     }
@@ -1230,7 +1063,7 @@ double WaterManager::variance() {
 
 struct CompareDifference {
     bool operator()(double a, double b) const {
-        return a > b; // Ordem decrescente
+        return a > b; // Decreasing Order
     }
 };
 /**
@@ -1262,7 +1095,6 @@ void WaterManager::balancingAlgorithmSortingDistribution() {
     double initialVariance = variance();
 
     std::multimap<double, Edge<WaterElement*>*, CompareDifference> differenceMap;
-
 
     for(auto we : waterNetwork.getVertexSet()){
         for(auto edge : we->getAdj()){
@@ -1336,14 +1168,11 @@ void WaterManager::balancingAlgorithmNeighborDistribution() {
             double difference = abs(edge->getWeight() - edge->getFlow());
             std::vector<Edge<WaterElement*>*> neighboringPipes;
 
-
-                for (auto adj: edge->getDest()->getAdj()) {
-                    if (abs(adj->getWeight() - adj->getFlow()) < difference) {
-                        neighboringPipes.push_back(adj);
-                    }
+            for (auto adj: edge->getDest()->getAdj()) {
+                if (abs(adj->getWeight() - adj->getFlow()) < difference) {
+                    neighboringPipes.push_back(adj);
                 }
-
-
+            }
 
             for(auto neighbor : neighboringPipes){
                 double thisDifference = abs(neighbor->getWeight() - neighbor->getFlow());
@@ -1370,7 +1199,7 @@ void WaterManager::balancingAlgorithmNeighborDistribution() {
     // Output table header
     std::cout << std::setw(20) << "City" << std::setw(35) << "Max Flow (Before)" << std::setw(25) << "Max Flow (After)"
               << std::endl;
-    for(auto city : waterCityMap) {
+    for(const auto& city : waterCityMap) {
         // Output city data
         std::cout << std::setw(20) << city.second->getCity() << std::setw(20) << initialFlows[city.second] << " m^3/s" << std::setw(20) << finalFlows[city.second] << " m^3/s"
                   << std::endl;
@@ -1420,13 +1249,10 @@ void WaterManager::balancingAlgorithmAverageDistribution(){
     // Output table header
     std::cout << std::setw(20) << "City" << std::setw(35) << "Max Flow (Before)" << std::setw(25) << "Max Flow (After)"
               << std::endl;
-    for(auto city : waterCityMap) {
+    for(const auto& city : waterCityMap) {
         // Output city data
         std::cout << std::setw(20) << city.second->getCity() << std::setw(20) << initialFlows[city.second] << " m^3/s" << std::setw(20) << finalFlows[city.second] << " m^3/s"
                   << std::endl;
     }
     restorePipes(originalEdges);
 }
-
-
-

@@ -81,7 +81,7 @@ int Application::processKey(const std::string& option) {
  */
 std::string Application::showMainMenu() {
     std::string opti;
-    std::cout << "\nSelect an operation you would like to do:\n\n"
+    std::cout << "Select an operation you would like to do:\n\n"
               << "1 - Maximum amount of water that can reach each or a specific city.\n"
               << "2 - Show water needs.\n"
               << "3 - Balance network load.\n"
@@ -90,7 +90,7 @@ std::string Application::showMainMenu() {
               << "6 - List cities affected by pipe rupture.\n"
               << "7 - Exit.\n";
 
-    std::cout << "Input: ";
+    std::cout << "\nInput: ";
     std::cin >> opti;
     std::cout << "\n";
     return opti;
@@ -104,12 +104,12 @@ void Application::showGoBackMenu(int functionNumber, const std::string& function
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::getline(std::cin, a);
     clearScreen();
-    std::cout << "\n\nWhat would you like to do next:\n"
+    std::cout << "What would you like to do next:\n"
               << "1 - Return to main menu.\n"
               << "2 - (again) " << functionName << "\n";
 
     std::string opt;
-    std::cout << "Input: ";
+    std::cout << "\nInput: ";
     std::cin >> opt;
     std::cout << "\n";
 
@@ -119,44 +119,14 @@ void Application::showGoBackMenu(int functionNumber, const std::string& function
         case -1:
             goto L1;
         case 1:
-            // This needs to return to main otherwise when the "new" run method called here returned the program would
-            // still keep on executing...
-            // This way we are replacing the variable in main and still calling the function run in main
-            // the no-no function -> run(-1)
             throw std::invalid_argument("-1");
         case 2:
-            // the no-no function -> run(functionNumber)
             throw std::invalid_argument(std::to_string(functionNumber));
         default:
             std::cout << "\n* Error while parsing option, please input a valid numeric option. *\n";
             goto L1;
     }
 }
-
-/* Some things to keep in mind.
- *
- * If your menu has sub-menus / sub-options they should appear like the main menu
- * You can use a simple cout and cin.
- *
- * Like this:
- * std::cout << "\nHow would you like to search for the target Airport ?\n"
- *             << "1 - Using it's code.\n"
- *             << "2 - Using it's name.\n"
- *             << "3 - Using the cities name (all airports considered).\n"
- *             << "4 - Using coordinates.\n"
- *             << "5 - Go back to main menu\n"
- *             << "Input: ";
- * std::cin >> targetOpt;
- *
- * Then you can make a call to processKey() like:
- *
- * processKey(targetOpt) and it will be converted to an int which can be used in:
- *
- *  a switch case... (use goto in default)
- *
- *  while (true) loop
- *
- * */
 
 /**
  * @brief Helper function to output text to file.
@@ -168,6 +138,7 @@ void Application::outputToFile(std::string header, std::string text){
 
     // Get current time
     std::time_t currentTime = std::time(nullptr);
+
     // Convert the current time to a struct tm
     std::tm* localTime = std::localtime(&currentTime);
 
@@ -181,12 +152,11 @@ void Application::outputToFile(std::string header, std::string text){
 void Application::maxWater(){
 restartMaxWater:
     clearScreen();
-
     std::string targetOpt;
-    std::cout << "\nWhat would you like to do?\n"
+    std::cout << "What would you like to do?\n\n"
               << "1 - See maximum amount of water that can reach all cities.\n"
               << "2 - See maximum amount of water that can reach a specific city.\n"
-              << "Input: ";
+              << "\nInput: ";
     std::cin >> targetOpt;
 
     clearScreen();
@@ -201,14 +171,15 @@ restartMaxWater:
             outputToFile("Exercice T2.1 - Max Flow All Cities", res);
             break;
         case 2:
-            std::cout << "\nPlease specify the city's code or id or city name\n"
+            std::cout << "Please specify the city's code or id or city name\n"
                       << "id example -> [Input: 7]\n"
                       << "code example -> [Input: C_7]\n"
                       << "name example -> [Input: câmara de lobos]\n"
-                      << "Input: ";
+                      << "\nInput: ";
 
-            std::getline(std::cin >> std::ws, cityCode); // Use std::ws to consume whitespaces
+            std::getline(std::cin >> std::ws, cityCode);
             std::cout << "\n";
+            clearScreen();
 
             // Show maximum flow to specified city.
             res = waterManager.maximumFlowSpecificCities(cityCode);
@@ -219,17 +190,14 @@ restartMaxWater:
             goto restartMaxWater;
     }
 
-    showGoBackMenu(1,"Maximum amount of water that can reach each or a specific city."); // At the end make a call to goBackMenu()
+    showGoBackMenu(1,"Maximum amount of water that can reach each or a specific city.");
 }
 
 // T2.2
 void Application::listwaterNeeds(){
     clearScreen();
-
-    waterManager.listwaterNeeds();
-    //Code here
-
-    showGoBackMenu(2, "Show water needs."); // At the end make a call to goBackMenu()
+    waterManager.listWaterNeeds();
+    showGoBackMenu(2, "Show water needs.");
 }
 
 // T2.3
@@ -237,19 +205,17 @@ void Application::balaceNetworkLoad(){
     restartbalanceNetworkLoad:
     clearScreen();
 
-
     std::string targetOpt;
-    std::cout << "\nWhat would you like to do?\n"
+    std::cout << "What would you like to do?\n\n"
               << "1 - Balancing algorithm based of redistribution by sorting of differences of pipe capacity and pipe flow.\n\n"
-              << "2 - Balancing algorithm based of redistribution of differences of pipe capacity and pipe flow between neighboring pipes.\n"
+              << "2 - Balancing algorithm based of redistribution of differences of pipe capacity and pipe flow between neighboring pipes.\n\n"
               << "3 - Balancing algorithm based of all pipes having the average difference of the initial water network.\n\n"
-              << "Input: ";
+              << "\nInput: ";
     std::cin >> targetOpt;
 
     clearScreen();
     switch (processKey(targetOpt)) {
         case 1:
-
             waterManager.balancingAlgorithmSortingDistribution();
             break;
         case 2:
@@ -261,30 +227,16 @@ void Application::balaceNetworkLoad(){
         default:
             goto restartbalanceNetworkLoad;
     }
-
-    showGoBackMenu(3, "Balance network load."); // At the end make a call to goBackMenu()
+    showGoBackMenu(3, "Balance network load.");
 }
 
 // T3.1
 void Application::listCitiesAffectedByReservoirRemoval(){
     clearScreen();
-
-    /* You might be concerned about the network's resiliency. In this context, you should
-    evaluate what happens in terms of the delivery capacity of the network if one specific water reservoir
-    is out of commission. How are the various delivery sites affected? Your system must allow it to take as
-    input the water reservoir that will be out of service and determine which cities are affected by having
-    their water supply not being met. Your interface should thus allow the user to selectively remove one
-    reservoir and list the affected cities whose water supply does not meet its demand. Could you think
-    about an algorithm that only sometimes needs to run the entire Max-Flow algorithm from scratch to
-    evaluate the impact of removing all the reservoirs, one at a time? Discuss this in your presentation.*/
-
-    //1. User input: Water reservoir that will be out of service
-
-
-    std::cout << "\nPlease select which water reservoir you would like to disable?\n"
+    std::cout << "Please select which water reservoir you would like to disable?\n"
               << "id example -> [Input: 1]\n"
               << "code example -> [Input: R_1]\n"
-              << "Input: ";
+              << "\nInput: ";
     std::string idCode;
     std::cin >> idCode;
 
@@ -295,7 +247,7 @@ void Application::listCitiesAffectedByReservoirRemoval(){
     do{
         waterManager.listCitiesAffectedByReservoirRemoval(idCode);
         std::cout << "\nWould you like to disable another water reservoir? (y/N)\n"
-                  << "Input: ";
+                  << "\nInput: ";
         std::cin >> opt;
         clearScreen();
         if (std::regex_match(opt, std::regex("n", std::regex_constants::icase))) break;
@@ -306,28 +258,25 @@ void Application::listCitiesAffectedByReservoirRemoval(){
         std::cout << "\nPlease select which water reservoir you would like to disable?\n"
                   << "id example -> [Input: 1]\n"
                   << "code example -> [Input: R_1]\n"
-                  << "Input: ";
+                  << "\nInput: ";
         std::cin >> idCode;
         std::cout << "\n";
     } while (true);
 
     this->waterManager.resetWaterReservoirs();
 
-    // TODO: Reflect changes in actual file?
-
-    showGoBackMenu(4, "List cities affected by reservoir removal."); // At the end make a call to goBackMenu()
+    showGoBackMenu(4, "List cities affected by reservoir removal.");
 }
 
 // T3.2
 void Application::listCitiesAffectedByMaintenance(){
 restartLCAFBM:
     clearScreen();
-
     std::string targetOpt;
-    std::cout << "\nWhat would you like to do?\n"
+    std::cout << "What would you like to do?\n\n"
               << "1 - Remove a specific pumping station and check the affected delivery sites.\n"
               << "2 - Check for each removed pumping station the affected delivery sites.\n"
-              << "Input: ";
+              << "\nInput: ";
     std::cin >> targetOpt;
 
     clearScreen();
@@ -335,12 +284,12 @@ restartLCAFBM:
     std::string idCode;
     switch (processKey(targetOpt)) {
         case 1:
-
-            std::cout << "\nPlease provide the id/code for the pumping station that is to be removed.\n"
+            std::cout << "Please provide the id/code for the pumping station that is to be removed.\n"
                       << "id example -> [Input: 1]\n"
                       << "code example -> [Input: PS_1]\n"
-                      << "Input: ";
+                      << "\nInput: ";
             std::cin >> idCode;
+            clearScreen();
 
             std::cout << waterManager.citiesAffectedByMaintenance_SpecificPump(idCode);
             break;
@@ -350,8 +299,7 @@ restartLCAFBM:
         default:
             goto restartLCAFBM;
     }
-
-    showGoBackMenu(5, "List cities affected by maintenance."); // At the end make a call to goBackMenu()
+    showGoBackMenu(5, "List cities affected by pump maintenance.");
 }
 
 // T3.3
@@ -359,12 +307,11 @@ void Application::listCitiesAffectedByPipeRupture(){
     restartPipelineFailure:
     clearScreen();
 
-
     std::string targetOpt;
-    std::cout << "\nWhat would you like to do?\n"
+    std::cout << "What would you like to do?\n\n"
               << "1 - See cities affected by a pipe belonging to a specific city.\n"
               << "2 - See global results for pipeline failures.\n"
-              << "Input: ";
+              << "\nInput: ";
     std::cin >> targetOpt;
 
     clearScreen();
@@ -372,16 +319,14 @@ void Application::listCitiesAffectedByPipeRupture(){
     std::map<std::string, std::vector<std::pair<std::string, double>>> result;
     switch (processKey(targetOpt)) {
         case 1:
-
-            std::cout << "\nPlease provide the id/code for the city.\n"
+            std::cout << "Please provide the id/code for the city.\n"
                       << "id example -> [Input: 1]\n"
                       << "code example -> [Input: C_1]\n"
-                      << "Input: ";
+                      << "name example -> [Input: câmara de lobos]\n"
+                      << "\nInput: ";
 
-            std::getline(std::cin >> std::ws, idCode); // Use std::ws to consume whitespaces
+            std::getline(std::cin >> std::ws, idCode);
             std::cout << "\n";
-
-            // Call the function to get cities affected by pipe rupture
             result = waterManager.CitiesAffectedByPipeRupture(idCode);
             break;
         case 2:
@@ -396,13 +341,13 @@ void Application::listCitiesAffectedByPipeRupture(){
         std::cout << "No cities affected by pipe rupture found for the specified city code.\n";
     } else {
         // Iterate over the result map
-        for (auto it = result.begin(); it != result.end(); ++it) {
+        for (auto& it : result) {
             std::cout << "-----------------------------------------------------------------------------------------------------------\n";
-            std::cout << "The removal of pipe" << it->first << " would affect the following cities:\n";
+            std::cout << "The removal of pipe" << it.first << " would affect the following cities:\n";
 
             // Iterate over the affected cities for the current pipe
             int count = 0;
-            for (const auto& city : it->second) {
+            for (const auto& city : it.second) {
                 ++count;
                 std::cout << "  " << count << ". City: " << city.first << ", Decrease in Demand: " << city.second << " m^3/sec\n";
             }
