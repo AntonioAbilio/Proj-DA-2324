@@ -1,7 +1,12 @@
 var searchData=
 [
-  ['listcitiesaffectedbymaintenance_0',['listCitiesAffectedByMaintenance',['../class_application.html#a93a8d8804ad74ef33538d1c193bd858d',1,'Application']]],
-  ['listcitiesaffectedbypiperupture_1',['listCitiesAffectedByPipeRupture',['../class_application.html#a53c43996b3d1c58f496eafa10352287a',1,'Application']]],
-  ['listcitiesaffectedbyreservoirremoval_2',['listcitiesaffectedbyreservoirremoval',['../class_application.html#aa1dc913a7baf452da982591be420fd45',1,'Application::listCitiesAffectedByReservoirRemoval()'],['../class_water_manager.html#afae65cfa7b284c7205fa08b9571be508',1,'WaterManager::listCitiesAffectedByReservoirRemoval()']]],
-  ['listwaterneeds_3',['listwaterneeds',['../class_application.html#a58224f147fa66aa8127f9e660f065f92',1,'Application::listWaterNeeds()'],['../class_water_manager.html#a806b6c071754fed0017ca8028e8a9a52',1,'WaterManager::listWaterNeeds()']]]
+  ['id_0',['id',['../class_water_element.html#a403b8416b502ce4355b7c14fbc4fce97',1,'WaterElement']]],
+  ['implementation_20details_1',['Implementation Details',['../index.html#autotoc_md9',1,'']]],
+  ['incoming_2',['incoming',['../class_vertex.html#a004d1b624d1cd1a7afe49295682e2899',1,'Vertex']]],
+  ['indegree_3',['indegree',['../class_vertex.html#af5db7e2f035a38dcc7c6e1b03117b06a',1,'Vertex']]],
+  ['info_4',['info',['../class_vertex.html#a415d7811eef6cdd992f0dca1f35a49cd',1,'Vertex']]],
+  ['isdag_5',['isDAG',['../class_graph.html#a1ea1512afe5ab878301bc806c2eba9d2',1,'Graph']]],
+  ['isprocessing_6',['isProcessing',['../class_vertex.html#aaa41dfa4ce1a19b4e529cc6cdc23b764',1,'Vertex']]],
+  ['isselected_7',['isSelected',['../class_edge.html#a2d36af60fa3dea16824bec12e5f68c58',1,'Edge']]],
+  ['isvisited_8',['isVisited',['../class_vertex.html#aa2bb17f6ebd98a67f8da1f689b22fadc',1,'Vertex']]]
 ];
