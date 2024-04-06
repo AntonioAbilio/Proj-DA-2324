@@ -1,5 +1,7 @@
 #include "Application.h"
 
+extern bool useMadeira;
+
 /**@brief Main function that gets the app started.*/
 int main() {
 

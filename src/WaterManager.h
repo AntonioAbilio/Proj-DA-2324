@@ -26,7 +26,7 @@
 
 class WaterManager {
 public:
-    void parseData(); // Data Parsing.
+    void parseData(bool useMadeira); // Data Parsing.
     void dataGoBoom(); // Free allocated space.
 
     // Exercise T2.1

@@ -5,11 +5,16 @@
 /**
  * @brief Calls the other data parsing functions
  */
-void WaterManager::parseData() {
+void WaterManager::parseData(bool useMadeira) {
     std::ifstream in;
 
     // Open the file using the provided path.
-    in.open("../inputFiles/MadeiraDataSet/Reservoirs.csv");
+
+    if (useMadeira){
+        in.open("../inputFiles/MadeiraDataSet/Reservoirs.csv");
+    } else {
+        in.open("../inputFiles/LargeDataSet/Reservoirs.csv");
+    }
     if (!in.is_open()) {
         std::cout << "Unable to open Reservoirs.csv.\n";
         return;
@@ -17,7 +22,12 @@ void WaterManager::parseData() {
     processReservoirs(in);
     in.close();
 
-    in.open("../inputFiles/MadeiraDataSet/Stations.csv");
+
+    if (useMadeira){
+        in.open("../inputFiles/MadeiraDataSet/Stations.csv");
+    } else {
+        in.open("../inputFiles/LargeDataSet/Stations.csv");
+    }
     if (!in.is_open()) {
         std::cout << "Unable to open Stations.csv.\n";
         return;
@@ -25,7 +35,11 @@ void WaterManager::parseData() {
     processPumps(in);
     in.close();
 
-    in.open("../inputFiles/MadeiraDataSet/Cities.csv");
+    if (useMadeira){
+        in.open("../inputFiles/MadeiraDataSet/Cities.csv");
+    } else {
+        in.open("../inputFiles/LargeDataSet/Cities.csv");
+    }
     if (!in.is_open()) {
         std::cout << "Unable to open Cities.csv.\n";
         return;
@@ -33,7 +47,11 @@ void WaterManager::parseData() {
     processCities(in);
     in.close();
 
-    in.open("../inputFiles/MadeiraDataSet/Pipes.csv");
+    if (useMadeira){
+        in.open("../inputFiles/MadeiraDataSet/Pipes.csv");
+    } else {
+        in.open("../inputFiles/LargeDataSet/Pipes.csv");
+    }
     if (!in.is_open()) {
         std::cout << "Unable to open Pipes.csv.\n";
         return;

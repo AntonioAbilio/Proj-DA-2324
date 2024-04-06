@@ -13,7 +13,19 @@
 class Application {
 public:
     Application(std::string env) {
-        waterManager.parseData();
+
+        std::string option;
+        std::cout << "Would you like to use the Madeira data set ? (y/N)\n\nInput: ";
+        std::cin >> option;
+
+        if (std::regex_match(option, std::regex("n",std::regex::icase))){
+            waterManager.parseData(false);
+        } else {
+            waterManager.parseData(true);
+        }
+
+        clearScreen();
+
         this->env = env;
     }
 
