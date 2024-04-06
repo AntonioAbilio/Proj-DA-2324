@@ -207,9 +207,9 @@ void Application::balaceNetworkLoad() {
 
     std::string targetOpt;
     std::cout << "What would you like to do?\n\n"
-              << "1 - Balancing algorithm based of redistribution by sorting of differences of pipe capacity and pipe flow.\n\n"
-              << "2 - Balancing algorithm based of redistribution of differences of pipe capacity and pipe flow between neighboring pipes.\n\n"
-              << "3 - Balancing algorithm based of all pipes having the average difference of the initial water network.\n\n"
+              << "1 - Balancing algorithm based of redistribution by sorting of differences of pipe capacity and pipe flow.\n"
+              << "2 - Balancing algorithm based of redistribution of differences of pipe capacity and pipe flow between neighboring pipes.\n"
+              << "3 - Balancing algorithm based of all pipes having the average difference of the initial water network.\n"
               << "\nInput: ";
     std::cin >> targetOpt;
 
