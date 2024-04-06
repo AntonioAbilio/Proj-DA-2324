@@ -1067,7 +1067,7 @@ double WaterManager::variance() {
             sumVariance += std::pow((difference - avg), 2);
         }
     }
-    return sumVariance / static_cast<double>(pipesSize);
+    return std::sqrt(sumVariance / static_cast<double>(pipesSize) + 1);
 }
 
 struct CompareDifference {
