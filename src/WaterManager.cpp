@@ -476,6 +476,20 @@ std::string WaterManager::maximumFlowAllCities() {
     waterNetwork.addVertex(superWaterReservoir);
     waterNetwork.addVertex(superDeliverySite);
 
+    // Calculate the max delivery for the superWaterReservoir.
+    for (const auto& waterReservoir : waterReservoirMap){
+        if (this->waterNetwork.findVertex(waterReservoir.second)->isProcessing())
+            continue;
+        ((WR*)superWaterReservoir)->setMaxDelivery(((WR*)superWaterReservoir)->getMaxDelivery() + waterReservoir.second->getMaxDelivery());
+        waterNetwork.addEdge(superWaterReservoir, waterReservoir.second, waterReservoir.second->getMaxDelivery());
+    }
+
+    // Calculate the demand for the superDeliverySite.
+    for (const auto& city : waterCityMap){
+        ((DS*)superDeliverySite)->setDemand(((DS*)superDeliverySite)->getDemand() + city.second->getDemand());
+        waterNetwork.addEdge(city.second, superDeliverySite, city.second->getDemand());
+    }
+
     // Set flow to 0.
     for (Vertex<WaterElement*>*& vertex : waterNetwork.getVertexSet()){
         auto* isDS = dynamic_cast<DS*>(vertex->getInfo());
@@ -492,20 +506,6 @@ std::string WaterManager::maximumFlowAllCities() {
         for (Edge<WaterElement*>*& edge : vertex->getAdj()){
             edge->setFlow(0);
         }
-    }
-
-    // Calculate the max delivery for the superWaterReservoir.
-    for (const auto& waterReservoir : waterReservoirMap){
-        if (this->waterNetwork.findVertex(waterReservoir.second)->isProcessing())
-            continue;
-        ((WR*)superWaterReservoir)->setMaxDelivery(((WR*)superWaterReservoir)->getMaxDelivery() + waterReservoir.second->getMaxDelivery());
-        waterNetwork.addEdge(superWaterReservoir, waterReservoir.second, waterReservoir.second->getMaxDelivery());
-    }
-
-    // Calculate the demand for the superDeliverySite.
-    for (const auto& city : waterCityMap){
-        ((DS*)superDeliverySite)->setDemand(((DS*)superDeliverySite)->getDemand() + city.second->getDemand());
-        waterNetwork.addEdge(city.second, superDeliverySite, city.second->getDemand());
     }
 
     while (existsAugmentingPath(superWaterReservoir, superDeliverySite)){
@@ -778,15 +778,17 @@ void WaterManager::listwaterNeeds(){
         int receivedFlow = 0;
         WaterElement* ds_to_we = ds.second;
         Vertex<WaterElement*>* v = waterNetwork.findVertex(ds_to_we);
-        if (v == nullptr){  // FIXME
+        if (v == nullptr){
             std::cout << "An error has occurred...\n";
             return;
         }
         for (auto e : v->getIncoming()) receivedFlow += e->getFlow();
         int demand = ds.second->getDemand();
         if (receivedFlow < demand){
-            std::cout << ds.second->getCity() << "(" << ds.first << ") is in need -> demand: "
-                      << demand << ", received flow: " << receivedFlow << std::endl;
+            std::cout << ds.second->getCity() << " (" << ds.first << ") needs more water:"
+                      << "\n- Demand: " << demand
+                      << "\n- Actual flow: " << receivedFlow
+                      << "\n- Deficit: "  << demand - receivedFlow << "\n\n";
         }
     }
 }
@@ -805,7 +807,7 @@ void WaterManager::dfsAffectedByRemoval(Vertex<WaterElement*>* v, std::vector<Wa
 
 
 void WaterManager::updateFlow(Vertex<WaterElement*>* WR){
-    // 1. Run DFS from the Reservoir to be removed
+    // Run DFS from the Reservoir to be removed
     std::vector<WaterElement*> affectedSubset;
     for (auto v : waterNetwork.getVertexSet()) // Set all vertices to unvisited
         v->setVisited(false);
@@ -819,11 +821,25 @@ void WaterManager::updateFlow(Vertex<WaterElement*>* WR){
     std::cout << "\n";
     //
 
-    // 2. Reset the flow in the subgraph found by the DFS
-    //dfsResetFlowByRemoval();  // FIXME
+    for (auto a : affectedSubset){
+        Vertex<WaterElement*>* v = waterNetwork.findVertex(a);
+        if (v == nullptr){
+            std::cout << "Vertex not found\n";
+            return;
+        }
 
-    // 3. Rerun Edomds-Karp but just for that subgraph
-    //maxFlowSubgraph(); // FIXME
+        // Set flow to 0 (only in subgraph)
+        auto* isDS = dynamic_cast<DS*>(v->getInfo());
+        if (isDS){
+            isDS->setCurrentFlow(0.0);
+        }
+        for (Edge<WaterElement*>*& edge : v->getAdj()){
+            edge->setFlow(0);
+        }
+    }
+
+    // Run Edmonds-Karp but just with this subgraph
+    std::cout << maximumFlowAllCities();
 }
 
 // T3.1
@@ -835,7 +851,6 @@ void WaterManager::updateFlow(Vertex<WaterElement*>* WR){
  * @details Time Complexity: O(V * E^2), because of Edmonds-Karp Algorithm
  */
 void WaterManager::listCitiesAffectedByReservoirRemoval(std::string idCode) {
-
     std::ostringstream oss;
     size_t pos;
 
@@ -862,43 +877,55 @@ void WaterManager::listCitiesAffectedByReservoirRemoval(std::string idCode) {
         return;
     }
 
-    // Vertex<WaterElement*>* WR = waterNetwork.findVertex(WRToRemove); //FIXME
-    // updateFlow(WR); //FIXME
+    Vertex<WaterElement*>* waterReservoir = waterNetwork.findVertex(WRToRemove);
+    if (waterReservoir == nullptr){
+        std::cout << "Vertex " << WRToRemove->getCode() << " not found\n";
+        return;
+    }
 
-    //std::vector<Edge<WaterElement*>> outgoingEdges;
-    //std::vector<Edge<WaterElement*>> incomingEdges;
-    //removeWR(WRToRemove, &outgoingEdges, &incomingEdges);
-    //waterReservoirMap.erase(WRToRemove->getCode());
+    // updateFlow(WR); //FIXME: More efficient algorithm
 
-    std::string flowBeforeRemoval = maximumFlowAllCities();
-
-    // Instead of removing the water reservoir let's set isProcessing to True.
-    Vertex<WaterElement*>* waterReservoir = this->waterNetwork.findVertex(WRToRemove);
+    maximumFlowAllCities();  // Get flow before removal
+    std::unordered_map<std::string, double> citiesOldFlow;
+    for (auto ds : waterCityMap){
+        citiesOldFlow.insert(std::make_pair(ds.first, ds.second->getCurrentFlow()));
+    }
 
     if (waterReservoir->isProcessing()){
         std::cout << "\nThe water reservoir with code/id " << wrCode << " has already been disabled.\n";
         return;
     }
 
+    // Instead of removing the water reservoir let's set isProcessing to True.
     waterReservoir->setProcesssing(true);
     this->disabledWaterReservoirs.push_back(waterReservoir);
 
-    std::string flowAfterRemoval = maximumFlowAllCities();
+    maximumFlowAllCities();  // Get flow after removal
 
-    listwaterNeeds(); // listwaterNeeds() already runs Edmonds-Karp Algorithm
+    for (auto ds : waterCityMap){ // Only check flow for delivery sites
+        int receivedFlow = 0;
+        WaterElement* ds_to_we = ds.second;
+        Vertex<WaterElement*>* v = waterNetwork.findVertex(ds_to_we);
+        if (v == nullptr){
+            std::cout << "An error has occurred...\n";
+            return;
+        }
+        for (auto e : v->getIncoming()) receivedFlow += e->getFlow();
+        int demand = ds.second->getDemand();
+        if (receivedFlow < demand){
+            std::cout << ds.second->getCity() << " (" << ds.first << ") needs more water:"
+                      << "\n- Old flow: " << citiesOldFlow[ds.first]
+                      << "\n- New flow: " << receivedFlow << "\n\n";
+        }
+    }
 
-    // Insert WR again after temporary removal (if option selected)
-    /*if (!remove){
-        this->waterReservoirMap[WRToRemove->getCode()] = WRToRemove;
-        addWR(WRToRemove, outgoingEdges, incomingEdges);
-    }*/
-
-    // Algorithm to only run complete Edmonds-Karp sometimes:
-    // 1. Run DFS from the Reservoir to be removed
-    // 2. Reset the flow in the subgraph found by the DFS
-    // 3. Rerun Edomds-Karp but just for that subgraph
-
-    // TODO: Add option to reset the graph (to main menu)
+    // -- More efficient algorithm --
+    // When running for the first time, run Edmonds-Karp, else:
+    // 1. Remove water reservoir
+    // 2. DFS (or BFS) from removed water reservoir (to find subgraph with all the nodes it can reach)
+    // 3. In the subgraph: Connect all water reservoirs to a super source and all the delivery sites to a super sink
+    // 4. Reset the flow in the subgraph
+    // 5. Run Edmonds-Karp Algorithm from the super source to the super sink
 }
 
 void WaterManager::resetWaterReservoirs(){
