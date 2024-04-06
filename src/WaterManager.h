@@ -40,7 +40,7 @@ public:
     std::string maximumFlowAllCities();
     std::string maximumFlowSpecificCities(std::string cityCode);
     //3.3
-    std::map<std::string, std::vector<std::pair<std::string, double>>> CitiesAffectedByPipeRupture(std::string &cityCode);
+    std::map<std::string, std::vector<std::pair<std::string, double>>> CitiesAffectedByPipeRupture(std::string &idCode);
     std::map<std::string, std::vector<std::pair<std::string, double>>> CitiesAffectedByPipeRupture();
     //2.3
     double avgDifference(double &maxDifference);
@@ -53,20 +53,22 @@ public:
     void balancingAlgorithmAverageDistribution();
 
     // Exercise T3.1
-    void removeWR(WR* wr, std::vector<Edge<WaterElement*>>* outgoing, std::vector<Edge<WaterElement*>>* incoming);
-    void addWR(WR* wr, const std::vector<Edge<WaterElement*>>& outgoing, const std::vector<Edge<WaterElement*>>& incoming);
-    void listCitiesAffectedByReservoirRemoval(std::string wr_code, bool remove);
+    void listCitiesAffectedByReservoirRemoval(std::string wr_code);
+    void resetWaterReservoirs();
 
     // Exercice T3.2
-    void removePS(PS* ps, std::vector<Edge<WaterElement*>>* outgoing, std::vector<Edge<WaterElement*>>* incoming);
-    void addPS(PS* ps, const std::vector<Edge<WaterElement*>>& outgoing, const std::vector<Edge<WaterElement*>>& incoming);
+    void removePS(PS* ps, std::vector<Edge<WaterElement*>>* outgoing, std::vector<Edge<WaterElement*>>* incoming); // ToDo remove
+    void addPS(PS* ps, const std::vector<Edge<WaterElement*>>& outgoing, const std::vector<Edge<WaterElement*>>& incoming); // ToDo remove
     std::string citiesAffectedByMaintenance_SpecificPump(std::string idCode);
     std::string citiesAffectedByMaintenance_AllPumps();
 
     void dfsAffectedByRemoval(Vertex<WaterElement*>* v, std::vector<WaterElement*> &res);
     void updateFlow(Vertex<WaterElement*>* WR );
+    const std::vector<Vertex<WaterElement*>*> getDisabledWaterReservoirs();
 
 private:
+
+    std::vector<Vertex<WaterElement*>*> disabledWaterReservoirs;
 
     Graph<WaterElement*> waterNetwork;
     int pipesSize = 0;

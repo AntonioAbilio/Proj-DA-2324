@@ -86,7 +86,7 @@ std::string Application::showMainMenu() {
               << "2 - Show water needs.\n"
               << "3 - Balance network load.\n"
               << "4 - List cities affected by reservoir removal.\n"
-              << "5 - List cities affected by pipe maintenance.\n"
+              << "5 - List cities affected by pump maintenance.\n"
               << "6 - List cities affected by pipe rupture.\n"
               << "7 - Exit.\n";
 
@@ -281,19 +281,37 @@ void Application::listCitiesAffectedByReservoirRemoval(){
     //1. User input: Water reservoir that will be out of service
 
 
-    std::cout << "Which water reservoir would you like to remove?\n";
-    // TODO: Different option for choosing water reservoir (not just using code)
-    std::string wr_code;
-    std::cout << "Input (code): ";
-    std::cin >> wr_code;
-    std::string remove_str;
-    bool remove = false;
+    std::cout << "\nPlease select which water reservoir you would like to disable?\n"
+              << "id example -> [Input: 1]\n"
+              << "code example -> [Input: R_1]\n"
+              << "Input: ";
+    std::string idCode;
+    std::cin >> idCode;
+
+    std::string opt = "y";
+
     clearScreen();
-    std::cout << "Would you like to remove it permanently? (Y/n)\n";
-    std::cin >> remove_str;
-    if (remove_str == "Y" || remove_str == "y") remove = true;
-    clearScreen();
-    waterManager.listCitiesAffectedByReservoirRemoval(wr_code, remove);
+
+    do{
+        waterManager.listCitiesAffectedByReservoirRemoval(idCode);
+        std::cout << "\nWould you like to disable another water reservoir? (y/N)\n"
+                  << "Input: ";
+        std::cin >> opt;
+        clearScreen();
+        if (std::regex_match(opt, std::regex("n", std::regex_constants::icase))) break;
+        if (!waterManager.getDisabledWaterReservoirs().empty()) std::cout << "\nThe current disabled water reservoirs are:\n";
+        for (Vertex<WaterElement*>* vWE : waterManager.getDisabledWaterReservoirs()){
+            std::cout << vWE->getInfo()->getId() << std::endl;
+        }
+        std::cout << "\nPlease select which water reservoir you would like to disable?\n"
+                  << "id example -> [Input: 1]\n"
+                  << "code example -> [Input: R_1]\n"
+                  << "Input: ";
+        std::cin >> idCode;
+        std::cout << "\n";
+    } while (true);
+
+    this->waterManager.resetWaterReservoirs();
 
     // TODO: Reflect changes in actual file?
 
@@ -350,17 +368,21 @@ void Application::listCitiesAffectedByPipeRupture(){
     std::cin >> targetOpt;
 
     clearScreen();
-    std::string cityCode;
+    std::string idCode;
     std::map<std::string, std::vector<std::pair<std::string, double>>> result;
     switch (processKey(targetOpt)) {
         case 1:
 
-            std::cout << "\nPlease specify the city's code: ";
-            std::getline(std::cin >> std::ws, cityCode); // Use std::ws to consume whitespaces
+            std::cout << "\nPlease provide the id/code for the city.\n"
+                      << "id example -> [Input: 1]\n"
+                      << "code example -> [Input: C_1]\n"
+                      << "Input: ";
+
+            std::getline(std::cin >> std::ws, idCode); // Use std::ws to consume whitespaces
             std::cout << "\n";
 
             // Call the function to get cities affected by pipe rupture
-            result = waterManager.CitiesAffectedByPipeRupture(cityCode);
+            result = waterManager.CitiesAffectedByPipeRupture(idCode);
             break;
         case 2:
             result = waterManager.CitiesAffectedByPipeRupture();
@@ -376,7 +398,7 @@ void Application::listCitiesAffectedByPipeRupture(){
         // Iterate over the result map
         for (auto it = result.begin(); it != result.end(); ++it) {
             std::cout << "-----------------------------------------------------------------------------------------------------------\n";
-            std::cout << "The removal of pipe " << it->first << " would affect the following cities:\n";
+            std::cout << "The removal of pipe" << it->first << " would affect the following cities:\n";
 
             // Iterate over the affected cities for the current pipe
             int count = 0;
