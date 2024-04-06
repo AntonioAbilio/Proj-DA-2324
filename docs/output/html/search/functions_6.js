@@ -1,4 +1,27 @@
 var searchData=
 [
-  ['processkey_0',['processKey',['../class_application.html#a6889e8e33946b8931ccff6f419630331',1,'Application']]]
+  ['getadj_0',['getAdj',['../class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a',1,'Vertex']]],
+  ['getcity_1',['getCity',['../class_d_s.html#ab5c1b7dd7f775ab90a8fd40dca1e7af1',1,'DS']]],
+  ['getcode_2',['getCode',['../class_water_element.html#aa1735e48b13bea097623f022ab455bb1',1,'WaterElement']]],
+  ['getcurrentflow_3',['getCurrentFlow',['../class_d_s.html#a0b2cb1baf58fabe8dc7008c0b592f231',1,'DS']]],
+  ['getdemand_4',['getDemand',['../class_d_s.html#af2d8f2787ea84e6aa0e2dbd6e61e4799',1,'DS']]],
+  ['getdest_5',['getDest',['../class_edge.html#a9a2de066dff8513dd788d553fc1d0c81',1,'Edge']]],
+  ['getdisabledwaterreservoirs_6',['getDisabledWaterReservoirs',['../class_water_manager.html#a6147912b5159385f43d124a70a1aa15c',1,'WaterManager']]],
+  ['getdist_7',['getDist',['../class_vertex.html#a01e90e3cdb2ee11dd3b1d593c8207382',1,'Vertex']]],
+  ['getflow_8',['getFlow',['../class_edge.html#a75458cfc838ca5aee5c34cb9f03b5647',1,'Edge']]],
+  ['getid_9',['getId',['../class_water_element.html#a49225a7e62899f8bfdbcf74a8fba8fad',1,'WaterElement']]],
+  ['getincoming_10',['getIncoming',['../class_vertex.html#a361d7d0459d37aead6401d6af9f81f0a',1,'Vertex']]],
+  ['getindegree_11',['getIndegree',['../class_vertex.html#a25642875df28caa2195bad5a9ae44683',1,'Vertex']]],
+  ['getinfo_12',['getInfo',['../class_vertex.html#a48eae2f7af2362634adab02b7b2dbec6',1,'Vertex']]],
+  ['getmaxdelivery_13',['getMaxDelivery',['../class_w_r.html#a54ec6c5d72f24ee7a52773027c9541df',1,'WR']]],
+  ['getmunicipality_14',['getMunicipality',['../class_w_r.html#a9abe8624b93664a8d5ad64da4ae373b3',1,'WR']]],
+  ['getnumvertex_15',['getNumVertex',['../class_graph.html#a0853eac15cdf0f06d63f4b8a7820ec71',1,'Graph']]],
+  ['getorig_16',['getOrig',['../class_edge.html#a40fc1470c5339203defca19b67c2535b',1,'Edge']]],
+  ['getpath_17',['getPath',['../class_vertex.html#a15e4ff95fba2bb5970a6551137ceb950',1,'Vertex']]],
+  ['getpopulation_18',['getPopulation',['../class_d_s.html#ac954b213ba6e5bc51232097c03011e35',1,'DS']]],
+  ['getreservoir_19',['getReservoir',['../class_w_r.html#a7c3e0e5218a5630680640949f199a274',1,'WR']]],
+  ['getreverse_20',['getReverse',['../class_edge.html#af0a900f3006e47b9f363df7429298eeb',1,'Edge']]],
+  ['gettotvertex_21',['getTotVertex',['../_water_manager_8cpp.html#a271777165c5a9b566ae42fe08df1f35a',1,'WaterManager.cpp']]],
+  ['getvertexset_22',['getVertexSet',['../class_graph.html#a41624b03fcb6bd29e4df574a1ec58541',1,'Graph']]],
+  ['getweight_23',['getWeight',['../class_edge.html#a3df378e283d6c8be5be4170ac8d7f4e8',1,'Edge']]]
 ];

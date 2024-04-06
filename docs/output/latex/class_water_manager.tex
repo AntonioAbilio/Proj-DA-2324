@@ -4,8 +4,609 @@
 
 {\ttfamily \#include $<$Water\+Manager.\+h$>$}
 
-
-
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
 \item 
-/\+Users/antonioabilio/\+Desktop/proj-\/da-\/1/src/\mbox{\hyperlink{_water_manager_8h}{Water\+Manager.\+h}}\end{DoxyCompactItemize}
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_water_manager_aaa9700fcf9eee856160cbe1d60cc27c2}{parse\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Calls the other data parsing functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_water_manager_a56c628d42df5d8c6255829e3c3c18ab6}{data\+Go\+Boom}} ()
+\begin{DoxyCompactList}\small\item\em Frees the data on program exit. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{bool}} \mbox{\hyperlink{class_water_manager_aa3f6e14ac6465f44cae94802d94df87e}{exists\+Augmenting\+Path}} (\mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{class_edge}{source}}, \mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{class_edge}{target}})
+\begin{DoxyCompactList}\small\item\em Helper function. Checks if there exists an augmenting path. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_water_manager_a652730f4f2d27ae74672ef040bf202e7}{find\+Min\+Residual\+Along\+Path}} (\mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{class_edge}{source}}, \mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{class_edge}{target}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_water_manager_ac45a8cde8e3f357f7a1b12718cbfc0fd}{augment\+Flow\+Along\+Path}} (\mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{class_edge}{source}}, \mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{class_edge}{target}}, \mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_edge}{f}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_water_manager_a4133edb564a208e448efad6cf5a39c45}{maximum\+Flow\+All\+Cities}} ()
+\begin{DoxyCompactList}\small\item\em Maximum flow across all cities. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_water_manager_a04b7445c7c6f82657c0f51bea6bd9657}{maximum\+Flow\+Specific\+Cities}} (std\+::string \mbox{\hyperlink{class_edge}{city\+Code}})
+\begin{DoxyCompactList}\small\item\em Maximum flow to a specific city. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_water_manager_a806b6c071754fed0017ca8028e8a9a52}{list\+Water\+Needs}} ()
+\begin{DoxyCompactList}\small\item\em Lists the cities that are in need of water, by checking the actual flow delivered to them. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_water_manager_a79fc33012a9a335988b4b08047354dc1}{avg\+Difference}} (\mbox{\hyperlink{class_edge}{double}} \&\mbox{\hyperlink{class_edge}{max\+Difference}})
+\begin{DoxyCompactList}\small\item\em Calculates the average difference between the capacity and flow of each pipe in the water network. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_water_manager_afab581794aee341c700af72ea76ea12a}{avg\+Capacity}} ()
+\begin{DoxyCompactList}\small\item\em Calculates the average capacity of all pipes in the water network. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_water_manager_a15bf7824290f17b131598a4ffd6f518e}{variance}} ()
+\begin{DoxyCompactList}\small\item\em Calculates the variance of the differences between the capacity and flow of each pipe in the water network. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_water_manager_ab95f47ece61b5ad276375c1ac6c412d3}{restore\+Pipes}} (std\+::vector$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*} $>$ $>$ \mbox{\hyperlink{class_edge}{original}})
+\begin{DoxyCompactList}\small\item\em Restores the pipes in the water network to their original state. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*} $>$ $>$ \mbox{\hyperlink{class_water_manager_ab0fc19b31c3d82963a0339af6a0283b7}{save\+Pipes}} ()
+\begin{DoxyCompactList}\small\item\em Saves the pipes in the water network. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_water_manager_a695d101251689b2094f6eba98ac5c992}{balancing\+Algorithm\+Neighbor\+Distribution}} ()
+\begin{DoxyCompactList}\small\item\em Performs a balancing algorithm using neighbor distribution technique. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_water_manager_a33909671a5b20807977dd639384e4c0e}{balancing\+Algorithm\+Sorting\+Distribution}} ()
+\begin{DoxyCompactList}\small\item\em Performs a balancing algorithm using sorting distribution technique. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_water_manager_a2790c6e0f65f54df587ec8d8a0887978}{balancing\+Algorithm\+Average\+Distribution}} ()
+\begin{DoxyCompactList}\small\item\em Performs a balancing algorithm using average distribution technique. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_water_manager_afae65cfa7b284c7205fa08b9571be508}{list\+Cities\+Affected\+By\+Reservoir\+Removal}} (std\+::string \mbox{\hyperlink{class_edge}{wr\+\_\+code}})
+\begin{DoxyCompactList}\small\item\em Lists the cities that are in need of water, by checking the actual flow delivered to them. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_water_manager_a2f6bdd5e35852da625e89022f7bc602f}{reset\+Water\+Reservoirs}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_water_manager_a6147912b5159385f43d124a70a1aa15c}{get\+Disabled\+Water\+Reservoirs}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_water_manager_a35645a5a5344d1eb8ad3f3de7ed8bbd7}{cities\+Affected\+By\+Maintenance\+\_\+\+Specific\+Pump}} (std\+::string \mbox{\hyperlink{class_edge}{id\+Code}})
+\begin{DoxyCompactList}\small\item\em This function aids in checking which cities are affected if a given pump is taken offline. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_water_manager_a470c6c5322d671efa416905b6081ddb9}{cities\+Affected\+By\+Maintenance\+\_\+\+All\+Pumps}} ()
+\begin{DoxyCompactList}\small\item\em This function aids in checking which cities are affected if each one of the pumps is taken offline. \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, std\+::vector$<$ std\+::pair$<$ std\+::string, \mbox{\hyperlink{class_edge}{double}} $>$ $>$ $>$ \mbox{\hyperlink{class_water_manager_a59f141cec23b9a8831aecd3f294a98a1}{Cities\+Affected\+By\+Pipe\+Rupture}} (std\+::string \&\mbox{\hyperlink{class_edge}{id\+Code}})
+\begin{DoxyCompactList}\small\item\em Determine the cities affected by pipe ruptures based on a given city code. \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, std\+::vector$<$ std\+::pair$<$ std\+::string, \mbox{\hyperlink{class_edge}{double}} $>$ $>$ $>$ \mbox{\hyperlink{class_water_manager_aa9a4a3c8bb64de51510103f5ac96e28b}{Cities\+Affected\+By\+Pipe\+Rupture}} ()
+\begin{DoxyCompactList}\small\item\em Determine the cities affected by pipe ruptures. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_water_manager_ae23330e9c22733ab2eaab492cf954b8f}{process\+Reservoirs}} (std\+::ifstream \&\mbox{\hyperlink{class_edge}{in}})
+\begin{DoxyCompactList}\small\item\em Data parsing for reservoirs. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_water_manager_a7de1d96f168bc1b810f1f2f5ef8f2602}{process\+Pumps}} (std\+::ifstream \&\mbox{\hyperlink{class_edge}{in}})
+\begin{DoxyCompactList}\small\item\em Data parsing for pumps. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_water_manager_ab0d8cca236202fa41974c9b33745a87a}{process\+Cities}} (std\+::ifstream \&\mbox{\hyperlink{class_edge}{in}})
+\begin{DoxyCompactList}\small\item\em Data parsing for cities / delivery\+Sites. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_water_manager_a7e0c6a003c2addf7c033949f39d3b296}{process\+Pipes}} (std\+::ifstream \&\mbox{\hyperlink{class_edge}{in}})
+\begin{DoxyCompactList}\small\item\em Data parsing for pipes. \end{DoxyCompactList}\item 
+std\+::map$<$ \mbox{\hyperlink{class_d_s}{DS}} \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{class_edge}{double}} $>$ \mbox{\hyperlink{class_water_manager_aaa9690dc8666eced0bd06eb9fe9b57e6}{aux\+Max\+Flow}} ()
+\begin{DoxyCompactList}\small\item\em Helper function to calculate maximum flow. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_water_manager_a76014901eff8815f6f200f2fd8190e4b}{water\+Network}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{class_w_r}{WR}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_water_manager_ae40a8b7c51315d3956d703f1236abeca}{water\+Reservoir\+Map}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{class_p_s}{PS}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_water_manager_a25742d9e3883904749e8cff79e30241e}{water\+Pump\+Map}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{class_d_s}{DS}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_water_manager_aad2a001a19e24a0f9c526617b9ff94a2}{water\+City\+Map}}
+\item 
+\mbox{\hyperlink{class_edge}{int}} \mbox{\hyperlink{class_water_manager_a986a8183273914fa1c2c25d5c9abd28b}{pipes\+Size}} = 0
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_water_manager_a402e09e6caceef5923723d7ff55f6c6b}{disabled\+Water\+Reservoirs}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_water_manager_ac45a8cde8e3f357f7a1b12718cbfc0fd}\label{class_water_manager_ac45a8cde8e3f357f7a1b12718cbfc0fd} 
+\index{WaterManager@{WaterManager}!augmentFlowAlongPath@{augmentFlowAlongPath}}
+\index{augmentFlowAlongPath@{augmentFlowAlongPath}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{augmentFlowAlongPath()}{augmentFlowAlongPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Water\+Manager\+::augment\+Flow\+Along\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*}\&}]{source,  }\item[{\mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*}\&}]{target,  }\item[{\mbox{\hyperlink{class_edge}{double}}}]{min\+Flow }\end{DoxyParamCaption})}
+
+
+
+Helper function. 
+
+Beginning from the target vertex we are going to follow the previously saved path
+
+and add \mbox{[}In case the path belongs to the normal graph\mbox{]} or subtract
+
+\mbox{[}In case we have found a path in the residual graph\mbox{]} the minimum residual capacity.
+
+The time complexity for this function is O(\+V). This is because in the worst case we
+
+need to go trough V vertexes (from the target to the source node).
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & -\/ This is the ending node. \\
+\hline
+{\em target} & -\/ This is the starting node. \\
+\hline
+{\em min\+Flow} & -\/ Minimum residual capacity. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_water_manager_aaa9690dc8666eced0bd06eb9fe9b57e6}\label{class_water_manager_aaa9690dc8666eced0bd06eb9fe9b57e6} 
+\index{WaterManager@{WaterManager}!auxMaxFlow@{auxMaxFlow}}
+\index{auxMaxFlow@{auxMaxFlow}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{auxMaxFlow()}{auxMaxFlow()}}
+{\footnotesize\ttfamily std\+::map$<$ \mbox{\hyperlink{class_d_s}{DS}} \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{class_edge}{double}} $>$ Water\+Manager\+::aux\+Max\+Flow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Helper function to calculate maximum flow. 
+
+This function calls the maximum\+Flow\+All\+Cities function (Edmond\textquotesingle{}s Karp) and calculates the updated maximum flow of each city, storing it into a map of delivery sites as keys and the respective flow value.
+
+Time Complexity\+: O(VE²), where V is the number of water elements in the system and E is the number of pipes.
+
+\begin{DoxyReturn}{Returns}
+A map containing the delivery sites as keys and the respective updated maximum flow values. 
+\end{DoxyReturn}
+\Hypertarget{class_water_manager_afab581794aee341c700af72ea76ea12a}\label{class_water_manager_afab581794aee341c700af72ea76ea12a} 
+\index{WaterManager@{WaterManager}!avgCapacity@{avgCapacity}}
+\index{avgCapacity@{avgCapacity}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{avgCapacity()}{avgCapacity()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{double}} Water\+Manager\+::avg\+Capacity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Calculates the average capacity of all pipes in the water network. 
+
+This function iterates over all edges in the water network and computes the sum of their weights, representing their capacity.
+
+It then divides the sum of capacities by the total number of pipes to obtain the average capacity.
+
+The time complexity of this function is O(V + E), where V is the number of vertices and E is the number of edges in the water network. \begin{DoxyReturn}{Returns}
+The average capacity of all pipes in the water network. 
+\end{DoxyReturn}
+\Hypertarget{class_water_manager_a79fc33012a9a335988b4b08047354dc1}\label{class_water_manager_a79fc33012a9a335988b4b08047354dc1} 
+\index{WaterManager@{WaterManager}!avgDifference@{avgDifference}}
+\index{avgDifference@{avgDifference}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{avgDifference()}{avgDifference()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{double}} Water\+Manager\+::avg\+Difference (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{double}} \&}]{max\+Difference }\end{DoxyParamCaption})}
+
+
+
+Calculates the average difference between the capacity and flow of each pipe in the water network. 
+
+This function iterates over all edges in the water network and computes the absolute difference between their capacity and flow.
+
+Additionally, it updates the maximum difference found during the iteration.
+
+The time complexity of this function is O(V + E), where V is the number of vertices and E is the number of edges in the water network.
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+Difference} & Reference to a variable that will store the maximum difference found during the iteration. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The average difference between the capacity and flow of each pipe. 
+\end{DoxyReturn}
+\Hypertarget{class_water_manager_a2790c6e0f65f54df587ec8d8a0887978}\label{class_water_manager_a2790c6e0f65f54df587ec8d8a0887978} 
+\index{WaterManager@{WaterManager}!balancingAlgorithmAverageDistribution@{balancingAlgorithmAverageDistribution}}
+\index{balancingAlgorithmAverageDistribution@{balancingAlgorithmAverageDistribution}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{balancingAlgorithmAverageDistribution()}{balancingAlgorithmAverageDistribution()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Water\+Manager\+::balancing\+Algorithm\+Average\+Distribution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Performs a balancing algorithm using average distribution technique. 
+
+This method balances the flow across the network by setting the weight of each pipe to the average capacity of all pipes.
+
+It saves the original pipe configuration, computes initial metrics such as max difference, average difference, and variance, then sets the weight of each pipe to the average capacity.
+
+After setting the weights, it computes final metrics and displays the changes in max difference, average difference, and variance.
+
+Additionally, it displays the changes in maximum flow for each city before and after the balancing process.
+
+The method then restores the original pipe configuration.
+
+It has time complexity equal to the maximum\+Flow\+All\+Cities function, since it uses it twice.
+
+(
+
+Time complexity is O(X + Y + Z).
+
+X -\/ Time complexity related to the addition of the super\+Water\+Reservoir and the super\+Delivery\+Site. X = V
+
+Y -\/ The for loops that set the flow of edges and the current\+Flow of vertexes to zero. Y = VE
+
+Z -\/ Edmonds-\/\+Karp Algorithm for Max Flow. Z = VE\texorpdfstring{$^\wedge$}{\string^}2
+
+) \Hypertarget{class_water_manager_a695d101251689b2094f6eba98ac5c992}\label{class_water_manager_a695d101251689b2094f6eba98ac5c992} 
+\index{WaterManager@{WaterManager}!balancingAlgorithmNeighborDistribution@{balancingAlgorithmNeighborDistribution}}
+\index{balancingAlgorithmNeighborDistribution@{balancingAlgorithmNeighborDistribution}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{balancingAlgorithmNeighborDistribution()}{balancingAlgorithmNeighborDistribution()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Water\+Manager\+::balancing\+Algorithm\+Neighbor\+Distribution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Performs a balancing algorithm using neighbor distribution technique. 
+
+This method balances the flow across the network by redistributing flow between neighboring pipes based on neighbor distribution technique.
+
+Access the neighbouring edges of a vertex and checks if the difference between capacity and flow is lower than its own, if it is, saves the neighbor edge and computes a redistribution function in order to balance.
+
+It saves the original pipe configuration, computes initial metrics such as max difference, average difference, and variance, then iteratively redistributes flow between neighboring pipes.
+
+After the redistribution, it computes final metrics and displays the changes in max difference, average difference, and variance.
+
+Additionally, it displays the changes in maximum flow for each city before and after the balancing process.
+
+The method then restores the original pipe configuration.
+
+It has time complexity equal to the maximum\+Flow\+All\+Cities function, since it uses it twice.
+
+(
+
+Time complexity is O(X + Y + Z).
+
+X -\/ Time complexity related to the addition of the super\+Water\+Reservoir and the super\+Delivery\+Site. X = V
+
+Y -\/ The for loops that set the flow of edges and the current\+Flow of vertexes to zero. Y = VE
+
+Z -\/ Edmonds-\/\+Karp Algorithm for Max Flow. Z = VE\texorpdfstring{$^\wedge$}{\string^}2
+
+) \Hypertarget{class_water_manager_a33909671a5b20807977dd639384e4c0e}\label{class_water_manager_a33909671a5b20807977dd639384e4c0e} 
+\index{WaterManager@{WaterManager}!balancingAlgorithmSortingDistribution@{balancingAlgorithmSortingDistribution}}
+\index{balancingAlgorithmSortingDistribution@{balancingAlgorithmSortingDistribution}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{balancingAlgorithmSortingDistribution()}{balancingAlgorithmSortingDistribution()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Water\+Manager\+::balancing\+Algorithm\+Sorting\+Distribution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Performs a balancing algorithm using sorting distribution technique. 
+
+This method balances the flow across the network by redistributing flow between pipes based on sorting distribution technique.
+
+It saves the original pipe configuration, computes initial metrics such as max difference, average difference
+
+Computes the difference between capacity and flow for each pipe and stores this value into a multimap of descending order.
+
+It iterates through the map (size/2 times), sending the overflow difference of the highest to the lowest. Using a sequential and a reverse iterator.
+
+After the redistribution, it computes final metrics and displays the changes in max difference, average difference, and variance.
+
+Additionally, it displays the changes in maximum flow for each city before and after the balancing process.
+
+It has time complexity equal to the maximum\+Flow\+All\+Cities function, since it uses it twice.
+
+(
+
+Time complexity is O(X + Y + Z).
+
+X -\/ Time complexity related to the addition of the super\+Water\+Reservoir and the super\+Delivery\+Site. X = V
+
+Y -\/ The for loops that set the flow of edges and the current\+Flow of vertexes to zero. Y = VE
+
+Z -\/ Edmonds-\/\+Karp Algorithm for Max Flow. Z = VE\texorpdfstring{$^\wedge$}{\string^}2
+
+)
+
+The method then restores the original pipe configuration. \Hypertarget{class_water_manager_a470c6c5322d671efa416905b6081ddb9}\label{class_water_manager_a470c6c5322d671efa416905b6081ddb9} 
+\index{WaterManager@{WaterManager}!citiesAffectedByMaintenance\_AllPumps@{citiesAffectedByMaintenance\_AllPumps}}
+\index{citiesAffectedByMaintenance\_AllPumps@{citiesAffectedByMaintenance\_AllPumps}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{citiesAffectedByMaintenance\_AllPumps()}{citiesAffectedByMaintenance\_AllPumps()}}
+{\footnotesize\ttfamily std\+::string Water\+Manager\+::cities\+Affected\+By\+Maintenance\+\_\+\+All\+Pumps (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function aids in checking which cities are affected if each one of the pumps is taken offline. 
+
+This function uses the previous function \doxylink{class_water_manager_a35645a5a5344d1eb8ad3f3de7ed8bbd7}{cities\+Affected\+By\+Maintenance\+\_\+\+Specific\+Pump()}.
+
+The Time Complexity for this function is O(\+XY) = O(\+VE\texorpdfstring{$^\wedge$}{\string^}2) where X is in the worst case the number of total amount of pumps that are in the graph and Y is the time complexity for the previously used function, O(\+VE\texorpdfstring{$^\wedge$}{\string^}2). \Hypertarget{class_water_manager_a35645a5a5344d1eb8ad3f3de7ed8bbd7}\label{class_water_manager_a35645a5a5344d1eb8ad3f3de7ed8bbd7} 
+\index{WaterManager@{WaterManager}!citiesAffectedByMaintenance\_SpecificPump@{citiesAffectedByMaintenance\_SpecificPump}}
+\index{citiesAffectedByMaintenance\_SpecificPump@{citiesAffectedByMaintenance\_SpecificPump}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{citiesAffectedByMaintenance\_SpecificPump()}{citiesAffectedByMaintenance\_SpecificPump()}}
+{\footnotesize\ttfamily std\+::string Water\+Manager\+::cities\+Affected\+By\+Maintenance\+\_\+\+Specific\+Pump (\begin{DoxyParamCaption}\item[{std\+::string}]{id\+Code }\end{DoxyParamCaption})}
+
+
+
+This function aids in checking which cities are affected if a given pump is taken offline. 
+
+It first executes the algorithm to find the maximum flow to all cities, removes the specified pump if it is found, executes the max flow algorithm again and it compares the results.
+
+The Time Complexity for this function is (X + Y) where X is the time complexity of the max flow algorithm which is O(V + VE + VE\texorpdfstring{$^\wedge$}{\string^}2) and Y is the time complexity of the functions remove\+PS() and add\+PS() which is O(n + E\texorpdfstring{$^\wedge$}{\string^}2) + O(\+E). \Hypertarget{class_water_manager_aa9a4a3c8bb64de51510103f5ac96e28b}\label{class_water_manager_aa9a4a3c8bb64de51510103f5ac96e28b} 
+\index{WaterManager@{WaterManager}!CitiesAffectedByPipeRupture@{CitiesAffectedByPipeRupture}}
+\index{CitiesAffectedByPipeRupture@{CitiesAffectedByPipeRupture}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{CitiesAffectedByPipeRupture()}{CitiesAffectedByPipeRupture()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, std\+::vector$<$ std\+::pair$<$ std\+::string, \mbox{\hyperlink{class_edge}{double}} $>$ $>$ $>$ Water\+Manager\+::\+Cities\+Affected\+By\+Pipe\+Rupture (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Determine the cities affected by pipe ruptures. 
+
+This function examines each pipe in the water network and calculates the maximum flow after simulating the rupture of each pipe. It records the affected cities and the deficit in water supply caused by each pipe rupture.
+
+Time Complexity\+: O(VE³), where V is the number of vertices (water elements) and E is the number of edges (pipes) in the network. This is because for each pipe examined, an Edmond\textquotesingle{}s Karp maximum flow algorithm is performed.
+
+\begin{DoxyReturn}{Returns}
+A map containing information about the affected cities and the deficit in water supply caused by each pipe rupture. The keys are strings representing the pipes (from origin to destination), and the values are vectors of pairs, where each pair contains the affected city and the deficit in water supply. 
+\end{DoxyReturn}
+\Hypertarget{class_water_manager_a59f141cec23b9a8831aecd3f294a98a1}\label{class_water_manager_a59f141cec23b9a8831aecd3f294a98a1} 
+\index{WaterManager@{WaterManager}!CitiesAffectedByPipeRupture@{CitiesAffectedByPipeRupture}}
+\index{CitiesAffectedByPipeRupture@{CitiesAffectedByPipeRupture}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{CitiesAffectedByPipeRupture()}{CitiesAffectedByPipeRupture()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, std\+::vector$<$ std\+::pair$<$ std\+::string, \mbox{\hyperlink{class_edge}{double}} $>$ $>$ $>$ Water\+Manager\+::\+Cities\+Affected\+By\+Pipe\+Rupture (\begin{DoxyParamCaption}\item[{std\+::string \&}]{id\+Code }\end{DoxyParamCaption})}
+
+
+
+Determine the cities affected by pipe ruptures based on a given city code. 
+
+This function examines each pipe connected to the specified city and calculates the maximum flow after simulating the rupture of each pipe. It records the affected cities and the deficit in water supply caused by each pipe rupture.
+
+Time Complexity\+: O(VE³), where V is the number of vertices (water elements) and E is the number of edges (pipes) in the network. This is because for each pipe examined, an Edmond\textquotesingle{}s Karp maximum flow algorithm is performed, and in the worst case, a city is connected to all the pipes of the system.
+
+
+\begin{DoxyParams}{Parameters}
+{\em city\+Code} & The city code of the city to be analyzed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A map containing information about the affected cities and the deficit in water supply caused by each pipe rupture. The keys are strings representing the pipes, and the values are vectors of pairs, where each pair contains the affected city code and the deficit in water supply. 
+\end{DoxyReturn}
+\Hypertarget{class_water_manager_a56c628d42df5d8c6255829e3c3c18ab6}\label{class_water_manager_a56c628d42df5d8c6255829e3c3c18ab6} 
+\index{WaterManager@{WaterManager}!dataGoBoom@{dataGoBoom}}
+\index{dataGoBoom@{dataGoBoom}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{dataGoBoom()}{dataGoBoom()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Water\+Manager\+::data\+Go\+Boom (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Frees the data on program exit. 
+
+\Hypertarget{class_water_manager_aa3f6e14ac6465f44cae94802d94df87e}\label{class_water_manager_aa3f6e14ac6465f44cae94802d94df87e} 
+\index{WaterManager@{WaterManager}!existsAugmentingPath@{existsAugmentingPath}}
+\index{existsAugmentingPath@{existsAugmentingPath}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{existsAugmentingPath()}{existsAugmentingPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{bool}} Water\+Manager\+::exists\+Augmenting\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*}\&}]{source,  }\item[{\mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*}\&}]{target }\end{DoxyParamCaption})}
+
+
+
+Helper function. Checks if there exists an augmenting path. 
+
+This function does a Breadth First Search (BFS) and tries to construct a path from source node to a target node.
+
+The path in question can either be a normal path or it can be a residual path.
+
+The time complexity for this function is O(V + V + E). This is because first we
+
+iterate over every vertex and set visited to false. After this we perform a BFS
+
+which iterates over the graph\textquotesingle{}s vertexes (V) and for each one, over it\textquotesingle{}s outgoing edges (E).
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & -\/ This is the starting node. \\
+\hline
+{\em target} & -\/ This is the ending node.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If it manages to find a path then it return true otherwise it returns false. 
+\end{DoxyReturn}
+\Hypertarget{class_water_manager_a652730f4f2d27ae74672ef040bf202e7}\label{class_water_manager_a652730f4f2d27ae74672ef040bf202e7} 
+\index{WaterManager@{WaterManager}!findMinResidualAlongPath@{findMinResidualAlongPath}}
+\index{findMinResidualAlongPath@{findMinResidualAlongPath}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{findMinResidualAlongPath()}{findMinResidualAlongPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{double}} Water\+Manager\+::find\+Min\+Residual\+Along\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*}\&}]{source,  }\item[{\mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*}\&}]{target }\end{DoxyParamCaption})}
+
+
+
+Helper function. 
+
+Beginning from the target vertex we are going to follow the previously saved path
+
+to determine what is the minimum residual capacity of the path.
+
+The time complexity for this function is O(\+V). This is because in the worst case we
+
+need to go trough V vertexes (from the target to the source node).
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & -\/ This is the ending node. \\
+\hline
+{\em target} & -\/ This is the starting node.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Minimum residual capacity of the path that goes from target to source. 
+\end{DoxyReturn}
+\Hypertarget{class_water_manager_a6147912b5159385f43d124a70a1aa15c}\label{class_water_manager_a6147912b5159385f43d124a70a1aa15c} 
+\index{WaterManager@{WaterManager}!getDisabledWaterReservoirs@{getDisabledWaterReservoirs}}
+\index{getDisabledWaterReservoirs@{getDisabledWaterReservoirs}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{getDisabledWaterReservoirs()}{getDisabledWaterReservoirs()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*} $>$ Water\+Manager\+::get\+Disabled\+Water\+Reservoirs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_water_manager_afae65cfa7b284c7205fa08b9571be508}\label{class_water_manager_afae65cfa7b284c7205fa08b9571be508} 
+\index{WaterManager@{WaterManager}!listCitiesAffectedByReservoirRemoval@{listCitiesAffectedByReservoirRemoval}}
+\index{listCitiesAffectedByReservoirRemoval@{listCitiesAffectedByReservoirRemoval}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{listCitiesAffectedByReservoirRemoval()}{listCitiesAffectedByReservoirRemoval()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Water\+Manager\+::list\+Cities\+Affected\+By\+Reservoir\+Removal (\begin{DoxyParamCaption}\item[{std\+::string}]{id\+Code }\end{DoxyParamCaption})}
+
+
+
+Lists the cities that are in need of water, by checking the actual flow delivered to them. 
+
+This function runs the Edmond\textquotesingle{}s Karp algorithm to determine the maximum flow before removing a water reservoir and after this if the given water reservoir exists it disables it and re-\/runs the Edmonds-\/\+Karp Algorithm to check the flow after the removal.
+
+Time Complexity\+: O(\+V \texorpdfstring{$\ast$}{*} E\texorpdfstring{$^\wedge$}{\string^}2), because of Edmonds-\/\+Karp Algorithm \Hypertarget{class_water_manager_a806b6c071754fed0017ca8028e8a9a52}\label{class_water_manager_a806b6c071754fed0017ca8028e8a9a52} 
+\index{WaterManager@{WaterManager}!listWaterNeeds@{listWaterNeeds}}
+\index{listWaterNeeds@{listWaterNeeds}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{listWaterNeeds()}{listWaterNeeds()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Water\+Manager\+::list\+Water\+Needs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Lists the cities that are in need of water, by checking the actual flow delivered to them. 
+
+Time Complexity\+: O(\+V \texorpdfstring{$\ast$}{*} E\texorpdfstring{$^\wedge$}{\string^}2), because of Edmonds-\/\+Karp Algorithm \Hypertarget{class_water_manager_a4133edb564a208e448efad6cf5a39c45}\label{class_water_manager_a4133edb564a208e448efad6cf5a39c45} 
+\index{WaterManager@{WaterManager}!maximumFlowAllCities@{maximumFlowAllCities}}
+\index{maximumFlowAllCities@{maximumFlowAllCities}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{maximumFlowAllCities()}{maximumFlowAllCities()}}
+{\footnotesize\ttfamily std\+::string Water\+Manager\+::maximum\+Flow\+All\+Cities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Maximum flow across all cities. 
+
+This functions uses a slightly modified Edmonds-\/\+Karp algorithm to find the maximum amount of flow that can reach all cities. The modifications are the addition of a super source and a super sink and the use of a variable named current\+Flow that helps us check if a given city already has it\textquotesingle{}s demand fulfilled.
+
+The time complexity for this functions is O(X + Y + Z) = O(V + VE + VE\texorpdfstring{$^\wedge$}{\string^}2) where X is the time complexity related to the addition of the super\+Water\+Reservoir (super source) and the super\+Delivery\+Site (super sink) (X = V), Y is the time complexity of the for loops that set the flow of edges and the current\+Flow of vertexes to zero (Y = VE) and finally Z is the time complexity for the Edmonds-\/\+Karp Algorithm for Max Flow (Z = VE\texorpdfstring{$^\wedge$}{\string^}2). \Hypertarget{class_water_manager_a04b7445c7c6f82657c0f51bea6bd9657}\label{class_water_manager_a04b7445c7c6f82657c0f51bea6bd9657} 
+\index{WaterManager@{WaterManager}!maximumFlowSpecificCities@{maximumFlowSpecificCities}}
+\index{maximumFlowSpecificCities@{maximumFlowSpecificCities}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{maximumFlowSpecificCities()}{maximumFlowSpecificCities()}}
+{\footnotesize\ttfamily std\+::string Water\+Manager\+::maximum\+Flow\+Specific\+Cities (\begin{DoxyParamCaption}\item[{std\+::string}]{id\+Code }\end{DoxyParamCaption})}
+
+
+
+Maximum flow to a specific city. 
+
+This function depends on the function above \mbox{[}\doxylink{class_water_manager_a4133edb564a208e448efad6cf5a39c45}{maximum\+Flow\+All\+Cities()}\mbox{]}
+
+The time complexity for this functions is is O(n + Y) = O(V + VE + VE\texorpdfstring{$^\wedge$}{\string^}2) where n is the time complexity for the worst case of finding the city and Y is the time complexity of the \doxylink{class_water_manager_a4133edb564a208e448efad6cf5a39c45}{maximum\+Flow\+All\+Cities()} function. \Hypertarget{class_water_manager_aaa9700fcf9eee856160cbe1d60cc27c2}\label{class_water_manager_aaa9700fcf9eee856160cbe1d60cc27c2} 
+\index{WaterManager@{WaterManager}!parseData@{parseData}}
+\index{parseData@{parseData}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{parseData()}{parseData()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Water\+Manager\+::parse\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Calls the other data parsing functions. 
+
+\Hypertarget{class_water_manager_ab0d8cca236202fa41974c9b33745a87a}\label{class_water_manager_ab0d8cca236202fa41974c9b33745a87a} 
+\index{WaterManager@{WaterManager}!processCities@{processCities}}
+\index{processCities@{processCities}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{processCities()}{processCities()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Water\+Manager\+::process\+Cities (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Data parsing for cities / delivery\+Sites. 
+
+\Hypertarget{class_water_manager_a7e0c6a003c2addf7c033949f39d3b296}\label{class_water_manager_a7e0c6a003c2addf7c033949f39d3b296} 
+\index{WaterManager@{WaterManager}!processPipes@{processPipes}}
+\index{processPipes@{processPipes}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{processPipes()}{processPipes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Water\+Manager\+::process\+Pipes (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Data parsing for pipes. 
+
+\Hypertarget{class_water_manager_a7de1d96f168bc1b810f1f2f5ef8f2602}\label{class_water_manager_a7de1d96f168bc1b810f1f2f5ef8f2602} 
+\index{WaterManager@{WaterManager}!processPumps@{processPumps}}
+\index{processPumps@{processPumps}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{processPumps()}{processPumps()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Water\+Manager\+::process\+Pumps (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Data parsing for pumps. 
+
+\Hypertarget{class_water_manager_ae23330e9c22733ab2eaab492cf954b8f}\label{class_water_manager_ae23330e9c22733ab2eaab492cf954b8f} 
+\index{WaterManager@{WaterManager}!processReservoirs@{processReservoirs}}
+\index{processReservoirs@{processReservoirs}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{processReservoirs()}{processReservoirs()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Water\+Manager\+::process\+Reservoirs (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Data parsing for reservoirs. 
+
+\Hypertarget{class_water_manager_a2f6bdd5e35852da625e89022f7bc602f}\label{class_water_manager_a2f6bdd5e35852da625e89022f7bc602f} 
+\index{WaterManager@{WaterManager}!resetWaterReservoirs@{resetWaterReservoirs}}
+\index{resetWaterReservoirs@{resetWaterReservoirs}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{resetWaterReservoirs()}{resetWaterReservoirs()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Water\+Manager\+::reset\+Water\+Reservoirs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_water_manager_ab95f47ece61b5ad276375c1ac6c412d3}\label{class_water_manager_ab95f47ece61b5ad276375c1ac6c412d3} 
+\index{WaterManager@{WaterManager}!restorePipes@{restorePipes}}
+\index{restorePipes@{restorePipes}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{restorePipes()}{restorePipes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Water\+Manager\+::restore\+Pipes (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*} $>$ $>$}]{original }\end{DoxyParamCaption})}
+
+
+
+Restores the pipes in the water network to their original state. 
+
+This function removes all edges in the water network and then adds the edges from the provided vector.
+
+The provided vector contains the original state of the pipes, including source vertices, destination vertices, and weights.
+
+Has time complexity of O(\+E), since it visits every edge at least once. 
+\begin{DoxyParams}{Parameters}
+{\em original} & A vector containing the original state of the pipes. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_water_manager_ab0fc19b31c3d82963a0339af6a0283b7}\label{class_water_manager_ab0fc19b31c3d82963a0339af6a0283b7} 
+\index{WaterManager@{WaterManager}!savePipes@{savePipes}}
+\index{savePipes@{savePipes}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{savePipes()}{savePipes()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*} $>$ $>$ Water\+Manager\+::save\+Pipes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Saves the pipes in the water network. 
+
+This function iterates over all edges in the water network and saves them into a vector of edges.
+
+Each edge consists of a source vertex, a destination vertex, and the weight representing the capacity of the pipe.
+
+Has time complexity of O(\+E), since it visits every edge at least once. \begin{DoxyReturn}{Returns}
+A vector containing all the pipes in the water network. 
+\end{DoxyReturn}
+\Hypertarget{class_water_manager_a15bf7824290f17b131598a4ffd6f518e}\label{class_water_manager_a15bf7824290f17b131598a4ffd6f518e} 
+\index{WaterManager@{WaterManager}!variance@{variance}}
+\index{variance@{variance}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{variance()}{variance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{double}} Water\+Manager\+::variance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Calculates the variance of the differences between the capacity and flow of each pipe in the water network. 
+
+This function computes the average difference first using the \doxylink{class_water_manager_a79fc33012a9a335988b4b08047354dc1}{avg\+Difference()} function.
+
+The time complexity of this function is O(V + E), where V is the number of vertices and E is the number of edges in the water network.
+
+\begin{DoxyReturn}{Returns}
+The variance of the differences between the capacity and flow of each pipe. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_water_manager_a402e09e6caceef5923723d7ff55f6c6b}\label{class_water_manager_a402e09e6caceef5923723d7ff55f6c6b} 
+\index{WaterManager@{WaterManager}!disabledWaterReservoirs@{disabledWaterReservoirs}}
+\index{disabledWaterReservoirs@{disabledWaterReservoirs}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{disabledWaterReservoirs}{disabledWaterReservoirs}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_vertex}{Vertex}}$<$\mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*}$>$ \texorpdfstring{$\ast$}{*}$>$ Water\+Manager\+::disabled\+Water\+Reservoirs\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_water_manager_a986a8183273914fa1c2c25d5c9abd28b}\label{class_water_manager_a986a8183273914fa1c2c25d5c9abd28b} 
+\index{WaterManager@{WaterManager}!pipesSize@{pipesSize}}
+\index{pipesSize@{pipesSize}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{pipesSize}{pipesSize}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{int}} Water\+Manager\+::pipes\+Size = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_water_manager_aad2a001a19e24a0f9c526617b9ff94a2}\label{class_water_manager_aad2a001a19e24a0f9c526617b9ff94a2} 
+\index{WaterManager@{WaterManager}!waterCityMap@{waterCityMap}}
+\index{waterCityMap@{waterCityMap}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{waterCityMap}{waterCityMap}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{class_d_s}{DS}} \texorpdfstring{$\ast$}{*}$>$ Water\+Manager\+::water\+City\+Map\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_water_manager_a76014901eff8815f6f200f2fd8190e4b}\label{class_water_manager_a76014901eff8815f6f200f2fd8190e4b} 
+\index{WaterManager@{WaterManager}!waterNetwork@{waterNetwork}}
+\index{waterNetwork@{waterNetwork}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{waterNetwork}{waterNetwork}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_graph}{Graph}}$<$\mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*}$>$ Water\+Manager\+::water\+Network\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_water_manager_a25742d9e3883904749e8cff79e30241e}\label{class_water_manager_a25742d9e3883904749e8cff79e30241e} 
+\index{WaterManager@{WaterManager}!waterPumpMap@{waterPumpMap}}
+\index{waterPumpMap@{waterPumpMap}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{waterPumpMap}{waterPumpMap}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{class_p_s}{PS}} \texorpdfstring{$\ast$}{*}$>$ Water\+Manager\+::water\+Pump\+Map\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_water_manager_ae40a8b7c51315d3956d703f1236abeca}\label{class_water_manager_ae40a8b7c51315d3956d703f1236abeca} 
+\index{WaterManager@{WaterManager}!waterReservoirMap@{waterReservoirMap}}
+\index{waterReservoirMap@{waterReservoirMap}!WaterManager@{WaterManager}}
+\doxysubsubsection{\texorpdfstring{waterReservoirMap}{waterReservoirMap}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{class_w_r}{WR}} \texorpdfstring{$\ast$}{*}$>$ Water\+Manager\+::water\+Reservoir\+Map\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/antonioabilio/\+Desktop/\+DA/proj-\/da-\/1/src/\mbox{\hyperlink{_water_manager_8h}{Water\+Manager.\+h}}\item 
+/\+Users/antonioabilio/\+Desktop/\+DA/proj-\/da-\/1/src/\mbox{\hyperlink{_water_manager_8cpp}{Water\+Manager.\+cpp}}\end{DoxyCompactItemize}

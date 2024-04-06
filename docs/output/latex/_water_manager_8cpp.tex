@@ -1,3 +1,67 @@
-\doxysection{/\+Users/antonioabilio/\+Desktop/proj-\/da-\/1/src/\+Water\+Manager.cpp File Reference}
-\hypertarget{_water_manager_8cpp}{}\label{_water_manager_8cpp}\index{/Users/antonioabilio/Desktop/proj-\/da-\/1/src/WaterManager.cpp@{/Users/antonioabilio/Desktop/proj-\/da-\/1/src/WaterManager.cpp}}
+\doxysection{/\+Users/antonioabilio/\+Desktop/\+DA/proj-\/da-\/1/src/\+Water\+Manager.cpp File Reference}
+\hypertarget{_water_manager_8cpp}{}\label{_water_manager_8cpp}\index{/Users/antonioabilio/Desktop/DA/proj-\/da-\/1/src/WaterManager.cpp@{/Users/antonioabilio/Desktop/DA/proj-\/da-\/1/src/WaterManager.cpp}}
 {\ttfamily \#include "{}Water\+Manager.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_compare_difference}{Compare\+Difference}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{_water_manager_8cpp_a271777165c5a9b566ae42fe08df1f35a}{get\+Tot\+Vertex}} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}adj, \mbox{\hyperlink{class_d_s}{DS}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{delivery\+Site}})
+\item 
+\mbox{\hyperlink{class_edge}{bool}} \mbox{\hyperlink{_water_manager_8cpp_a20b5017eabab9eb69f7222dcf9ea06f7}{demand\+Fulfilled}} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}adj, \mbox{\hyperlink{class_d_s}{DS}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{delivery\+Site}})
+\begin{DoxyCompactList}\small\item\em Helper function. Checks if a given delivery site already has the needed demand. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{_water_manager_8cpp_a691b6dd4df73df404685a10738f5747c}{check\+Differences}} (\mbox{\hyperlink{class_edge}{const}} std\+::string \&\mbox{\hyperlink{class_edge}{before}}, \mbox{\hyperlink{class_edge}{const}} std\+::string \&\mbox{\hyperlink{class_edge}{after}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_water_manager_8cpp_a691b6dd4df73df404685a10738f5747c}\label{_water_manager_8cpp_a691b6dd4df73df404685a10738f5747c} 
+\index{WaterManager.cpp@{WaterManager.cpp}!checkDifferences@{checkDifferences}}
+\index{checkDifferences@{checkDifferences}!WaterManager.cpp@{WaterManager.cpp}}
+\doxysubsubsection{\texorpdfstring{checkDifferences()}{checkDifferences()}}
+{\footnotesize\ttfamily std\+::string check\+Differences (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} std\+::string \&}]{before,  }\item[{\mbox{\hyperlink{class_edge}{const}} std\+::string \&}]{after }\end{DoxyParamCaption})}
+
+
+
+Helper function. 
+
+This function takes two string and checks the differences between them. The complexity for \doxylink{class_edge_ab976213419283ed754f42f57b195a288}{string\+::find} is unspecified but according to c++ reference it\textquotesingle{}s O(n). Total complexity for function is in the worst case O(n\texorpdfstring{$^\wedge$}{\string^}2). 
+\begin{DoxyParams}{Parameters}
+{\em before} & The old string. \\
+\hline
+{\em after} & The new string. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_water_manager_8cpp_a20b5017eabab9eb69f7222dcf9ea06f7}\label{_water_manager_8cpp_a20b5017eabab9eb69f7222dcf9ea06f7} 
+\index{WaterManager.cpp@{WaterManager.cpp}!demandFulfilled@{demandFulfilled}}
+\index{demandFulfilled@{demandFulfilled}!WaterManager.cpp@{WaterManager.cpp}}
+\doxysubsubsection{\texorpdfstring{demandFulfilled()}{demandFulfilled()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{bool}} demand\+Fulfilled (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}}]{adj,  }\item[{\mbox{\hyperlink{class_d_s}{DS}} \texorpdfstring{$\ast$}{*}}]{delivery\+Site }\end{DoxyParamCaption})}
+
+
+
+Helper function. Checks if a given delivery site already has the needed demand. 
+
+It\textquotesingle{}s time complexity in the worst case is O(\+E) where E is the amount of edges that are
+
+incoming and outgoing of a given delivery Site.
+
+
+\begin{DoxyParams}{Parameters}
+{\em adj} & -\/ This is the vertex that contains the delivery Site. \\
+\hline
+{\em delivery\+Site} & -\/ This is the delivery site.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the demand has been fulfilled then it returns true, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{_water_manager_8cpp_a271777165c5a9b566ae42fe08df1f35a}\label{_water_manager_8cpp_a271777165c5a9b566ae42fe08df1f35a} 
+\index{WaterManager.cpp@{WaterManager.cpp}!getTotVertex@{getTotVertex}}
+\index{getTotVertex@{getTotVertex}!WaterManager.cpp@{WaterManager.cpp}}
+\doxysubsubsection{\texorpdfstring{getTotVertex()}{getTotVertex()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{double}} get\+Tot\+Vertex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_water_element}{Water\+Element}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}}]{adj,  }\item[{\mbox{\hyperlink{class_d_s}{DS}} \texorpdfstring{$\ast$}{*}}]{delivery\+Site }\end{DoxyParamCaption})}
+

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main.cpp']]],
-  ['maxwater_1',['maxWater',['../class_application.html#a2329c5db2625c987ea554fadc5c51839',1,'Application']]]
+  ['findminresidualalongpath_0',['findMinResidualAlongPath',['../class_water_manager.html#a652730f4f2d27ae74672ef040bf202e7',1,'WaterManager']]],
+  ['findvertex_1',['findVertex',['../class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75',1,'Graph']]],
+  ['findvertexidx_2',['findVertexIdx',['../class_graph.html#a676cdfb976eccfa82b631d2094c1cdac',1,'Graph']]]
 ];

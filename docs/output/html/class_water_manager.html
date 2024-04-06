@@ -69,13 +69,1004 @@ $(function() {
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="class_water_manager-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">WaterManager Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="_water_manager_8h_source.html">WaterManager.h</a>&gt;</code></p>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/antonioabilio/Desktop/proj-da-1/src/<a class="el" href="_water_manager_8h_source.html">WaterManager.h</a></li>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aaa9700fcf9eee856160cbe1d60cc27c2" id="r_aaa9700fcf9eee856160cbe1d60cc27c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#aaa9700fcf9eee856160cbe1d60cc27c2">parseData</a> ()</td></tr>
+<tr class="memdesc:aaa9700fcf9eee856160cbe1d60cc27c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls the other data parsing functions.  <br /></td></tr>
+<tr class="separator:aaa9700fcf9eee856160cbe1d60cc27c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56c628d42df5d8c6255829e3c3c18ab6" id="r_a56c628d42df5d8c6255829e3c3c18ab6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a56c628d42df5d8c6255829e3c3c18ab6">dataGoBoom</a> ()</td></tr>
+<tr class="memdesc:a56c628d42df5d8c6255829e3c3c18ab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the data on program exit.  <br /></td></tr>
+<tr class="separator:a56c628d42df5d8c6255829e3c3c18ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3f6e14ac6465f44cae94802d94df87e" id="r_aa3f6e14ac6465f44cae94802d94df87e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#aa3f6e14ac6465f44cae94802d94df87e">existsAugmentingPath</a> (<a class="el" href="class_water_element.html">WaterElement</a> *&amp;<a class="el" href="class_edge.html">source</a>, <a class="el" href="class_water_element.html">WaterElement</a> *&amp;<a class="el" href="class_edge.html">target</a>)</td></tr>
+<tr class="memdesc:aa3f6e14ac6465f44cae94802d94df87e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function. Checks if there exists an augmenting path.  <br /></td></tr>
+<tr class="separator:aa3f6e14ac6465f44cae94802d94df87e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a652730f4f2d27ae74672ef040bf202e7" id="r_a652730f4f2d27ae74672ef040bf202e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a652730f4f2d27ae74672ef040bf202e7">findMinResidualAlongPath</a> (<a class="el" href="class_water_element.html">WaterElement</a> *&amp;<a class="el" href="class_edge.html">source</a>, <a class="el" href="class_water_element.html">WaterElement</a> *&amp;<a class="el" href="class_edge.html">target</a>)</td></tr>
+<tr class="memdesc:a652730f4f2d27ae74672ef040bf202e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a652730f4f2d27ae74672ef040bf202e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac45a8cde8e3f357f7a1b12718cbfc0fd" id="r_ac45a8cde8e3f357f7a1b12718cbfc0fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#ac45a8cde8e3f357f7a1b12718cbfc0fd">augmentFlowAlongPath</a> (<a class="el" href="class_water_element.html">WaterElement</a> *&amp;<a class="el" href="class_edge.html">source</a>, <a class="el" href="class_water_element.html">WaterElement</a> *&amp;<a class="el" href="class_edge.html">target</a>, <a class="el" href="class_edge.html">double</a> <a class="el" href="class_edge.html">f</a>)</td></tr>
+<tr class="memdesc:ac45a8cde8e3f357f7a1b12718cbfc0fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:ac45a8cde8e3f357f7a1b12718cbfc0fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4133edb564a208e448efad6cf5a39c45" id="r_a4133edb564a208e448efad6cf5a39c45"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a4133edb564a208e448efad6cf5a39c45">maximumFlowAllCities</a> ()</td></tr>
+<tr class="memdesc:a4133edb564a208e448efad6cf5a39c45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum flow across all cities.  <br /></td></tr>
+<tr class="separator:a4133edb564a208e448efad6cf5a39c45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04b7445c7c6f82657c0f51bea6bd9657" id="r_a04b7445c7c6f82657c0f51bea6bd9657"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a04b7445c7c6f82657c0f51bea6bd9657">maximumFlowSpecificCities</a> (std::string <a class="el" href="class_edge.html">cityCode</a>)</td></tr>
+<tr class="memdesc:a04b7445c7c6f82657c0f51bea6bd9657"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum flow to a specific city.  <br /></td></tr>
+<tr class="separator:a04b7445c7c6f82657c0f51bea6bd9657"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a806b6c071754fed0017ca8028e8a9a52" id="r_a806b6c071754fed0017ca8028e8a9a52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a806b6c071754fed0017ca8028e8a9a52">listWaterNeeds</a> ()</td></tr>
+<tr class="memdesc:a806b6c071754fed0017ca8028e8a9a52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lists the cities that are in need of water, by checking the actual flow delivered to them.  <br /></td></tr>
+<tr class="separator:a806b6c071754fed0017ca8028e8a9a52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79fc33012a9a335988b4b08047354dc1" id="r_a79fc33012a9a335988b4b08047354dc1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a79fc33012a9a335988b4b08047354dc1">avgDifference</a> (<a class="el" href="class_edge.html">double</a> &amp;<a class="el" href="class_edge.html">maxDifference</a>)</td></tr>
+<tr class="memdesc:a79fc33012a9a335988b4b08047354dc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the average difference between the capacity and flow of each pipe in the water network.  <br /></td></tr>
+<tr class="separator:a79fc33012a9a335988b4b08047354dc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afab581794aee341c700af72ea76ea12a" id="r_afab581794aee341c700af72ea76ea12a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#afab581794aee341c700af72ea76ea12a">avgCapacity</a> ()</td></tr>
+<tr class="memdesc:afab581794aee341c700af72ea76ea12a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the average capacity of all pipes in the water network.  <br /></td></tr>
+<tr class="separator:afab581794aee341c700af72ea76ea12a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15bf7824290f17b131598a4ffd6f518e" id="r_a15bf7824290f17b131598a4ffd6f518e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a15bf7824290f17b131598a4ffd6f518e">variance</a> ()</td></tr>
+<tr class="memdesc:a15bf7824290f17b131598a4ffd6f518e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the variance of the differences between the capacity and flow of each pipe in the water network.  <br /></td></tr>
+<tr class="separator:a15bf7824290f17b131598a4ffd6f518e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab95f47ece61b5ad276375c1ac6c412d3" id="r_ab95f47ece61b5ad276375c1ac6c412d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#ab95f47ece61b5ad276375c1ac6c412d3">restorePipes</a> (std::vector&lt; <a class="el" href="class_edge.html">Edge</a>&lt; <a class="el" href="class_water_element.html">WaterElement</a> * &gt; &gt; <a class="el" href="class_edge.html">original</a>)</td></tr>
+<tr class="memdesc:ab95f47ece61b5ad276375c1ac6c412d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restores the pipes in the water network to their original state.  <br /></td></tr>
+<tr class="separator:ab95f47ece61b5ad276375c1ac6c412d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0fc19b31c3d82963a0339af6a0283b7" id="r_ab0fc19b31c3d82963a0339af6a0283b7"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_edge.html">Edge</a>&lt; <a class="el" href="class_water_element.html">WaterElement</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#ab0fc19b31c3d82963a0339af6a0283b7">savePipes</a> ()</td></tr>
+<tr class="memdesc:ab0fc19b31c3d82963a0339af6a0283b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the pipes in the water network.  <br /></td></tr>
+<tr class="separator:ab0fc19b31c3d82963a0339af6a0283b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a695d101251689b2094f6eba98ac5c992" id="r_a695d101251689b2094f6eba98ac5c992"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a695d101251689b2094f6eba98ac5c992">balancingAlgorithmNeighborDistribution</a> ()</td></tr>
+<tr class="memdesc:a695d101251689b2094f6eba98ac5c992"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs a balancing algorithm using neighbor distribution technique.  <br /></td></tr>
+<tr class="separator:a695d101251689b2094f6eba98ac5c992"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33909671a5b20807977dd639384e4c0e" id="r_a33909671a5b20807977dd639384e4c0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a33909671a5b20807977dd639384e4c0e">balancingAlgorithmSortingDistribution</a> ()</td></tr>
+<tr class="memdesc:a33909671a5b20807977dd639384e4c0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs a balancing algorithm using sorting distribution technique.  <br /></td></tr>
+<tr class="separator:a33909671a5b20807977dd639384e4c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2790c6e0f65f54df587ec8d8a0887978" id="r_a2790c6e0f65f54df587ec8d8a0887978"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a2790c6e0f65f54df587ec8d8a0887978">balancingAlgorithmAverageDistribution</a> ()</td></tr>
+<tr class="memdesc:a2790c6e0f65f54df587ec8d8a0887978"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs a balancing algorithm using average distribution technique.  <br /></td></tr>
+<tr class="separator:a2790c6e0f65f54df587ec8d8a0887978"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afae65cfa7b284c7205fa08b9571be508" id="r_afae65cfa7b284c7205fa08b9571be508"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#afae65cfa7b284c7205fa08b9571be508">listCitiesAffectedByReservoirRemoval</a> (std::string <a class="el" href="class_edge.html">wr_code</a>)</td></tr>
+<tr class="memdesc:afae65cfa7b284c7205fa08b9571be508"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lists the cities that are in need of water, by checking the actual flow delivered to them.  <br /></td></tr>
+<tr class="separator:afae65cfa7b284c7205fa08b9571be508"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f6bdd5e35852da625e89022f7bc602f" id="r_a2f6bdd5e35852da625e89022f7bc602f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a2f6bdd5e35852da625e89022f7bc602f">resetWaterReservoirs</a> ()</td></tr>
+<tr class="separator:a2f6bdd5e35852da625e89022f7bc602f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6147912b5159385f43d124a70a1aa15c" id="r_a6147912b5159385f43d124a70a1aa15c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_water_element.html">WaterElement</a> * &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a6147912b5159385f43d124a70a1aa15c">getDisabledWaterReservoirs</a> ()</td></tr>
+<tr class="separator:a6147912b5159385f43d124a70a1aa15c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35645a5a5344d1eb8ad3f3de7ed8bbd7" id="r_a35645a5a5344d1eb8ad3f3de7ed8bbd7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a35645a5a5344d1eb8ad3f3de7ed8bbd7">citiesAffectedByMaintenance_SpecificPump</a> (std::string <a class="el" href="class_edge.html">idCode</a>)</td></tr>
+<tr class="memdesc:a35645a5a5344d1eb8ad3f3de7ed8bbd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function aids in checking which cities are affected if a given pump is taken offline.  <br /></td></tr>
+<tr class="separator:a35645a5a5344d1eb8ad3f3de7ed8bbd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a470c6c5322d671efa416905b6081ddb9" id="r_a470c6c5322d671efa416905b6081ddb9"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a470c6c5322d671efa416905b6081ddb9">citiesAffectedByMaintenance_AllPumps</a> ()</td></tr>
+<tr class="memdesc:a470c6c5322d671efa416905b6081ddb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function aids in checking which cities are affected if each one of the pumps is taken offline.  <br /></td></tr>
+<tr class="separator:a470c6c5322d671efa416905b6081ddb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59f141cec23b9a8831aecd3f294a98a1" id="r_a59f141cec23b9a8831aecd3f294a98a1"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::vector&lt; std::pair&lt; std::string, <a class="el" href="class_edge.html">double</a> &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a59f141cec23b9a8831aecd3f294a98a1">CitiesAffectedByPipeRupture</a> (std::string &amp;<a class="el" href="class_edge.html">idCode</a>)</td></tr>
+<tr class="memdesc:a59f141cec23b9a8831aecd3f294a98a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine the cities affected by pipe ruptures based on a given city code.  <br /></td></tr>
+<tr class="separator:a59f141cec23b9a8831aecd3f294a98a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9a4a3c8bb64de51510103f5ac96e28b" id="r_aa9a4a3c8bb64de51510103f5ac96e28b"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::vector&lt; std::pair&lt; std::string, <a class="el" href="class_edge.html">double</a> &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#aa9a4a3c8bb64de51510103f5ac96e28b">CitiesAffectedByPipeRupture</a> ()</td></tr>
+<tr class="memdesc:aa9a4a3c8bb64de51510103f5ac96e28b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine the cities affected by pipe ruptures.  <br /></td></tr>
+<tr class="separator:aa9a4a3c8bb64de51510103f5ac96e28b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ae23330e9c22733ab2eaab492cf954b8f" id="r_ae23330e9c22733ab2eaab492cf954b8f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#ae23330e9c22733ab2eaab492cf954b8f">processReservoirs</a> (std::ifstream &amp;<a class="el" href="class_edge.html">in</a>)</td></tr>
+<tr class="memdesc:ae23330e9c22733ab2eaab492cf954b8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data parsing for reservoirs.  <br /></td></tr>
+<tr class="separator:ae23330e9c22733ab2eaab492cf954b8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7de1d96f168bc1b810f1f2f5ef8f2602" id="r_a7de1d96f168bc1b810f1f2f5ef8f2602"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a7de1d96f168bc1b810f1f2f5ef8f2602">processPumps</a> (std::ifstream &amp;<a class="el" href="class_edge.html">in</a>)</td></tr>
+<tr class="memdesc:a7de1d96f168bc1b810f1f2f5ef8f2602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data parsing for pumps.  <br /></td></tr>
+<tr class="separator:a7de1d96f168bc1b810f1f2f5ef8f2602"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0d8cca236202fa41974c9b33745a87a" id="r_ab0d8cca236202fa41974c9b33745a87a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#ab0d8cca236202fa41974c9b33745a87a">processCities</a> (std::ifstream &amp;<a class="el" href="class_edge.html">in</a>)</td></tr>
+<tr class="memdesc:ab0d8cca236202fa41974c9b33745a87a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data parsing for cities / deliverySites.  <br /></td></tr>
+<tr class="separator:ab0d8cca236202fa41974c9b33745a87a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e0c6a003c2addf7c033949f39d3b296" id="r_a7e0c6a003c2addf7c033949f39d3b296"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a7e0c6a003c2addf7c033949f39d3b296">processPipes</a> (std::ifstream &amp;<a class="el" href="class_edge.html">in</a>)</td></tr>
+<tr class="memdesc:a7e0c6a003c2addf7c033949f39d3b296"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data parsing for pipes.  <br /></td></tr>
+<tr class="separator:a7e0c6a003c2addf7c033949f39d3b296"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa9690dc8666eced0bd06eb9fe9b57e6" id="r_aaa9690dc8666eced0bd06eb9fe9b57e6"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="class_d_s.html">DS</a> *, <a class="el" href="class_edge.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#aaa9690dc8666eced0bd06eb9fe9b57e6">auxMaxFlow</a> ()</td></tr>
+<tr class="memdesc:aaa9690dc8666eced0bd06eb9fe9b57e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to calculate maximum flow.  <br /></td></tr>
+<tr class="separator:aaa9690dc8666eced0bd06eb9fe9b57e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a76014901eff8815f6f200f2fd8190e4b" id="r_a76014901eff8815f6f200f2fd8190e4b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_water_element.html">WaterElement</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a76014901eff8815f6f200f2fd8190e4b">waterNetwork</a></td></tr>
+<tr class="separator:a76014901eff8815f6f200f2fd8190e4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae40a8b7c51315d3956d703f1236abeca" id="r_ae40a8b7c51315d3956d703f1236abeca"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, <a class="el" href="class_w_r.html">WR</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#ae40a8b7c51315d3956d703f1236abeca">waterReservoirMap</a></td></tr>
+<tr class="separator:ae40a8b7c51315d3956d703f1236abeca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25742d9e3883904749e8cff79e30241e" id="r_a25742d9e3883904749e8cff79e30241e"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, <a class="el" href="class_p_s.html">PS</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a25742d9e3883904749e8cff79e30241e">waterPumpMap</a></td></tr>
+<tr class="separator:a25742d9e3883904749e8cff79e30241e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad2a001a19e24a0f9c526617b9ff94a2" id="r_aad2a001a19e24a0f9c526617b9ff94a2"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, <a class="el" href="class_d_s.html">DS</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#aad2a001a19e24a0f9c526617b9ff94a2">waterCityMap</a></td></tr>
+<tr class="separator:aad2a001a19e24a0f9c526617b9ff94a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a986a8183273914fa1c2c25d5c9abd28b" id="r_a986a8183273914fa1c2c25d5c9abd28b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a986a8183273914fa1c2c25d5c9abd28b">pipesSize</a> = 0</td></tr>
+<tr class="separator:a986a8183273914fa1c2c25d5c9abd28b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a402e09e6caceef5923723d7ff55f6c6b" id="r_a402e09e6caceef5923723d7ff55f6c6b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_water_element.html">WaterElement</a> * &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html#a402e09e6caceef5923723d7ff55f6c6b">disabledWaterReservoirs</a></td></tr>
+<tr class="separator:a402e09e6caceef5923723d7ff55f6c6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac45a8cde8e3f357f7a1b12718cbfc0fd" name="ac45a8cde8e3f357f7a1b12718cbfc0fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac45a8cde8e3f357f7a1b12718cbfc0fd">&#9670;&#160;</a></span>augmentFlowAlongPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">void</a> WaterManager::augmentFlowAlongPath </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_water_element.html">WaterElement</a> *&amp;&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_water_element.html">WaterElement</a> *&amp;&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_edge.html">double</a>&#160;</td>
+          <td class="paramname"><em>minFlow</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Beginning from the target vertex we are going to follow the previously saved path</p>
+<p>and add [In case the path belongs to the normal graph] or subtract</p>
+<p>[In case we have found a path in the residual graph] the minimum residual capacity.</p>
+<p>The time complexity for this function is O(V). This is because in the worst case we</p>
+<p>need to go trough V vertexes (from the target to the source node).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>- This is the ending node. </td></tr>
+    <tr><td class="paramname">target</td><td>- This is the starting node. </td></tr>
+    <tr><td class="paramname">minFlow</td><td>- Minimum residual capacity. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aaa9690dc8666eced0bd06eb9fe9b57e6" name="aaa9690dc8666eced0bd06eb9fe9b57e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa9690dc8666eced0bd06eb9fe9b57e6">&#9670;&#160;</a></span>auxMaxFlow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; <a class="el" href="class_d_s.html">DS</a> *, <a class="el" href="class_edge.html">double</a> &gt; WaterManager::auxMaxFlow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function to calculate maximum flow. </p>
+<p>This function calls the maximumFlowAllCities function (Edmond's Karp) and calculates the updated maximum flow of each city, storing it into a map of delivery sites as keys and the respective flow value.</p>
+<p>Time Complexity: O(VE²), where V is the number of water elements in the system and E is the number of pipes.</p>
+<dl class="section return"><dt>Returns</dt><dd>A map containing the delivery sites as keys and the respective updated maximum flow values. </dd></dl>
+
+</div>
+</div>
+<a id="afab581794aee341c700af72ea76ea12a" name="afab581794aee341c700af72ea76ea12a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afab581794aee341c700af72ea76ea12a">&#9670;&#160;</a></span>avgCapacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">double</a> WaterManager::avgCapacity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the average capacity of all pipes in the water network. </p>
+<p>This function iterates over all edges in the water network and computes the sum of their weights, representing their capacity.</p>
+<p>It then divides the sum of capacities by the total number of pipes to obtain the average capacity.</p>
+<p>The time complexity of this function is O(V + E), where V is the number of vertices and E is the number of edges in the water network. </p><dl class="section return"><dt>Returns</dt><dd>The average capacity of all pipes in the water network. </dd></dl>
+
+</div>
+</div>
+<a id="a79fc33012a9a335988b4b08047354dc1" name="a79fc33012a9a335988b4b08047354dc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79fc33012a9a335988b4b08047354dc1">&#9670;&#160;</a></span>avgDifference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">double</a> WaterManager::avgDifference </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_edge.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>maxDifference</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the average difference between the capacity and flow of each pipe in the water network. </p>
+<p>This function iterates over all edges in the water network and computes the absolute difference between their capacity and flow.</p>
+<p>Additionally, it updates the maximum difference found during the iteration.</p>
+<p>The time complexity of this function is O(V + E), where V is the number of vertices and E is the number of edges in the water network.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maxDifference</td><td>Reference to a variable that will store the maximum difference found during the iteration. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The average difference between the capacity and flow of each pipe. </dd></dl>
+
+</div>
+</div>
+<a id="a2790c6e0f65f54df587ec8d8a0887978" name="a2790c6e0f65f54df587ec8d8a0887978"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2790c6e0f65f54df587ec8d8a0887978">&#9670;&#160;</a></span>balancingAlgorithmAverageDistribution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">void</a> WaterManager::balancingAlgorithmAverageDistribution </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Performs a balancing algorithm using average distribution technique. </p>
+<p>This method balances the flow across the network by setting the weight of each pipe to the average capacity of all pipes.</p>
+<p>It saves the original pipe configuration, computes initial metrics such as max difference, average difference, and variance, then sets the weight of each pipe to the average capacity.</p>
+<p>After setting the weights, it computes final metrics and displays the changes in max difference, average difference, and variance.</p>
+<p>Additionally, it displays the changes in maximum flow for each city before and after the balancing process.</p>
+<p>The method then restores the original pipe configuration.</p>
+<p>It has time complexity equal to the maximumFlowAllCities function, since it uses it twice.</p>
+<p>(</p>
+<p>Time complexity is O(X + Y + Z).</p>
+<p>X - Time complexity related to the addition of the superWaterReservoir and the superDeliverySite. X = V</p>
+<p>Y - The for loops that set the flow of edges and the currentFlow of vertexes to zero. Y = VE</p>
+<p>Z - Edmonds-Karp Algorithm for Max Flow. Z = VE^2</p>
+<p>) </p>
+
+</div>
+</div>
+<a id="a695d101251689b2094f6eba98ac5c992" name="a695d101251689b2094f6eba98ac5c992"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a695d101251689b2094f6eba98ac5c992">&#9670;&#160;</a></span>balancingAlgorithmNeighborDistribution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">void</a> WaterManager::balancingAlgorithmNeighborDistribution </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Performs a balancing algorithm using neighbor distribution technique. </p>
+<p>This method balances the flow across the network by redistributing flow between neighboring pipes based on neighbor distribution technique.</p>
+<p>Access the neighbouring edges of a vertex and checks if the difference between capacity and flow is lower than its own, if it is, saves the neighbor edge and computes a redistribution function in order to balance.</p>
+<p>It saves the original pipe configuration, computes initial metrics such as max difference, average difference, and variance, then iteratively redistributes flow between neighboring pipes.</p>
+<p>After the redistribution, it computes final metrics and displays the changes in max difference, average difference, and variance.</p>
+<p>Additionally, it displays the changes in maximum flow for each city before and after the balancing process.</p>
+<p>The method then restores the original pipe configuration.</p>
+<p>It has time complexity equal to the maximumFlowAllCities function, since it uses it twice.</p>
+<p>(</p>
+<p>Time complexity is O(X + Y + Z).</p>
+<p>X - Time complexity related to the addition of the superWaterReservoir and the superDeliverySite. X = V</p>
+<p>Y - The for loops that set the flow of edges and the currentFlow of vertexes to zero. Y = VE</p>
+<p>Z - Edmonds-Karp Algorithm for Max Flow. Z = VE^2</p>
+<p>) </p>
+
+</div>
+</div>
+<a id="a33909671a5b20807977dd639384e4c0e" name="a33909671a5b20807977dd639384e4c0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33909671a5b20807977dd639384e4c0e">&#9670;&#160;</a></span>balancingAlgorithmSortingDistribution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">void</a> WaterManager::balancingAlgorithmSortingDistribution </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Performs a balancing algorithm using sorting distribution technique. </p>
+<p>This method balances the flow across the network by redistributing flow between pipes based on sorting distribution technique.</p>
+<p>It saves the original pipe configuration, computes initial metrics such as max difference, average difference</p>
+<p>Computes the difference between capacity and flow for each pipe and stores this value into a multimap of descending order.</p>
+<p>It iterates through the map (size/2 times), sending the overflow difference of the highest to the lowest. Using a sequential and a reverse iterator.</p>
+<p>After the redistribution, it computes final metrics and displays the changes in max difference, average difference, and variance.</p>
+<p>Additionally, it displays the changes in maximum flow for each city before and after the balancing process.</p>
+<p>It has time complexity equal to the maximumFlowAllCities function, since it uses it twice.</p>
+<p>(</p>
+<p>Time complexity is O(X + Y + Z).</p>
+<p>X - Time complexity related to the addition of the superWaterReservoir and the superDeliverySite. X = V</p>
+<p>Y - The for loops that set the flow of edges and the currentFlow of vertexes to zero. Y = VE</p>
+<p>Z - Edmonds-Karp Algorithm for Max Flow. Z = VE^2</p>
+<p>)</p>
+<p>The method then restores the original pipe configuration. </p>
+
+</div>
+</div>
+<a id="a470c6c5322d671efa416905b6081ddb9" name="a470c6c5322d671efa416905b6081ddb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a470c6c5322d671efa416905b6081ddb9">&#9670;&#160;</a></span>citiesAffectedByMaintenance_AllPumps()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string WaterManager::citiesAffectedByMaintenance_AllPumps </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function aids in checking which cities are affected if each one of the pumps is taken offline. </p>
+<p>This function uses the previous function <a class="el" href="class_water_manager.html#a35645a5a5344d1eb8ad3f3de7ed8bbd7" title="This function aids in checking which cities are affected if a given pump is taken offline.">citiesAffectedByMaintenance_SpecificPump()</a>.</p>
+<p>The Time Complexity for this function is O(XY) = O(VE^2) where X is in the worst case the number of total amount of pumps that are in the graph and Y is the time complexity for the previously used function, O(VE^2). </p>
+
+</div>
+</div>
+<a id="a35645a5a5344d1eb8ad3f3de7ed8bbd7" name="a35645a5a5344d1eb8ad3f3de7ed8bbd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35645a5a5344d1eb8ad3f3de7ed8bbd7">&#9670;&#160;</a></span>citiesAffectedByMaintenance_SpecificPump()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string WaterManager::citiesAffectedByMaintenance_SpecificPump </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>idCode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function aids in checking which cities are affected if a given pump is taken offline. </p>
+<p>It first executes the algorithm to find the maximum flow to all cities, removes the specified pump if it is found, executes the max flow algorithm again and it compares the results.</p>
+<p>The Time Complexity for this function is (X + Y) where X is the time complexity of the max flow algorithm which is O(V + VE + VE^2) and Y is the time complexity of the functions removePS() and addPS() which is O(n + E^2) + O(E). </p>
+
+</div>
+</div>
+<a id="aa9a4a3c8bb64de51510103f5ac96e28b" name="aa9a4a3c8bb64de51510103f5ac96e28b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9a4a3c8bb64de51510103f5ac96e28b">&#9670;&#160;</a></span>CitiesAffectedByPipeRupture() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; std::string, std::vector&lt; std::pair&lt; std::string, <a class="el" href="class_edge.html">double</a> &gt; &gt; &gt; WaterManager::CitiesAffectedByPipeRupture </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Determine the cities affected by pipe ruptures. </p>
+<p>This function examines each pipe in the water network and calculates the maximum flow after simulating the rupture of each pipe. It records the affected cities and the deficit in water supply caused by each pipe rupture.</p>
+<p>Time Complexity: O(VE³), where V is the number of vertices (water elements) and E is the number of edges (pipes) in the network. This is because for each pipe examined, an Edmond's Karp maximum flow algorithm is performed.</p>
+<dl class="section return"><dt>Returns</dt><dd>A map containing information about the affected cities and the deficit in water supply caused by each pipe rupture. The keys are strings representing the pipes (from origin to destination), and the values are vectors of pairs, where each pair contains the affected city and the deficit in water supply. </dd></dl>
+
+</div>
+</div>
+<a id="a59f141cec23b9a8831aecd3f294a98a1" name="a59f141cec23b9a8831aecd3f294a98a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59f141cec23b9a8831aecd3f294a98a1">&#9670;&#160;</a></span>CitiesAffectedByPipeRupture() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; std::string, std::vector&lt; std::pair&lt; std::string, <a class="el" href="class_edge.html">double</a> &gt; &gt; &gt; WaterManager::CitiesAffectedByPipeRupture </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>idCode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Determine the cities affected by pipe ruptures based on a given city code. </p>
+<p>This function examines each pipe connected to the specified city and calculates the maximum flow after simulating the rupture of each pipe. It records the affected cities and the deficit in water supply caused by each pipe rupture.</p>
+<p>Time Complexity: O(VE³), where V is the number of vertices (water elements) and E is the number of edges (pipes) in the network. This is because for each pipe examined, an Edmond's Karp maximum flow algorithm is performed, and in the worst case, a city is connected to all the pipes of the system.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cityCode</td><td>The city code of the city to be analyzed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A map containing information about the affected cities and the deficit in water supply caused by each pipe rupture. The keys are strings representing the pipes, and the values are vectors of pairs, where each pair contains the affected city code and the deficit in water supply. </dd></dl>
+
+</div>
+</div>
+<a id="a56c628d42df5d8c6255829e3c3c18ab6" name="a56c628d42df5d8c6255829e3c3c18ab6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56c628d42df5d8c6255829e3c3c18ab6">&#9670;&#160;</a></span>dataGoBoom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">void</a> WaterManager::dataGoBoom </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Frees the data on program exit. </p>
+
+</div>
+</div>
+<a id="aa3f6e14ac6465f44cae94802d94df87e" name="aa3f6e14ac6465f44cae94802d94df87e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3f6e14ac6465f44cae94802d94df87e">&#9670;&#160;</a></span>existsAugmentingPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">bool</a> WaterManager::existsAugmentingPath </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_water_element.html">WaterElement</a> *&amp;&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_water_element.html">WaterElement</a> *&amp;&#160;</td>
+          <td class="paramname"><em>target</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function. Checks if there exists an augmenting path. </p>
+<p>This function does a Breadth First Search (BFS) and tries to construct a path from source node to a target node.</p>
+<p>The path in question can either be a normal path or it can be a residual path.</p>
+<p>The time complexity for this function is O(V + V + E). This is because first we</p>
+<p>iterate over every vertex and set visited to false. After this we perform a BFS</p>
+<p>which iterates over the graph's vertexes (V) and for each one, over it's outgoing edges (E).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>- This is the starting node. </td></tr>
+    <tr><td class="paramname">target</td><td>- This is the ending node.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>If it manages to find a path then it return true otherwise it returns false. </dd></dl>
+
+</div>
+</div>
+<a id="a652730f4f2d27ae74672ef040bf202e7" name="a652730f4f2d27ae74672ef040bf202e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a652730f4f2d27ae74672ef040bf202e7">&#9670;&#160;</a></span>findMinResidualAlongPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">double</a> WaterManager::findMinResidualAlongPath </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_water_element.html">WaterElement</a> *&amp;&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_water_element.html">WaterElement</a> *&amp;&#160;</td>
+          <td class="paramname"><em>target</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Beginning from the target vertex we are going to follow the previously saved path</p>
+<p>to determine what is the minimum residual capacity of the path.</p>
+<p>The time complexity for this function is O(V). This is because in the worst case we</p>
+<p>need to go trough V vertexes (from the target to the source node).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>- This is the ending node. </td></tr>
+    <tr><td class="paramname">target</td><td>- This is the starting node.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Minimum residual capacity of the path that goes from target to source. </dd></dl>
+
+</div>
+</div>
+<a id="a6147912b5159385f43d124a70a1aa15c" name="a6147912b5159385f43d124a70a1aa15c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6147912b5159385f43d124a70a1aa15c">&#9670;&#160;</a></span>getDisabledWaterReservoirs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_water_element.html">WaterElement</a> * &gt; * &gt; WaterManager::getDisabledWaterReservoirs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afae65cfa7b284c7205fa08b9571be508" name="afae65cfa7b284c7205fa08b9571be508"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afae65cfa7b284c7205fa08b9571be508">&#9670;&#160;</a></span>listCitiesAffectedByReservoirRemoval()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">void</a> WaterManager::listCitiesAffectedByReservoirRemoval </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>idCode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lists the cities that are in need of water, by checking the actual flow delivered to them. </p>
+<p>This function runs the Edmond's Karp algorithm to determine the maximum flow before removing a water reservoir and after this if the given water reservoir exists it disables it and re-runs the Edmonds-Karp Algorithm to check the flow after the removal.</p>
+<p>Time Complexity: O(V * E^2), because of Edmonds-Karp Algorithm </p>
+
+</div>
+</div>
+<a id="a806b6c071754fed0017ca8028e8a9a52" name="a806b6c071754fed0017ca8028e8a9a52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a806b6c071754fed0017ca8028e8a9a52">&#9670;&#160;</a></span>listWaterNeeds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">void</a> WaterManager::listWaterNeeds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lists the cities that are in need of water, by checking the actual flow delivered to them. </p>
+<p>Time Complexity: O(V * E^2), because of Edmonds-Karp Algorithm </p>
+
+</div>
+</div>
+<a id="a4133edb564a208e448efad6cf5a39c45" name="a4133edb564a208e448efad6cf5a39c45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4133edb564a208e448efad6cf5a39c45">&#9670;&#160;</a></span>maximumFlowAllCities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string WaterManager::maximumFlowAllCities </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Maximum flow across all cities. </p>
+<p>This functions uses a slightly modified Edmonds-Karp algorithm to find the maximum amount of flow that can reach all cities. The modifications are the addition of a super source and a super sink and the use of a variable named currentFlow that helps us check if a given city already has it's demand fulfilled.</p>
+<p>The time complexity for this functions is O(X + Y + Z) = O(V + VE + VE^2) where X is the time complexity related to the addition of the superWaterReservoir (super source) and the superDeliverySite (super sink) (X = V), Y is the time complexity of the for loops that set the flow of edges and the currentFlow of vertexes to zero (Y = VE) and finally Z is the time complexity for the Edmonds-Karp Algorithm for Max Flow (Z = VE^2). </p>
+
+</div>
+</div>
+<a id="a04b7445c7c6f82657c0f51bea6bd9657" name="a04b7445c7c6f82657c0f51bea6bd9657"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04b7445c7c6f82657c0f51bea6bd9657">&#9670;&#160;</a></span>maximumFlowSpecificCities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string WaterManager::maximumFlowSpecificCities </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>idCode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Maximum flow to a specific city. </p>
+<p>This function depends on the function above [<a class="el" href="class_water_manager.html#a4133edb564a208e448efad6cf5a39c45" title="Maximum flow across all cities.">maximumFlowAllCities()</a>]</p>
+<p>The time complexity for this functions is is O(n + Y) = O(V + VE + VE^2) where n is the time complexity for the worst case of finding the city and Y is the time complexity of the <a class="el" href="class_water_manager.html#a4133edb564a208e448efad6cf5a39c45" title="Maximum flow across all cities.">maximumFlowAllCities()</a> function. </p>
+
+</div>
+</div>
+<a id="aaa9700fcf9eee856160cbe1d60cc27c2" name="aaa9700fcf9eee856160cbe1d60cc27c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa9700fcf9eee856160cbe1d60cc27c2">&#9670;&#160;</a></span>parseData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">void</a> WaterManager::parseData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calls the other data parsing functions. </p>
+
+</div>
+</div>
+<a id="ab0d8cca236202fa41974c9b33745a87a" name="ab0d8cca236202fa41974c9b33745a87a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0d8cca236202fa41974c9b33745a87a">&#9670;&#160;</a></span>processCities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">void</a> WaterManager::processCities </td>
+          <td>(</td>
+          <td class="paramtype">std::ifstream &amp;&#160;</td>
+          <td class="paramname"><em>in</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Data parsing for cities / deliverySites. </p>
+
+</div>
+</div>
+<a id="a7e0c6a003c2addf7c033949f39d3b296" name="a7e0c6a003c2addf7c033949f39d3b296"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e0c6a003c2addf7c033949f39d3b296">&#9670;&#160;</a></span>processPipes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">void</a> WaterManager::processPipes </td>
+          <td>(</td>
+          <td class="paramtype">std::ifstream &amp;&#160;</td>
+          <td class="paramname"><em>in</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Data parsing for pipes. </p>
+
+</div>
+</div>
+<a id="a7de1d96f168bc1b810f1f2f5ef8f2602" name="a7de1d96f168bc1b810f1f2f5ef8f2602"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7de1d96f168bc1b810f1f2f5ef8f2602">&#9670;&#160;</a></span>processPumps()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">void</a> WaterManager::processPumps </td>
+          <td>(</td>
+          <td class="paramtype">std::ifstream &amp;&#160;</td>
+          <td class="paramname"><em>in</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Data parsing for pumps. </p>
+
+</div>
+</div>
+<a id="ae23330e9c22733ab2eaab492cf954b8f" name="ae23330e9c22733ab2eaab492cf954b8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae23330e9c22733ab2eaab492cf954b8f">&#9670;&#160;</a></span>processReservoirs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">void</a> WaterManager::processReservoirs </td>
+          <td>(</td>
+          <td class="paramtype">std::ifstream &amp;&#160;</td>
+          <td class="paramname"><em>in</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Data parsing for reservoirs. </p>
+
+</div>
+</div>
+<a id="a2f6bdd5e35852da625e89022f7bc602f" name="a2f6bdd5e35852da625e89022f7bc602f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f6bdd5e35852da625e89022f7bc602f">&#9670;&#160;</a></span>resetWaterReservoirs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">void</a> WaterManager::resetWaterReservoirs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab95f47ece61b5ad276375c1ac6c412d3" name="ab95f47ece61b5ad276375c1ac6c412d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab95f47ece61b5ad276375c1ac6c412d3">&#9670;&#160;</a></span>restorePipes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">void</a> WaterManager::restorePipes </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="class_edge.html">Edge</a>&lt; <a class="el" href="class_water_element.html">WaterElement</a> * &gt; &gt;&#160;</td>
+          <td class="paramname"><em>original</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Restores the pipes in the water network to their original state. </p>
+<p>This function removes all edges in the water network and then adds the edges from the provided vector.</p>
+<p>The provided vector contains the original state of the pipes, including source vertices, destination vertices, and weights.</p>
+<p>Has time complexity of O(E), since it visits every edge at least once. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">original</td><td>A vector containing the original state of the pipes. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab0fc19b31c3d82963a0339af6a0283b7" name="ab0fc19b31c3d82963a0339af6a0283b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0fc19b31c3d82963a0339af6a0283b7">&#9670;&#160;</a></span>savePipes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="class_edge.html">Edge</a>&lt; <a class="el" href="class_water_element.html">WaterElement</a> * &gt; &gt; WaterManager::savePipes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Saves the pipes in the water network. </p>
+<p>This function iterates over all edges in the water network and saves them into a vector of edges.</p>
+<p>Each edge consists of a source vertex, a destination vertex, and the weight representing the capacity of the pipe.</p>
+<p>Has time complexity of O(E), since it visits every edge at least once. </p><dl class="section return"><dt>Returns</dt><dd>A vector containing all the pipes in the water network. </dd></dl>
+
+</div>
+</div>
+<a id="a15bf7824290f17b131598a4ffd6f518e" name="a15bf7824290f17b131598a4ffd6f518e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15bf7824290f17b131598a4ffd6f518e">&#9670;&#160;</a></span>variance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">double</a> WaterManager::variance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the variance of the differences between the capacity and flow of each pipe in the water network. </p>
+<p>This function computes the average difference first using the <a class="el" href="class_water_manager.html#a79fc33012a9a335988b4b08047354dc1" title="Calculates the average difference between the capacity and flow of each pipe in the water network.">avgDifference()</a> function.</p>
+<p>The time complexity of this function is O(V + E), where V is the number of vertices and E is the number of edges in the water network.</p>
+<dl class="section return"><dt>Returns</dt><dd>The variance of the differences between the capacity and flow of each pipe. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a402e09e6caceef5923723d7ff55f6c6b" name="a402e09e6caceef5923723d7ff55f6c6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a402e09e6caceef5923723d7ff55f6c6b">&#9670;&#160;</a></span>disabledWaterReservoirs</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="class_vertex.html">Vertex</a>&lt;<a class="el" href="class_water_element.html">WaterElement</a> *&gt; *&gt; WaterManager::disabledWaterReservoirs</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a986a8183273914fa1c2c25d5c9abd28b" name="a986a8183273914fa1c2c25d5c9abd28b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a986a8183273914fa1c2c25d5c9abd28b">&#9670;&#160;</a></span>pipesSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">int</a> WaterManager::pipesSize = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aad2a001a19e24a0f9c526617b9ff94a2" name="aad2a001a19e24a0f9c526617b9ff94a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad2a001a19e24a0f9c526617b9ff94a2">&#9670;&#160;</a></span>waterCityMap</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;std::string, <a class="el" href="class_d_s.html">DS</a> *&gt; WaterManager::waterCityMap</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a76014901eff8815f6f200f2fd8190e4b" name="a76014901eff8815f6f200f2fd8190e4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76014901eff8815f6f200f2fd8190e4b">&#9670;&#160;</a></span>waterNetwork</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_graph.html">Graph</a>&lt;<a class="el" href="class_water_element.html">WaterElement</a> *&gt; WaterManager::waterNetwork</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a25742d9e3883904749e8cff79e30241e" name="a25742d9e3883904749e8cff79e30241e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25742d9e3883904749e8cff79e30241e">&#9670;&#160;</a></span>waterPumpMap</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;std::string, <a class="el" href="class_p_s.html">PS</a> *&gt; WaterManager::waterPumpMap</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae40a8b7c51315d3956d703f1236abeca" name="ae40a8b7c51315d3956d703f1236abeca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae40a8b7c51315d3956d703f1236abeca">&#9670;&#160;</a></span>waterReservoirMap</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;std::string, <a class="el" href="class_w_r.html">WR</a> *&gt; WaterManager::waterReservoirMap</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>/Users/antonioabilio/Desktop/DA/proj-da-1/src/<a class="el" href="_water_manager_8h_source.html">WaterManager.h</a></li>
+<li>/Users/antonioabilio/Desktop/DA/proj-da-1/src/<a class="el" href="_water_manager_8cpp.html">WaterManager.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

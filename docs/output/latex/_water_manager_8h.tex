@@ -1,7 +1,74 @@
-\doxysection{/\+Users/antonioabilio/\+Desktop/proj-\/da-\/1/src/\+Water\+Manager.h File Reference}
-\hypertarget{_water_manager_8h}{}\label{_water_manager_8h}\index{/Users/antonioabilio/Desktop/proj-\/da-\/1/src/WaterManager.h@{/Users/antonioabilio/Desktop/proj-\/da-\/1/src/WaterManager.h}}
+\doxysection{/\+Users/antonioabilio/\+Desktop/\+DA/proj-\/da-\/1/src/\+Water\+Manager.h File Reference}
+\hypertarget{_water_manager_8h}{}\label{_water_manager_8h}\index{/Users/antonioabilio/Desktop/DA/proj-\/da-\/1/src/WaterManager.h@{/Users/antonioabilio/Desktop/DA/proj-\/da-\/1/src/WaterManager.h}}
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$regex$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include "{}Graph.\+h"{}}\newline
+{\ttfamily \#include "{}Water\+Element.\+h"{}}\newline
+{\ttfamily \#include "{}WR.\+h"{}}\newline
+{\ttfamily \#include "{}PS.\+h"{}}\newline
+{\ttfamily \#include "{}DS.\+h"{}}\newline
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{class_water_manager}{Water\+Manager}}
 \end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#\mbox{\hyperlink{class_edge}{define}} \mbox{\hyperlink{_water_manager_8h_a81b4b561d590455bc29ecece21b1fdf7}{city\+Code\+Prefix}}~"{}c\+\_\+"{}
+\item 
+\#\mbox{\hyperlink{class_edge}{define}} \mbox{\hyperlink{_water_manager_8h_a666cfc2d40b42d87b433c5751d875850}{reservoir\+Code\+Prefix}}~"{}r\+\_\+"{}
+\item 
+\#\mbox{\hyperlink{class_edge}{define}} \mbox{\hyperlink{_water_manager_8h_afe867d0752b6c34ecf32ed55a4ad1ebb}{pumping\+Station\+Code\+Prefix}}~"{}ps\+\_\+"{}
+\item 
+\#\mbox{\hyperlink{class_edge}{define}} \mbox{\hyperlink{_water_manager_8h_ac7d3d309fdf9d4d1dbf8b5c5d5f94f40}{city\+Code\+Regex}}~"{}c\+\_\+\mbox{[}0-\/9\mbox{]}+"{}
+\item 
+\#\mbox{\hyperlink{class_edge}{define}} \mbox{\hyperlink{_water_manager_8h_ac2d830f21f8f3e1b29bfd5b59291eddb}{reservoir\+Code\+Regex}}~"{}r\+\_\+\mbox{[}0-\/9\mbox{]}+"{}
+\item 
+\#\mbox{\hyperlink{class_edge}{define}} \mbox{\hyperlink{_water_manager_8h_a5fe1ba161a852a0137ee5ed43bf833c3}{pumping\+Station\+Code\+Regex}}~"{}ps\+\_\+\mbox{[}0-\/9\mbox{]}+"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_water_manager_8h_a81b4b561d590455bc29ecece21b1fdf7}\label{_water_manager_8h_a81b4b561d590455bc29ecece21b1fdf7} 
+\index{WaterManager.h@{WaterManager.h}!cityCodePrefix@{cityCodePrefix}}
+\index{cityCodePrefix@{cityCodePrefix}!WaterManager.h@{WaterManager.h}}
+\doxysubsubsection{\texorpdfstring{cityCodePrefix}{cityCodePrefix}}
+{\footnotesize\ttfamily \#\mbox{\hyperlink{class_edge}{define}} city\+Code\+Prefix~"{}c\+\_\+"{}}
+
+\Hypertarget{_water_manager_8h_ac7d3d309fdf9d4d1dbf8b5c5d5f94f40}\label{_water_manager_8h_ac7d3d309fdf9d4d1dbf8b5c5d5f94f40} 
+\index{WaterManager.h@{WaterManager.h}!cityCodeRegex@{cityCodeRegex}}
+\index{cityCodeRegex@{cityCodeRegex}!WaterManager.h@{WaterManager.h}}
+\doxysubsubsection{\texorpdfstring{cityCodeRegex}{cityCodeRegex}}
+{\footnotesize\ttfamily \#\mbox{\hyperlink{class_edge}{define}} city\+Code\+Regex~"{}c\+\_\+\mbox{[}0-\/9\mbox{]}+"{}}
+
+\Hypertarget{_water_manager_8h_afe867d0752b6c34ecf32ed55a4ad1ebb}\label{_water_manager_8h_afe867d0752b6c34ecf32ed55a4ad1ebb} 
+\index{WaterManager.h@{WaterManager.h}!pumpingStationCodePrefix@{pumpingStationCodePrefix}}
+\index{pumpingStationCodePrefix@{pumpingStationCodePrefix}!WaterManager.h@{WaterManager.h}}
+\doxysubsubsection{\texorpdfstring{pumpingStationCodePrefix}{pumpingStationCodePrefix}}
+{\footnotesize\ttfamily \#\mbox{\hyperlink{class_edge}{define}} pumping\+Station\+Code\+Prefix~"{}ps\+\_\+"{}}
+
+\Hypertarget{_water_manager_8h_a5fe1ba161a852a0137ee5ed43bf833c3}\label{_water_manager_8h_a5fe1ba161a852a0137ee5ed43bf833c3} 
+\index{WaterManager.h@{WaterManager.h}!pumpingStationCodeRegex@{pumpingStationCodeRegex}}
+\index{pumpingStationCodeRegex@{pumpingStationCodeRegex}!WaterManager.h@{WaterManager.h}}
+\doxysubsubsection{\texorpdfstring{pumpingStationCodeRegex}{pumpingStationCodeRegex}}
+{\footnotesize\ttfamily \#\mbox{\hyperlink{class_edge}{define}} pumping\+Station\+Code\+Regex~"{}ps\+\_\+\mbox{[}0-\/9\mbox{]}+"{}}
+
+\Hypertarget{_water_manager_8h_a666cfc2d40b42d87b433c5751d875850}\label{_water_manager_8h_a666cfc2d40b42d87b433c5751d875850} 
+\index{WaterManager.h@{WaterManager.h}!reservoirCodePrefix@{reservoirCodePrefix}}
+\index{reservoirCodePrefix@{reservoirCodePrefix}!WaterManager.h@{WaterManager.h}}
+\doxysubsubsection{\texorpdfstring{reservoirCodePrefix}{reservoirCodePrefix}}
+{\footnotesize\ttfamily \#\mbox{\hyperlink{class_edge}{define}} reservoir\+Code\+Prefix~"{}r\+\_\+"{}}
+
+\Hypertarget{_water_manager_8h_ac2d830f21f8f3e1b29bfd5b59291eddb}\label{_water_manager_8h_ac2d830f21f8f3e1b29bfd5b59291eddb} 
+\index{WaterManager.h@{WaterManager.h}!reservoirCodeRegex@{reservoirCodeRegex}}
+\index{reservoirCodeRegex@{reservoirCodeRegex}!WaterManager.h@{WaterManager.h}}
+\doxysubsubsection{\texorpdfstring{reservoirCodeRegex}{reservoirCodeRegex}}
+{\footnotesize\ttfamily \#\mbox{\hyperlink{class_edge}{define}} reservoir\+Code\+Regex~"{}r\+\_\+\mbox{[}0-\/9\mbox{]}+"{}}
+

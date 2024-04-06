@@ -1,5 +1,5 @@
 \doxysection{Application.\+h}
-\hypertarget{_application_8h_source}{}\label{_application_8h_source}\index{/Users/antonioabilio/Desktop/proj-\/da-\/1/src/Application.h@{/Users/antonioabilio/Desktop/proj-\/da-\/1/src/Application.h}}
+\hypertarget{_application_8h_source}{}\label{_application_8h_source}\index{/Users/antonioabilio/Desktop/DA/proj-\/da-\/1/src/Application.h@{/Users/antonioabilio/Desktop/DA/proj-\/da-\/1/src/Application.h}}
 \mbox{\hyperlink{_application_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PROJ\_DA\_1\_APLICATIONMANAGER\_H}}
@@ -11,41 +11,50 @@
 \DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <iostream>}}
 \DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
 \DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
-\DoxyCodeLine{00010\ }
-\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_application}{Application}}\{}
-\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_application_a8a0c6f6989c32876137e4a8b6022ee81}{Application}}(std::string\ \mbox{\hyperlink{class_application_ab7b151fe7350dc2a7d17ea76972ecc56}{env}})\{}
-\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ this-\/>env\ =\ \mbox{\hyperlink{class_application_ab7b151fe7350dc2a7d17ea76972ecc56}{env}};}
-\DoxyCodeLine{00016\ \ \ \ \ \}}
-\DoxyCodeLine{00017\ }
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a27c58712d868d161ec1f407fcab72e24}{run}}(\textcolor{keywordtype}{int}\ processedKey);}
-\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_ab0547067a5688fa2a17c067dacdf3f6a}{clearScreen}}();}
-\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_ad12666083e189dcf95c8b87bf59d95c2}{delay}}(\textcolor{keywordtype}{long}\ sleepTime);}
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_application_a6889e8e33946b8931ccff6f419630331}{processKey}}(\textcolor{keyword}{const}\ std::string\&\ option);}
-\DoxyCodeLine{00022\ }
-\DoxyCodeLine{00023\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{comment}{//\ WaterManager\ options}}
-\DoxyCodeLine{00026\ \ \ \ \ std::string\ \mbox{\hyperlink{class_application_a8dc9c233e74d5b6cb129eeda5b62fd64}{showMainMenu}}();}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_water_manager_8h}{WaterManager.h}}"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_application}{Application}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_application_a8a0c6f6989c32876137e4a8b6022ee81}{Application}}(std::string\ \mbox{\hyperlink{class_application_ab7b151fe7350dc2a7d17ea76972ecc56}{env}})\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_application_acce3460a8fdef37890b69ebccda76204}{waterManager}}.\mbox{\hyperlink{class_water_manager_aaa9700fcf9eee856160cbe1d60cc27c2}{parseData}}();}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ this-\/>env\ =\ \mbox{\hyperlink{class_application_ab7b151fe7350dc2a7d17ea76972ecc56}{env}};}
+\DoxyCodeLine{00018\ \ \ \ \ \}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a27c58712d868d161ec1f407fcab72e24}{run}}(\textcolor{keywordtype}{int}\ processedKey);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_ab0547067a5688fa2a17c067dacdf3f6a}{clearScreen}}();}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_ad12666083e189dcf95c8b87bf59d95c2}{delay}}(\textcolor{keywordtype}{long}\ sleepTime);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_application_a6889e8e33946b8931ccff6f419630331}{processKey}}(\textcolor{keyword}{const}\ std::string\ \&option);}
 \DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a07eba7cd2a9fcfd846da6ab3e5d2067e}{showGoBackMenu}}(\textcolor{keywordtype}{int}\ option,\ \textcolor{keyword}{const}\ std::string\&\ functionName);}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_abdb62625f23c38b49f267ae9371c4854}{outputToFile}}(std::string\ header,\ std::string\ text);}
 \DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a2329c5db2625c987ea554fadc5c51839}{maxWater}}();\ \textcolor{comment}{//\ T2.1}}
+\DoxyCodeLine{00030\ \textcolor{keyword}{private}:}
 \DoxyCodeLine{00031\ }
-\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a2ae9fef54782fae04a389cec27a772bf}{listwaterNeeds}}();\ \textcolor{comment}{//\ T2.2}}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_water_manager}{WaterManager}}\ \mbox{\hyperlink{class_application_acce3460a8fdef37890b69ebccda76204}{waterManager}};}
 \DoxyCodeLine{00033\ }
-\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_aac9d01a21d22d8df6f9bc55ce1749e8f}{balaceNetworkLoad}}();\ \textcolor{comment}{//\ T2.3}}
-\DoxyCodeLine{00035\ }
-\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_aa1dc913a7baf452da982591be420fd45}{listCitiesAffectedByReservoirRemoval}}();\ \textcolor{comment}{//\ T3.1}}
-\DoxyCodeLine{00037\ }
-\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a93a8d8804ad74ef33538d1c193bd858d}{listCitiesAffectedByMaintenance}}();\ \textcolor{comment}{//\ T3.2}}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a53c43996b3d1c58f496eafa10352287a}{listCitiesAffectedByPipeRupture}}();\ \textcolor{comment}{//\ T3.3}}
-\DoxyCodeLine{00041\ }
-\DoxyCodeLine{00042\ \ \ \ \ \textcolor{comment}{//\ Attributes}}
-\DoxyCodeLine{00043\ \ \ \ \ std::string\ \mbox{\hyperlink{class_application_ab7b151fe7350dc2a7d17ea76972ecc56}{env}};\ \textcolor{comment}{//\ System\ environment\ variable}}
-\DoxyCodeLine{00044\ \};}
-\DoxyCodeLine{00045\ }
-\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PROJ\_DA\_1\_APLICATIONMANAGER\_H}}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ WaterManager\ options}}
+\DoxyCodeLine{00035\ \ \ \ \ std::string\ \mbox{\hyperlink{class_application_a8dc9c233e74d5b6cb129eeda5b62fd64}{showMainMenu}}();}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a07eba7cd2a9fcfd846da6ab3e5d2067e}{showGoBackMenu}}(\textcolor{keywordtype}{int}\ option,\ \textcolor{keyword}{const}\ std::string\ \&functionName);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a2329c5db2625c987ea554fadc5c51839}{maxWater}}();\ \textcolor{comment}{//\ T2.1}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a58224f147fa66aa8127f9e660f065f92}{listWaterNeeds}}();\ \textcolor{comment}{//\ T2.2}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_aac9d01a21d22d8df6f9bc55ce1749e8f}{balaceNetworkLoad}}();\ \textcolor{comment}{//\ T2.3}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_aa1dc913a7baf452da982591be420fd45}{listCitiesAffectedByReservoirRemoval}}();\ \textcolor{comment}{//\ T3.1}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a93a8d8804ad74ef33538d1c193bd858d}{listCitiesAffectedByMaintenance}}();\ \textcolor{comment}{//\ T3.2}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a53c43996b3d1c58f496eafa10352287a}{listCitiesAffectedByPipeRupture}}();\ \textcolor{comment}{//\ T3.3}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{comment}{//\ Attributes}}
+\DoxyCodeLine{00052\ \ \ \ \ std::string\ \mbox{\hyperlink{class_application_ab7b151fe7350dc2a7d17ea76972ecc56}{env}};\ \textcolor{comment}{//\ System\ environment\ variable}}
+\DoxyCodeLine{00053\ \};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PROJ\_DA\_1\_APLICATIONMANAGER\_H}}
 
 \end{DoxyCode}

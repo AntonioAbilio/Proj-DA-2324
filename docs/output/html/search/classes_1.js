@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ds_0',['DS',['../class_d_s.html',1,'']]]
+  ['comparedifference_0',['CompareDifference',['../struct_compare_difference.html',1,'']]]
 ];

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['listcitiesaffectedbymaintenance_0',['listCitiesAffectedByMaintenance',['../class_application.html#a93a8d8804ad74ef33538d1c193bd858d',1,'Application']]],
-  ['listcitiesaffectedbypiperupture_1',['listCitiesAffectedByPipeRupture',['../class_application.html#a53c43996b3d1c58f496eafa10352287a',1,'Application']]],
-  ['listcitiesaffectedbyreservoirremoval_2',['listCitiesAffectedByReservoirRemoval',['../class_application.html#aa1dc913a7baf452da982591be420fd45',1,'Application']]],
-  ['listwaterneeds_3',['listwaterNeeds',['../class_application.html#a2ae9fef54782fae04a389cec27a772bf',1,'Application']]]
+  ['findminresidualalongpath_0',['findMinResidualAlongPath',['../class_water_manager.html#a652730f4f2d27ae74672ef040bf202e7',1,'WaterManager']]],
+  ['findvertex_1',['findVertex',['../class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75',1,'Graph']]],
+  ['findvertexidx_2',['findVertexIdx',['../class_graph.html#a676cdfb976eccfa82b631d2094c1cdac',1,'Graph']]],
+  ['flow_3',['flow',['../class_edge.html#a30808601fa37f509147eabf9cc5f9ed6',1,'Edge']]]
 ];

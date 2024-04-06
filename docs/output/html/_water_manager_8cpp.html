@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Design of Algorithms: /Users/antonioabilio/Desktop/proj-da-1/src/WaterManager.cpp File Reference</title>
+<title>Design of Algorithms: /Users/antonioabilio/Desktop/DA/proj-da-1/src/WaterManager.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -73,11 +73,137 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">WaterManager.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="_water_manager_8h_source.html">WaterManager.h</a>&quot;</code><br />
-</div></div><!-- contents -->
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_compare_difference.html">CompareDifference</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a271777165c5a9b566ae42fe08df1f35a" id="r_a271777165c5a9b566ae42fe08df1f35a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_water_manager_8cpp.html#a271777165c5a9b566ae42fe08df1f35a">getTotVertex</a> (<a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_water_element.html">WaterElement</a> * &gt; *adj, <a class="el" href="class_d_s.html">DS</a> *<a class="el" href="class_edge.html">deliverySite</a>)</td></tr>
+<tr class="separator:a271777165c5a9b566ae42fe08df1f35a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20b5017eabab9eb69f7222dcf9ea06f7" id="r_a20b5017eabab9eb69f7222dcf9ea06f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_water_manager_8cpp.html#a20b5017eabab9eb69f7222dcf9ea06f7">demandFulfilled</a> (<a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_water_element.html">WaterElement</a> * &gt; *adj, <a class="el" href="class_d_s.html">DS</a> *<a class="el" href="class_edge.html">deliverySite</a>)</td></tr>
+<tr class="memdesc:a20b5017eabab9eb69f7222dcf9ea06f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function. Checks if a given delivery site already has the needed demand.  <br /></td></tr>
+<tr class="separator:a20b5017eabab9eb69f7222dcf9ea06f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a691b6dd4df73df404685a10738f5747c" id="r_a691b6dd4df73df404685a10738f5747c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_water_manager_8cpp.html#a691b6dd4df73df404685a10738f5747c">checkDifferences</a> (<a class="el" href="class_edge.html">const</a> std::string &amp;<a class="el" href="class_edge.html">before</a>, <a class="el" href="class_edge.html">const</a> std::string &amp;<a class="el" href="class_edge.html">after</a>)</td></tr>
+<tr class="memdesc:a691b6dd4df73df404685a10738f5747c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a691b6dd4df73df404685a10738f5747c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a691b6dd4df73df404685a10738f5747c" name="a691b6dd4df73df404685a10738f5747c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a691b6dd4df73df404685a10738f5747c">&#9670;&#160;</a></span>checkDifferences()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string checkDifferences </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_edge.html">const</a> std::string &amp;&#160;</td>
+          <td class="paramname"><em>before</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_edge.html">const</a> std::string &amp;&#160;</td>
+          <td class="paramname"><em>after</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>This function takes two string and checks the differences between them. The complexity for <a class="el" href="class_edge.html#ab976213419283ed754f42f57b195a288">string::find</a> is unspecified but according to c++ reference it's O(n). Total complexity for function is in the worst case O(n^2). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">before</td><td>The old string. </td></tr>
+    <tr><td class="paramname">after</td><td>The new string. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a20b5017eabab9eb69f7222dcf9ea06f7" name="a20b5017eabab9eb69f7222dcf9ea06f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20b5017eabab9eb69f7222dcf9ea06f7">&#9670;&#160;</a></span>demandFulfilled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">bool</a> demandFulfilled </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_water_element.html">WaterElement</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>adj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_d_s.html">DS</a> *&#160;</td>
+          <td class="paramname"><em>deliverySite</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function. Checks if a given delivery site already has the needed demand. </p>
+<p>It's time complexity in the worst case is O(E) where E is the amount of edges that are</p>
+<p>incoming and outgoing of a given delivery Site.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adj</td><td>- This is the vertex that contains the delivery Site. </td></tr>
+    <tr><td class="paramname">deliverySite</td><td>- This is the delivery site.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>If the demand has been fulfilled then it returns true, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a271777165c5a9b566ae42fe08df1f35a" name="a271777165c5a9b566ae42fe08df1f35a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a271777165c5a9b566ae42fe08df1f35a">&#9670;&#160;</a></span>getTotVertex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">double</a> getTotVertex </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_water_element.html">WaterElement</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>adj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_d_s.html">DS</a> *&#160;</td>
+          <td class="paramname"><em>deliverySite</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8

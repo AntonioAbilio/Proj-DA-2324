@@ -1,8 +1,18 @@
 var searchData=
 [
-  ['dawatersupplymanagement_0',['DAWaterSupplyManagement',['../index.html',1,'']]],
-  ['delay_1',['delay',['../class_application.html#ad12666083e189dcf95c8b87bf59d95c2',1,'Application']]],
-  ['ds_2',['DS',['../class_d_s.html',1,'']]],
-  ['ds_2ecpp_3',['DS.cpp',['../_d_s_8cpp.html',1,'']]],
-  ['ds_2eh_4',['DS.h',['../_d_s_8h.html',1,'']]]
+  ['datagoboom_0',['dataGoBoom',['../class_water_manager.html#a56c628d42df5d8c6255829e3c3c18ab6',1,'WaterManager']]],
+  ['dawatersupplymanagement_1',['DAWaterSupplyManagement',['../index.html',1,'']]],
+  ['delay_2',['delay',['../class_application.html#ad12666083e189dcf95c8b87bf59d95c2',1,'Application']]],
+  ['deleteedge_3',['deleteEdge',['../class_vertex.html#a622503fe44ef12d5c39bd1043d47865c',1,'Vertex']]],
+  ['demand_4',['demand',['../class_d_s.html#af5695408e674e67c8f21c08d7cb9c8ce',1,'DS']]],
+  ['demandfulfilled_5',['demandFulfilled',['../_water_manager_8cpp.html#a20b5017eabab9eb69f7222dcf9ea06f7',1,'WaterManager.cpp']]],
+  ['dest_6',['dest',['../class_edge.html#ae4d65678b91bd9d814af4720ad87cd0c',1,'Edge']]],
+  ['dfs_7',['dfs',['../class_graph.html#a1243f481d9929b890dbafe18cc3d8259',1,'Graph::dfs() const'],['../class_graph.html#a4e6e8c33823d6d45d2ab201d64b39483',1,'Graph::dfs(const T &amp;source) const']]],
+  ['dfsisdag_8',['dfsIsDAG',['../class_graph.html#a06743c0b3e219cfeefa5aade38556cb7',1,'Graph']]],
+  ['dfsvisit_9',['dfsVisit',['../class_graph.html#a468b6d9b6b1899d4c885324ed14e4f8a',1,'Graph']]],
+  ['disabledwaterreservoirs_10',['disabledWaterReservoirs',['../class_water_manager.html#a402e09e6caceef5923723d7ff55f6c6b',1,'WaterManager']]],
+  ['dist_11',['dist',['../class_vertex.html#a08a2b813e77f97aa8b6c1d252e5417f7',1,'Vertex']]],
+  ['ds_12',['ds',['../class_d_s.html',1,'DS'],['../class_d_s.html#a049da317806951e6724d4846db7f5515',1,'DS::DS()']]],
+  ['ds_2ecpp_13',['DS.cpp',['../_d_s_8cpp.html',1,'']]],
+  ['ds_2eh_14',['DS.h',['../_d_s_8h.html',1,'']]]
 ];

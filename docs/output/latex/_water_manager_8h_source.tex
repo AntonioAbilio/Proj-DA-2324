@@ -1,16 +1,101 @@
 \doxysection{Water\+Manager.\+h}
-\hypertarget{_water_manager_8h_source}{}\label{_water_manager_8h_source}\index{/Users/antonioabilio/Desktop/proj-\/da-\/1/src/WaterManager.h@{/Users/antonioabilio/Desktop/proj-\/da-\/1/src/WaterManager.h}}
+\hypertarget{_water_manager_8h_source}{}\label{_water_manager_8h_source}\index{/Users/antonioabilio/Desktop/DA/proj-\/da-\/1/src/WaterManager.h@{/Users/antonioabilio/Desktop/DA/proj-\/da-\/1/src/WaterManager.h}}
 \mbox{\hyperlink{_water_manager_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PROJ\_DA\_1\_MENU\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PROJ\_DA\_1\_MENU\_H}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00004\ }
-\DoxyCodeLine{00005\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_water_manager}{WaterManager}}\ \{}
-\DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \};}
-\DoxyCodeLine{00008\ }
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PROJ\_DA\_1\_MENU\_H}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <regex>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_8h}{Graph.h}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_water_element_8h}{WaterElement.h}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_w_r_8h}{WR.h}}"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_p_s_8h}{PS.h}}"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_d_s_8h}{DS.h}}"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ cityCodePrefix\ "{}c\_"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ reservoirCodePrefix\ "{}r\_"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ pumpingStationCodePrefix\ "{}ps\_"{}}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ cityCodeRegex\ "{}c\_[0-\/9]+"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ reservoirCodeRegex\ "{}r\_[0-\/9]+"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ pumpingStationCodeRegex\ "{}ps\_[0-\/9]+"{}}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_water_manager}{WaterManager}}\ \{}
+\DoxyCodeLine{00028\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_water_manager_aaa9700fcf9eee856160cbe1d60cc27c2}{parseData}}();\ \textcolor{comment}{//\ Data\ Parsing.}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_water_manager_a56c628d42df5d8c6255829e3c3c18ab6}{dataGoBoom}}();\ \textcolor{comment}{//\ Free\ allocated\ space.}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{comment}{//\ Exercise\ T2.1}}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_water_manager_aa3f6e14ac6465f44cae94802d94df87e}{existsAugmentingPath}}(\mbox{\hyperlink{class_water_element}{WaterElement}}\ *\&\mbox{\hyperlink{class_edge}{source}},\ \mbox{\hyperlink{class_water_element}{WaterElement}}\ *\&\mbox{\hyperlink{class_edge}{target}});\ \textcolor{comment}{//HelperFunction}}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_water_manager_a652730f4f2d27ae74672ef040bf202e7}{findMinResidualAlongPath}}(\mbox{\hyperlink{class_water_element}{WaterElement}}\ *\&\mbox{\hyperlink{class_edge}{source}},\ \mbox{\hyperlink{class_water_element}{WaterElement}}\ *\&\mbox{\hyperlink{class_edge}{target}});\ \textcolor{comment}{//\ HelperFunction}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_water_manager_ac45a8cde8e3f357f7a1b12718cbfc0fd}{augmentFlowAlongPath}}(\mbox{\hyperlink{class_water_element}{WaterElement}}\ *\&\mbox{\hyperlink{class_edge}{source}},\ \mbox{\hyperlink{class_water_element}{WaterElement}}\ *\&\mbox{\hyperlink{class_edge}{target}},\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_edge}{f}});\ \textcolor{comment}{//\ HelperFunction}}
+\DoxyCodeLine{00036\ \ \ \ \ std::string\ \mbox{\hyperlink{class_water_manager_a4133edb564a208e448efad6cf5a39c45}{maximumFlowAllCities}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ std::string\ \mbox{\hyperlink{class_water_manager_a04b7445c7c6f82657c0f51bea6bd9657}{maximumFlowSpecificCities}}(std::string\ \mbox{\hyperlink{class_edge}{cityCode}});}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{//\ Exercise\ T2.2}}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_water_manager_a806b6c071754fed0017ca8028e8a9a52}{listWaterNeeds}}();}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{comment}{//\ Exercise\ T2.3}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_water_manager_a79fc33012a9a335988b4b08047354dc1}{avgDifference}}(\textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{class_edge}{maxDifference}});}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_water_manager_afab581794aee341c700af72ea76ea12a}{avgCapacity}}();}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_water_manager_a15bf7824290f17b131598a4ffd6f518e}{variance}}();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_water_manager_ab95f47ece61b5ad276375c1ac6c412d3}{restorePipes}}(std::vector<\mbox{\hyperlink{class_edge}{Edge<WaterElement\ *>}}>\ \mbox{\hyperlink{class_edge}{original}});}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ std::vector<Edge<WaterElement\ *>>\ \mbox{\hyperlink{class_water_manager_ab0fc19b31c3d82963a0339af6a0283b7}{savePipes}}();}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_water_manager_a695d101251689b2094f6eba98ac5c992}{balancingAlgorithmNeighborDistribution}}();}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_water_manager_a33909671a5b20807977dd639384e4c0e}{balancingAlgorithmSortingDistribution}}();}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_water_manager_a2790c6e0f65f54df587ec8d8a0887978}{balancingAlgorithmAverageDistribution}}();}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{comment}{//\ Exercise\ T3.1}}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_water_manager_afae65cfa7b284c7205fa08b9571be508}{listCitiesAffectedByReservoirRemoval}}(std::string\ \mbox{\hyperlink{class_edge}{wr\_code}});}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_water_manager_a2f6bdd5e35852da625e89022f7bc602f}{resetWaterReservoirs}}();}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ std::vector<Vertex<WaterElement\ *>\ *>\ \mbox{\hyperlink{class_water_manager_a6147912b5159385f43d124a70a1aa15c}{getDisabledWaterReservoirs}}();}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{comment}{//\ Exercise\ T3.2}}
+\DoxyCodeLine{00068\ \ \ \ \ std::string\ \mbox{\hyperlink{class_water_manager_a35645a5a5344d1eb8ad3f3de7ed8bbd7}{citiesAffectedByMaintenance\_SpecificPump}}(std::string\ \mbox{\hyperlink{class_edge}{idCode}});}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ std::string\ \mbox{\hyperlink{class_water_manager_a470c6c5322d671efa416905b6081ddb9}{citiesAffectedByMaintenance\_AllPumps}}();}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{comment}{//\ Exercise\ T3.3}}
+\DoxyCodeLine{00073\ \ \ \ \ std::map<std::string,\ std::vector<std::pair<std::string,\ double>>>\ \mbox{\hyperlink{class_water_manager_aa9a4a3c8bb64de51510103f5ac96e28b}{CitiesAffectedByPipeRupture}}(std::string\ \&\mbox{\hyperlink{class_edge}{idCode}});}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ std::map<std::string,\ std::vector<std::pair<std::string,\ double>>>\ \mbox{\hyperlink{class_water_manager_aa9a4a3c8bb64de51510103f5ac96e28b}{CitiesAffectedByPipeRupture}}();}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{class_edge}{Graph<WaterElement\ *>}}\ \mbox{\hyperlink{class_water_manager_a76014901eff8815f6f200f2fd8190e4b}{waterNetwork}};\ \textcolor{comment}{//\ Graph.}}
+\DoxyCodeLine{00080\ \ \ \ \ std::unordered\_map<std::string,\ WR\ *>\ \mbox{\hyperlink{class_water_manager_ae40a8b7c51315d3956d703f1236abeca}{waterReservoirMap}};\ \textcolor{comment}{//\ Contains\ all\ water\ reservoirs.}}
+\DoxyCodeLine{00081\ \ \ \ \ std::unordered\_map<std::string,\ PS\ *>\ \mbox{\hyperlink{class_water_manager_a25742d9e3883904749e8cff79e30241e}{waterPumpMap}};\ \textcolor{comment}{//\ Contains\ all\ pumping\ stations.}}
+\DoxyCodeLine{00082\ \ \ \ \ std::unordered\_map<std::string,\ DS\ *>\ \mbox{\hyperlink{class_water_manager_aad2a001a19e24a0f9c526617b9ff94a2}{waterCityMap}};\ \textcolor{comment}{//\ Contains\ all\ delivery\ sites.}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_water_manager_ae23330e9c22733ab2eaab492cf954b8f}{processReservoirs}}(std::ifstream\ \&\mbox{\hyperlink{class_edge}{in}});\ \textcolor{comment}{//\ Parsing\ of\ Reservoirs.}}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_water_manager_a7de1d96f168bc1b810f1f2f5ef8f2602}{processPumps}}(std::ifstream\ \&\mbox{\hyperlink{class_edge}{in}});\ \textcolor{comment}{//\ Parsing\ of\ Pumping\ Stations.}}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_water_manager_ab0d8cca236202fa41974c9b33745a87a}{processCities}}(std::ifstream\ \&\mbox{\hyperlink{class_edge}{in}});\ \textcolor{comment}{//\ Parsing\ of\ Cities\ (Delivery\ Sites).}}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_water_manager_a7e0c6a003c2addf7c033949f39d3b296}{processPipes}}(std::ifstream\ \&\mbox{\hyperlink{class_edge}{in}});\ \textcolor{comment}{//\ Parsing\ of\ Pipes.}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_water_manager_a986a8183273914fa1c2c25d5c9abd28b}{pipesSize}}\ =\ 0;}
+\DoxyCodeLine{00090\ \ \ \ \ std::vector<Vertex<WaterElement\ *>\ *>\ \mbox{\hyperlink{class_water_manager_a402e09e6caceef5923723d7ff55f6c6b}{disabledWaterReservoirs}};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ std::map<DS\ *,\ double>\ \mbox{\hyperlink{class_water_manager_aaa9690dc8666eced0bd06eb9fe9b57e6}{auxMaxFlow}}();}
+\DoxyCodeLine{00093\ \};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PROJ\_DA\_1\_MENU\_H}}
 
 \end{DoxyCode}

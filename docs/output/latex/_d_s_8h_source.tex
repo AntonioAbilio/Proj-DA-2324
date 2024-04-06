@@ -1,16 +1,44 @@
 \doxysection{DS.\+h}
-\hypertarget{_d_s_8h_source}{}\label{_d_s_8h_source}\index{/Users/antonioabilio/Desktop/proj-\/da-\/1/src/DS.h@{/Users/antonioabilio/Desktop/proj-\/da-\/1/src/DS.h}}
+\hypertarget{_d_s_8h_source}{}\label{_d_s_8h_source}\index{/Users/antonioabilio/Desktop/DA/proj-\/da-\/1/src/DS.h@{/Users/antonioabilio/Desktop/DA/proj-\/da-\/1/src/DS.h}}
 \mbox{\hyperlink{_d_s_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PROJ\_DA\_1\_DS\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PROJ\_DA\_1\_DS\_H}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00004\ }
-\DoxyCodeLine{00005\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_d_s}{DS}}\ \{}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_water_element_8h}{WaterElement.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
 \DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \};}
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_d_s}{DS}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_water_element}{WaterElement}}\ \{}
 \DoxyCodeLine{00008\ }
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PROJ\_DA\_1\_DS\_H}}
+\DoxyCodeLine{00009\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00010\ \ \ \ \ std::string\ \mbox{\hyperlink{class_d_s_a95ea1509bb6a6f2017d57adaba42b418}{city}};}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_d_s_af5695408e674e67c8f21c08d7cb9c8ce}{demand}};}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_d_s_a452c66f43469b8e75181d98a339ae238}{currentFlow}};}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_d_s_a8328b34f4448613116333d13939f8492}{population}};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_d_s}{DS}}(\textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{class_water_element_a9899e699bc9fcd3e0dfed160501a78f5}{code}},\ \textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{class_d_s_a95ea1509bb6a6f2017d57adaba42b418}{city}},\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_d_s_af5695408e674e67c8f21c08d7cb9c8ce}{demand}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_d_s_a8328b34f4448613116333d13939f8492}{population}},\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_d_s_a452c66f43469b8e75181d98a339ae238}{currentFlow}});}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{class_d_s_ab5c1b7dd7f775ab90a8fd40dca1e7af1}{getCity}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_d_s_a664cdc3720403f4c0970ee333b7237a4}{setCity}}(\textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{class_d_s_a95ea1509bb6a6f2017d57adaba42b418}{city}});}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_d_s_a0b2cb1baf58fabe8dc7008c0b592f231}{getCurrentFlow}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_d_s_a3358a60b8bf70fe8a7180886128b79b9}{setCurrentFlow}}(\textcolor{keywordtype}{double}\ flow);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_d_s_af2d8f2787ea84e6aa0e2dbd6e61e4799}{getDemand}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_d_s_a9d0c5e3bde913c0fa16c4e23533dd7d2}{setDemand}}(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_d_s_af5695408e674e67c8f21c08d7cb9c8ce}{demand}});}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_d_s_ac954b213ba6e5bc51232097c03011e35}{getPopulation}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_d_s_af62d90f218f348509af06508e7580a60}{setPopulation}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_d_s_a8328b34f4448613116333d13939f8492}{population}});}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PROJ\_DA\_1\_DS\_H}}
 
 \end{DoxyCode}

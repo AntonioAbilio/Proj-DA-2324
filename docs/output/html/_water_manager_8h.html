@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Design of Algorithms: /Users/antonioabilio/Desktop/proj-da-1/src/WaterManager.h File Reference</title>
+<title>Design of Algorithms: /Users/antonioabilio/Desktop/DA/proj-da-1/src/WaterManager.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,18 +74,132 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle"><div class="title">WaterManager.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
+<div class="textblock"><code>#include &lt;fstream&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;regex&gt;</code><br />
+<code>#include &lt;unordered_map&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;iomanip&gt;</code><br />
+<code>#include &quot;<a class="el" href="_graph_8h_source.html">Graph.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_water_element_8h_source.html">WaterElement.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_w_r_8h_source.html">WR.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_p_s_8h_source.html">PS.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_d_s_8h_source.html">DS.h</a>&quot;</code><br />
+</div>
 <p><a href="_water_manager_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_water_manager.html">WaterManager</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a81b4b561d590455bc29ecece21b1fdf7" id="r_a81b4b561d590455bc29ecece21b1fdf7"><td class="memItemLeft" align="right" valign="top">#<a class="el" href="class_edge.html">define</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_water_manager_8h.html#a81b4b561d590455bc29ecece21b1fdf7">cityCodePrefix</a>&#160;&#160;&#160;&quot;c_&quot;</td></tr>
+<tr class="separator:a81b4b561d590455bc29ecece21b1fdf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a666cfc2d40b42d87b433c5751d875850" id="r_a666cfc2d40b42d87b433c5751d875850"><td class="memItemLeft" align="right" valign="top">#<a class="el" href="class_edge.html">define</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_water_manager_8h.html#a666cfc2d40b42d87b433c5751d875850">reservoirCodePrefix</a>&#160;&#160;&#160;&quot;r_&quot;</td></tr>
+<tr class="separator:a666cfc2d40b42d87b433c5751d875850"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe867d0752b6c34ecf32ed55a4ad1ebb" id="r_afe867d0752b6c34ecf32ed55a4ad1ebb"><td class="memItemLeft" align="right" valign="top">#<a class="el" href="class_edge.html">define</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_water_manager_8h.html#afe867d0752b6c34ecf32ed55a4ad1ebb">pumpingStationCodePrefix</a>&#160;&#160;&#160;&quot;ps_&quot;</td></tr>
+<tr class="separator:afe867d0752b6c34ecf32ed55a4ad1ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7d3d309fdf9d4d1dbf8b5c5d5f94f40" id="r_ac7d3d309fdf9d4d1dbf8b5c5d5f94f40"><td class="memItemLeft" align="right" valign="top">#<a class="el" href="class_edge.html">define</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_water_manager_8h.html#ac7d3d309fdf9d4d1dbf8b5c5d5f94f40">cityCodeRegex</a>&#160;&#160;&#160;&quot;c_[0-9]+&quot;</td></tr>
+<tr class="separator:ac7d3d309fdf9d4d1dbf8b5c5d5f94f40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2d830f21f8f3e1b29bfd5b59291eddb" id="r_ac2d830f21f8f3e1b29bfd5b59291eddb"><td class="memItemLeft" align="right" valign="top">#<a class="el" href="class_edge.html">define</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_water_manager_8h.html#ac2d830f21f8f3e1b29bfd5b59291eddb">reservoirCodeRegex</a>&#160;&#160;&#160;&quot;r_[0-9]+&quot;</td></tr>
+<tr class="separator:ac2d830f21f8f3e1b29bfd5b59291eddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fe1ba161a852a0137ee5ed43bf833c3" id="r_a5fe1ba161a852a0137ee5ed43bf833c3"><td class="memItemLeft" align="right" valign="top">#<a class="el" href="class_edge.html">define</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_water_manager_8h.html#a5fe1ba161a852a0137ee5ed43bf833c3">pumpingStationCodeRegex</a>&#160;&#160;&#160;&quot;ps_[0-9]+&quot;</td></tr>
+<tr class="separator:a5fe1ba161a852a0137ee5ed43bf833c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a81b4b561d590455bc29ecece21b1fdf7" name="a81b4b561d590455bc29ecece21b1fdf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81b4b561d590455bc29ecece21b1fdf7">&#9670;&#160;</a></span>cityCodePrefix</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#<a class="el" href="class_edge.html">define</a> cityCodePrefix&#160;&#160;&#160;&quot;c_&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac7d3d309fdf9d4d1dbf8b5c5d5f94f40" name="ac7d3d309fdf9d4d1dbf8b5c5d5f94f40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7d3d309fdf9d4d1dbf8b5c5d5f94f40">&#9670;&#160;</a></span>cityCodeRegex</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#<a class="el" href="class_edge.html">define</a> cityCodeRegex&#160;&#160;&#160;&quot;c_[0-9]+&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afe867d0752b6c34ecf32ed55a4ad1ebb" name="afe867d0752b6c34ecf32ed55a4ad1ebb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe867d0752b6c34ecf32ed55a4ad1ebb">&#9670;&#160;</a></span>pumpingStationCodePrefix</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#<a class="el" href="class_edge.html">define</a> pumpingStationCodePrefix&#160;&#160;&#160;&quot;ps_&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5fe1ba161a852a0137ee5ed43bf833c3" name="a5fe1ba161a852a0137ee5ed43bf833c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fe1ba161a852a0137ee5ed43bf833c3">&#9670;&#160;</a></span>pumpingStationCodeRegex</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#<a class="el" href="class_edge.html">define</a> pumpingStationCodeRegex&#160;&#160;&#160;&quot;ps_[0-9]+&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a666cfc2d40b42d87b433c5751d875850" name="a666cfc2d40b42d87b433c5751d875850"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a666cfc2d40b42d87b433c5751d875850">&#9670;&#160;</a></span>reservoirCodePrefix</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#<a class="el" href="class_edge.html">define</a> reservoirCodePrefix&#160;&#160;&#160;&quot;r_&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac2d830f21f8f3e1b29bfd5b59291eddb" name="ac2d830f21f8f3e1b29bfd5b59291eddb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2d830f21f8f3e1b29bfd5b59291eddb">&#9670;&#160;</a></span>reservoirCodeRegex</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#<a class="el" href="class_edge.html">define</a> reservoirCodeRegex&#160;&#160;&#160;&quot;r_[0-9]+&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
