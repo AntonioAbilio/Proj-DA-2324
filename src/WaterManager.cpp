@@ -643,9 +643,9 @@ std::string WaterManager::citiesAffectedByMaintenance_SpecificPump(std::string i
 /**
  * @brief This function aids in checking which cities are affected if each one of the pumps is taken offline.
  * @details This function uses the previous function citiesAffectedByMaintenance_SpecificPump().
- * @details The Time Complexity for this function is O(XY) = O(V + VE + VE^2 + n + E^2 + E) where X is
+ * @details The Time Complexity for this function is O(XY) = O(VE^2) where X is
  * in the worst case the number of total amount of pumps that are in the graph
- * and Y is the time complexity for the previously used function, O(X + V + VE + VE^2 + n + E^2 + E).
+ * and Y is the time complexity for the previously used function, O(VE^2).
  **/
 std::string WaterManager::citiesAffectedByMaintenance_AllPumps() {
     std::ostringstream oss;
@@ -691,8 +691,8 @@ void WaterManager::listWaterNeeds() {
 /**
  * @brief Lists the cities that are in need of water, by checking the actual flow delivered to them
  * @details This function runs the Edmond's Karp algorithm to determine the maximum flow before removing
- * a water reservoir and after this if the given water reservoir exists it disables it and re-runs the Edmond's
- * Karp Algorithm to check the flow after the removal.
+ * a water reservoir and after this if the given water reservoir exists it disables it and re-runs the Edmonds-Karp
+ * Algorithm to check the flow after the removal.
  * @details Time Complexity: O(V * E^2), because of Edmonds-Karp Algorithm
  */
 void WaterManager::listCitiesAffectedByReservoirRemoval(std::string idCode) {
