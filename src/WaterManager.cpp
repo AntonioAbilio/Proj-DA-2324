@@ -894,17 +894,20 @@ WaterManager::CitiesAffectedByPipeRupture(std::string &idCode) {
 
             // Check if the desired water supply cannot be met for any city
             for (const auto &city: maxFlows) {
+                try {
+                    if ((city.second < city.first->getDemand()) && (originalFlows.at(city.first) > city.second) &&
+                        (targetCityVertex->getInfo()->getCode() == city.first->getCode())) {
+                        // Record the affected city and the deficit in water supply
+                        std::string affectedCity = city.first->getCity(); // Remove the prefix 'c_'
+                        double deficit = city.first->getDemand() - city.second;
+                        std::ostringstream oss;
 
-                if ((city.second < city.first->getDemand()) && (originalFlows[city.first] > city.second) &&
-                    (targetCityVertex->getInfo()->getCode() == city.first->getCode())) {
-                    // Record the affected city and the deficit in water supply
-                    std::string affectedCity = city.first->getCity(); // Remove the prefix 'c_'
-                    double deficit = city.first->getDemand() - city.second;
-                    std::ostringstream oss;
-
-                    oss << " from service point " << origin->getCode() << " to service point "
-                        << destination->getCode();
-                    result[oss.str()].emplace_back(affectedCity, deficit);
+                        oss << " from service point " << origin->getCode() << " to service point "
+                            << destination->getCode();
+                        result[oss.str()].emplace_back(affectedCity, deficit);
+                    }
+                } catch (std::out_of_range){
+                    std::cout << "city not found!" << std::endl;
                 }
             }
 
@@ -952,16 +955,19 @@ std::map<std::string, std::vector<std::pair<std::string, double>>> WaterManager:
 
             // Check if the desired water supply cannot be met for any city
             for (const auto &city: maxFlows) {
+                try {
+                    if ((city.second < city.first->getDemand()) && (originalFlows.at(city.first) > city.second)) {
+                        // Record the affected city and the deficit in water supply
+                        std::string affectedCity = city.first->getCity(); // Remove the prefix 'c_'
+                        double deficit = city.first->getDemand() - city.second;
+                        std::ostringstream oss;
 
-                if ((city.second < city.first->getDemand()) && (originalFlows[city.first] > city.second)) {
-                    // Record the affected city and the deficit in water supply
-                    std::string affectedCity = city.first->getCity(); // Remove the prefix 'c_'
-                    double deficit = city.first->getDemand() - city.second;
-                    std::ostringstream oss;
-
-                    oss << " from service point " << origin->getCode() << " to service point "
-                        << destination->getCode();
-                    result[oss.str()].emplace_back(affectedCity, deficit);
+                        oss << " from service point " << origin->getCode() << " to service point "
+                            << destination->getCode();
+                        result[oss.str()].emplace_back(affectedCity, deficit);
+                    }
+                } catch (std::out_of_range){
+                    std::cout << "city not found!" << std::endl;
                 }
             }
 
@@ -1143,9 +1149,14 @@ void WaterManager::balancingAlgorithmSortingDistribution() {
               << std::endl;
     for (auto city: waterCityMap) {
         // Output city data
-        std::cout << std::setw(20) << city.second->getCity() << std::setw(20) << initialFlows[city.second] << " m^3/s"
-                  << std::setw(20) << finalFlows[city.second] << " m^3/s"
-                  << std::endl;
+        try {
+            std::cout << std::setw(20) << city.second->getCity() << std::setw(20) << initialFlows.at(city.second)
+                      << " m^3/s"
+                      << std::setw(20) << finalFlows.at(city.second) << " m^3/s"
+                      << std::endl;
+        } catch (std::out_of_range){
+            std::cout << "city not found!" << std::endl;
+        }
     }
 
     restorePipes(originalEdges);
@@ -1221,9 +1232,13 @@ void WaterManager::balancingAlgorithmNeighborDistribution() {
               << std::endl;
     for (const auto &city: waterCityMap) {
         // Output city data
-        std::cout << std::setw(20) << city.second->getCity() << std::setw(20) << initialFlows[city.second] << " m^3/s"
-                  << std::setw(20) << finalFlows[city.second] << " m^3/s"
+        try {
+        std::cout << std::setw(20) << city.second->getCity() << std::setw(20) << initialFlows.at(city.second) << " m^3/s"
+                  << std::setw(20) << finalFlows.at(city.second) << " m^3/s"
                   << std::endl;
+    } catch (std::out_of_range){
+            std::cout << "city not found!" << std::endl;
+    }
     }
     restorePipes(originalEdges);
 }
@@ -1277,9 +1292,14 @@ void WaterManager::balancingAlgorithmAverageDistribution() {
               << std::endl;
     for (const auto &city: waterCityMap) {
         // Output city data
-        std::cout << std::setw(20) << city.second->getCity() << std::setw(20) << initialFlows[city.second] << " m^3/s"
-                  << std::setw(20) << finalFlows[city.second] << " m^3/s"
-                  << std::endl;
+        try {
+            std::cout << std::setw(20) << city.second->getCity() << std::setw(20) << initialFlows.at(city.second)
+                      << " m^3/s"
+                      << std::setw(20) << finalFlows.at(city.second) << " m^3/s"
+                      << std::endl;
+        } catch (std::out_of_range) {
+            std::cout << "city not found!" << std::endl;
+        }
     }
     restorePipes(originalEdges);
 }
